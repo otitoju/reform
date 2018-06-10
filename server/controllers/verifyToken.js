@@ -16,7 +16,7 @@ const verifyToken = async (req, res, next) => {
         jwt.verify(token, config.secret, (err, decoded) => {
             if (err) {
                 res.json({
-                    message:`Error authenticating token`,
+                    message:`Authentication Error`,
                     auth:false,
                     token:false
                 })

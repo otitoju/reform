@@ -26,4 +26,10 @@ router.get('/recipe/get/:id', adminVerify, recipecontroller.getSingleRecipe)
 router.put('/recipe/update/:id', recipecontroller.updateRecipe)
 router.delete('/recipe/delete/:id', recipecontroller.deleteRecipe)
 
+//Auth routes
+router.put('/reset/:token', authcontroller.resetPassword)
+router.post('/forgot', authcontroller.forgotPassword)
+router.post('/report', authcontroller.reportIssues)
+router.post('/register', authcontroller.register)
+
 module.exports = router

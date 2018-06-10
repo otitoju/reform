@@ -45,15 +45,23 @@ exports.getSingleUser = async (req, res) => {
     })
 }
 //update user profile
-exports.updateUserProfile = async (req, res) => {
-    const updateUser = await user.findByIdAndUpdate(req.params.id, (user) => {
-        if(!user){
-            res.json(`No user provided`)
+exports.updateUserProfile =  (req, res) => {
+    const hashpassword = bcrypt.hashSync(req.body.password,10)
+    
+    user.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, user) => {
+        if (err) {
+            res.status(500).send("There was a problem updating the user.");
         }
-        else{
-            res.json(updateUser)
+        else {
+            user.password = hashpassword;
+            user.save()
+            res.status(200).send({
+                message:'Updated',
+                user:user
+            });
         }
-    })
+        
+    })  
 }
 //get all users
 exports.getAllUser =  async (req, res) => {

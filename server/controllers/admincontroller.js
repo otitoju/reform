@@ -1,7 +1,7 @@
 const bodyParser = require('body-parser')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const config = require('../config/config')
+const config = require('../config/adminconfig')
 const admin = require('../models/admin')
 
 
@@ -50,7 +50,7 @@ exports.loginSuperUser = (req, res) => {
                 res.json(`You are not an admin`)
             }
             else {
-                const token = jwt.sign({id:admin.id,username:admin.username, password:admin.password}, config.secret, {expiresIn:86400})
+                const token = jwt.sign({id:admin.id,username:admin.username, password:admin.password}, config.adminsecret, {expiresIn:86400})
                 res.json({
                     message:`Welcome admin ${req.body.username}`,
                     token:token

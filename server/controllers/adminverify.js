@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const config = require('../config/config')
+const config = require('../config/adminconfig')
 const admin = require('../models/admin')
 
 //ADMIN AUTHENICATION
@@ -9,19 +9,13 @@ const adminVerify = (req, res, next) => {
         res.json(`No token provided`)
     }
     else{
-        jwt.verify(token, config.secret, (err, isAdminToken) =>{
+        jwt.verify(token, config.adminsecret, (err, isAdminToken) =>{
             if (err) {
-                res.json(`Unable to verify token`)
+                res.status(403).json(`Authentication Error`)
             }
             else {
-                if (req.admin = isAdminToken){
-                    next()
-                }
-                else {
-                    req.admin = !isAdminToken
-                    res.json(`Not an admin`)
-                     
-                }
+                req.admin = isAdminToken
+                next()
             
             }
         })
