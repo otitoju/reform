@@ -1,6 +1,9 @@
 const bodyParser = require('body-parser')
 const recipe = require('../models/recipe')
 
+exports.create = (req, res) => {
+    res.render('../../views/pages/createrecipe')
+}
 exports.createRecipe = async (req, res) => {
     if (req.body === ''){
         res.json(`Please create recipes`)

@@ -6,37 +6,38 @@ const admin = require('../models/admin')
 
 
 //CREATE ADMIN SUPERUSER
-exports.createSuperUser = (req, res) => {
+exports.createSuperUser =async (req, res) => {
     const hashpassword = bcrypt.hashSync(req.body.password,10)
-    admin.create({
+    const Admin = await admin.create({
         username:req.body.username,
         password:hashpassword,
         email:req.body.email
     })
     res.status(200).json({
-        message:`${req.body.username} is now an admin`
+        message:`${req.body.username} is now an admin`,
+        Admin:Admin
     })
-    const transport = nodemailer.createTransport({
-        service:'Gmail',
-        auth:{
-            user:'otitojuoluwapelumi@gmail.com',
-            pass:process.env.GMAILPW
-        }
-    })
-    const mailOptions = {
-        from:'otitojuoluwapelumi@gmail.com',
-        to:req.body.email,
-        subject:'Welcome team',
-        html:'<p>Recipe team welcome you admin'
-    }
-    transport.sendMail(mailOptions, (err) => {
-        if (err) {
-            res.json(`Error sending mail`)
-        }
-        else {
-            res.json('mail sent')
-        }
-    })
+    // const transport = nodemailer.createTransport({
+    //     service:'Gmail',
+    //     auth:{
+    //         user:'otitojuoluwapelumi@gmail.com',
+    //         pass:process.env.GMAILPW
+    //     }
+    // })
+    // const mailOptions = {
+    //     from:'otitojuoluwapelumi@gmail.com',
+    //     to:req.body.email,
+    //     subject:'Welcome team',
+    //     html:'<p>Recipe team welcome you admin'
+    // }
+    // transport.sendMail(mailOptions, (err) => {
+    //     if (err) {
+    //         res.json(`Error sending mail`)
+    //     }
+    //     else {
+    //         res.json('mail sent')
+    //     }
+    // })
 }
 //LOGIN SUPERUSER
 exports.loginSuperUser = (req, res) => {

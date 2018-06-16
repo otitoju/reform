@@ -7,13 +7,18 @@ const admin = require('../controllers/admincontroller')
 const adminVerify = require('../controllers/adminverify')
 const recipecontroller = require('../controllers/recipecontroller')
 
+router.get('/log', usercontroller.Login)
+router.get('/reg',verifyToken, usercontroller.registerUser)
+router.get('/postrecipe', recipecontroller.create)
+
 //USER ROUTES
-router.post('/user', usercontroller.admincreateUser)
+router.post('/reg',verifyToken, usercontroller.admincreateUser)
 router.get('/user/get/:id', usercontroller.getSingleUser)
 router.put('/user/update/:id', usercontroller.updateUserProfile)
 router.get('/user', usercontroller.getAllUser)
-router.delete('/user/:id', verifyToken, usercontroller.deleteUser)
+router.delete('/user/:id', usercontroller.deleteUser)
 router.post('/login', usercontroller.userLogin)
+router.put('/change', usercontroller.changePassword)
 
 //Admin routes
 router.post('/createsuperuser',  admin.createSuperUser)

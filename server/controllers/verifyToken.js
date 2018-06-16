@@ -23,6 +23,7 @@ const verifyToken = async (req, res, next) => {
             }
             else {
                 if (req.user = decoded ){
+                    
                     next();
                 }
                 

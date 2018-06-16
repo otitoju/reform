@@ -6,6 +6,8 @@ const crypto = require('crypto')
 const user = require('../models/user')
 const config = require('../config/config')
 const async = require('async')
+const passportLocalMongoose = require('passport-local-mongoose');
+
 
 
 exports.register = (req, res, next) => {
@@ -110,23 +112,56 @@ exports.reportIssues = (req, res) => {
         }
     })
 }
+
 //FORGOT PASSWORD
-exports.forgotPassword = (req, res, next) => {
+exports.forgotPassword = (req, res) => {
     user.findOne({email:req.body.email}, (err, user) => {
-        if (err) {
-            res.json('Error finding user email')
-        }
-        else if (!user) {
-            res.json('No user with such email')
+        if (!user) {
+            res.status(403).json(`No user with such email`)
         }
         else {
-            crypto.randomBytes(20, (err, buffer) => {
-                const token = buffer.toString('hex')
-                user.resettoken = token
+            if (req.body.secret === user.secret) {
+                user.resetexpires = Date.now() + 3600000 //1h 
                 user.save()
-                
-            })
-            const token = user.resettoken
+                var transport = nodemailer.createTransport({
+                    service:'Gmail',
+                    auth:{
+                        user:'otitojuoluwapelumi@gmail.com',
+                        pass:process.env.GMAILPASS
+                    }
+                })
+                var mailOptions = {
+                    from:'otitojuoluwapelumi@gmail.com',
+                    to:req.body.email,
+                    subject:'Password Recovery',
+                    html:'<p>You requested for reset password and it will expire in 1hour time, please follow this link to reset your password http://'+req.headers.host+'/reset/'+req.body.email+'</p>'
+                }
+                transport.sendMail(mailOptions, (err) => {
+                    if (err) {
+                        res.status(403).json('Sending failed')
+                    }
+                    else{}
+                    res.status(200).json('Mail sent successfully')
+                })
+            }
+            else {
+                res.json('incorrect credentials')
+            }
+        }
+    })
+}
+
+//RESET PASSWORD
+exports.resetPassword = (req, res) => {
+    const hashpassword = bcrypt.hashSync(req.body.password,10)
+    user.findOne({email:req.params.email, resetexpires:{$gt:Date.now()}}, req.body, {new: true}, (err, user) => {
+        if (!user){
+            res.status(403).json('Invalid email address or email session has expired, please check and try again')
+        }
+        else {
+            if(req.body.password === req.body.confirm && user.secret === req.body.secret){
+                user.password = hashpassword;
+                user.save()
             var transport = nodemailer.createTransport({
                 service:'Gmail',
                 auth:{
@@ -136,39 +171,16 @@ exports.forgotPassword = (req, res, next) => {
             })
             var mailOptions = {
                 from:'otitojuoluwapelumi@gmail.com',
-                to:req.body.email,
-                subject:'Password recovery team',
-                html:'<p>You have requested for password reset, please follow this link '+'http://'+req.headers.host+'/reset/'+token +'</p>'
+                to:user.email,
+                subject:'Password reset',
+                html:'<p>Your password has been change to '+req.body.password
             }
-            transport.sendMail(mailOptions, (err) =>{
-                if (err){
-                    console.log('mail not sent')
-                    res.json('mail not sent')
-                }
-                else{
-                    console.log('mail sent')
-                    res.json('mail sent successfully')
-                }
-            })
-        }
-    })
-}
-
-exports.resetPassword = (req, res, next) =>{
-    //const hashpassword = bcrypt.hashSync(req.body.password,10)
-    user.findOne({resettoken:req.params.token}, (err, user) =>{
-        if (err) {
-            res.json('no user with such token')
-        }
-        else{
-            if (req.body.password) {
-                user.setPassword(req.body.password)
-                
-                user.save()
-                user.resettoken = undefined
-                res.json('changed')
+            
             }
+            else{
+                res.json('passwords do not match')
+            }
+            
         }
-    })
-    
+    } )
 }
