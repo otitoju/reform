@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const user = require('../models/user');
 const config = require('../config/config')
-const localstorage = require('localStorage')
 //const flash = require('req-flash')
 
 exports.registerUser = (req, res) => {
@@ -41,7 +40,6 @@ exports.admincreateUser = async (req, res) => {
             name:body.name,
             email:body.email,
             password:hashpassword,
-            date:body.date,
             secret:body.secret
         })
         res.json({
@@ -54,7 +52,7 @@ exports.admincreateUser = async (req, res) => {
 exports.getSingleUser = async (req, res) => {
     const singleUser = await user.findById(req.params.id)
     res.json({
-        message:`All userrs are: `,
+        message:`All users are: `,
         user:singleUser
     })
 }
@@ -90,32 +88,42 @@ exports.Login = (req, res) =>{
 }
 //user login
 exports.userLogin = (req, res) => {
-    user.findOne({email:req.body.email}, (err, user) => {
-        if (err){
-            res.json('Unable to login')
-        }
-        else if(!user){
-            res.json(`No user with such email`)
-        }
-        else{
-            isUserPassword = bcrypt.compareSync(req.body.password, user.password)
-            if(!isUserPassword) {
-                res.json('Invalid or wrong password')
+    if(!req.body.email || !req.body.password){
+        res.status(403).json({
+            message:'Please fill all input fields '
+        })
+    }
+    else{
+        user.findOne({email:req.body.email}, (err, user) => {
+            if (err){
+                res.json({
+                    message:'Unable to login'
+                })
+            }
+            else if(!user){
+                res.json({
+                    message:`No user with such email`
+                })
             }
             else{
-                var token = jwt.sign({id:user.id,email:user.email,password:user.password}, config.secret, {expiresIn:'2h'})
-                 
-                // var values = {
-                //     id:user.id,
-                //     email:user.email,
-                //     password:user.password
-                // }
-                localstorage.setItem('user', JSON.stringify({token:token}))
-                token === localstorage.getItem('user');
-                res.redirect('/reg')
+                isUserPassword = bcrypt.compareSync(req.body.password, user.password)
+                if(!isUserPassword) {
+                    res.json({
+                        message:'Invalid or wrong password'
+                    })
+                }
+                else{
+                    var token = jwt.sign({id:user.id,email:user.email,name:user.name}, config.secret, {expiresIn:'2h'})
+                     
+                    res.json({
+                        message:'Login successful',
+                        token:token
+                    })
+                }
             }
-        }
-    })
+        })
+    }
+   
 }
 exports.changePassword = (req, res) => {
     const hashpassword = bcrypt.hashSync(req.body.newpassword,10)

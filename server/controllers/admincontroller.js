@@ -17,27 +17,7 @@ exports.createSuperUser =async (req, res) => {
         message:`${req.body.username} is now an admin`,
         Admin:Admin
     })
-    // const transport = nodemailer.createTransport({
-    //     service:'Gmail',
-    //     auth:{
-    //         user:'otitojuoluwapelumi@gmail.com',
-    //         pass:process.env.GMAILPW
-    //     }
-    // })
-    // const mailOptions = {
-    //     from:'otitojuoluwapelumi@gmail.com',
-    //     to:req.body.email,
-    //     subject:'Welcome team',
-    //     html:'<p>Recipe team welcome you admin'
-    // }
-    // transport.sendMail(mailOptions, (err) => {
-    //     if (err) {
-    //         res.json(`Error sending mail`)
-    //     }
-    //     else {
-    //         res.json('mail sent')
-    //     }
-    // })
+    
 }
 //LOGIN SUPERUSER
 exports.loginSuperUser = (req, res) => {
@@ -61,5 +41,12 @@ exports.loginSuperUser = (req, res) => {
             }
         }
     })
+}
+
+exports.getAllAdmin = (req, res) => {
+    admin.find({},{password:0}, (err,admin) =>{
+        res.json(admin)
+    });
+    
 }
 

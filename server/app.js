@@ -9,18 +9,18 @@ const path = require('path')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname,'../views')))
+// app.use(express.static(path.join(__dirname,'../views')))
 //app.use(flash());
 
-app.set('view engine', 'ejs');
+// app.set('view engine', 'ejs');
 app.use('/', routes)
 
 // app.get('/', (req,res)=>{
 //     res.render('../../views/pages/login')
 // })
-app.get('*', (req, res) => {
-    res.send('<h1>404 ERROR, PAGE NOT FOUND') 
-})
+// app.get('*', (req, res) => {
+//     res.send('<h1>404 ERROR, PAGE NOT FOUND') 
+// })
 //SERVER PORT
 const port = 2000
 app.listen(port, (req,res)=>{

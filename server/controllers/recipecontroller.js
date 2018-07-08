@@ -5,12 +5,20 @@ exports.create = (req, res) => {
     res.render('../../views/pages/createrecipe')
 }
 exports.createRecipe = async (req, res) => {
-    if (req.body === ''){
-        res.json(`Please create recipes`)
+    if (req.body.name == '' || req.body.ingredients =='' || req.body.procedure ==''){
+        res.json({
+            message:`Please create recipes`
+        })
     }
     else{
-        const Recipe = await recipe.create(req.body)
-        res.status(200).json(Recipe)
+        const Recipe = await recipe.create({
+            name:req.body.name,
+            ingredients:req.body.ingredients,
+            procedure:req.body.procedure
+        })
+        res.status(200).json({
+            message:'Recipe created'
+        })
     }
 
 }

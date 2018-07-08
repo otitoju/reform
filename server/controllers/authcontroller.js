@@ -104,11 +104,15 @@ exports.reportIssues = (req, res) => {
     transport.sendMail(mailOptions, (err) =>{
         if(err){
             console.log('mail not sent')
-            res.json(`Mail not sent`)
+            res.status(403).json({
+                message:`Mail sending failed, please try again later`
+            })
         }
         else{
             console.log("Mail sent")
-            res.json('Mail sent')
+            res.status(200).json({
+                message:`Mail sent successfully`
+            })
         }
     })
 }
@@ -117,7 +121,9 @@ exports.reportIssues = (req, res) => {
 exports.forgotPassword = (req, res) => {
     user.findOne({email:req.body.email}, (err, user) => {
         if (!user) {
-            res.status(403).json(`No user with such email`)
+            res.status(401).json({
+                message:'No user with such email'
+            })
         }
         else {
             if (req.body.secret === user.secret) {
@@ -138,14 +144,20 @@ exports.forgotPassword = (req, res) => {
                 }
                 transport.sendMail(mailOptions, (err) => {
                     if (err) {
-                        res.status(403).json('Sending failed')
+                        res.status(403).json({
+                            message:'Request failed, please try again'
+                        })
                     }
                     else{}
-                    res.status(200).json('Mail sent successfully')
+                    res.status(200).json({
+                        message:'A message has been sent to your email '
+                    })
                 })
             }
             else {
-                res.json('incorrect credentials')
+                res.status(401).json({
+                    message:'Incorrect information'
+                })
             }
         }
     })
@@ -156,7 +168,9 @@ exports.resetPassword = (req, res) => {
     const hashpassword = bcrypt.hashSync(req.body.password,10)
     user.findOne({email:req.params.email, resetexpires:{$gt:Date.now()}}, req.body, {new: true}, (err, user) => {
         if (!user){
-            res.status(403).json('Invalid email address or email session has expired, please check and try again')
+            res.status(401).json({
+                message:'Invalid email address or email session has expired, please check and try again'
+            })
         }
         else {
             if(req.body.password === req.body.confirm && user.secret === req.body.secret){
@@ -178,7 +192,9 @@ exports.resetPassword = (req, res) => {
             
             }
             else{
-                res.json('passwords do not match')
+                res.json({
+                    message:'passwords do not match'
+                })
             }
             
         }
