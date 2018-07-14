@@ -1,0 +1,19 @@
+#Ucard{
+    margin-top: 5%;
+    margin:0 auto;
+    width: 50%;
+}
+@media (max-width: 650px) {
+    #Ucard{
+        margin-top: 5%;
+        margin:0 auto;
+        width: 350px;
+    }
+}
+@media (max-width: 350px) {
+    #Ucard{
+        margin-top: 5%;
+        margin:0 auto;
+        width: 300px;
+    }
+}

@@ -1,0 +1,19 @@
+#reset{
+    width:50%;
+    margin: auto;
+    margin-top:5%;
+}
+@media (max-width: 650px) {
+    #reset{
+        width:350px;
+        margin: auto;
+        margin-top:5%;
+    }
+}
+@media (max-width: 350px) {
+    #reset{
+        width:300px;
+        margin: auto;
+        margin-top:5%;
+    }
+}

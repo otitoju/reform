@@ -1,0 +1,30 @@
+#head{
+    width:50%;
+    margin: auto;
+    margin-top:5%;
+    margin-bottom: 70px;
+}
+@media (max-width: 650px) {
+    h3{
+        font-size: 16px;
+        text-align: center
+    }  
+    #head{
+        width:350px;
+        margin: auto;
+        margin-top:5%;
+        margin-bottom: 70px;
+    }
+}
+@media (max-width: 350px) {
+    h3{
+        font-size: 16px;
+        text-align: center
+    }  
+    #head{
+        width:280px;
+        margin: auto;
+        margin-top:5%;
+        margin-bottom: 70px;
+    }
+}

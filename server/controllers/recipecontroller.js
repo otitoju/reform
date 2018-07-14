@@ -1,5 +1,8 @@
 const bodyParser = require('body-parser')
 const recipe = require('../models/recipe')
+const user = require('../models/user')
+const jwt = require('jsonwebtoken')
+const config = require('../config/config')
 
 exports.create = (req, res) => {
     res.render('../../views/pages/createrecipe')
@@ -25,12 +28,27 @@ exports.createRecipe = async (req, res) => {
 // get all recipe
 exports.getAllRecipe = async (req, res, next) => {
     const allRecipe = await recipe.find()
-    res.json(allRecipe)
+    let food_id = allRecipe.id
+    const token = await req.headers['authorization'].split(" ")[1];
+    const decode = await jwt.verify(token, config.secret)
+    let name = await decode.name
+    let id = await decode.id
+    let email = await decode.email
+
+    res.json({recipe:allRecipe,
+         name:name,
+         id:id,
+         email:email,
+         food_id:food_id
+        })
 }
 //get single recipe
 exports.getSingleRecipe = async (req, res) => {
     const singleRecipe = await recipe.findById(req.params.id)
-    res.json(singleRecipe)
+    res.json({
+        recipe:singleRecipe
+    })
+    console.log(singleRecipe.name)
 }
 //update recipe
 exports.updateRecipe = async (req, res) => {

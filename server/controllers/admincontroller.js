@@ -21,26 +21,38 @@ exports.createSuperUser =async (req, res) => {
 }
 //LOGIN SUPERUSER
 exports.loginSuperUser = (req, res) => {
-    admin.findOne({username:req.body.username}, (err, admin) => {
-        if (err) {
-            res.status(403).json(`Problem creating superuser`)
-        }
-        else {
-            const adminpassword = bcrypt.compareSync(req.body.password, admin.password)
-            if (!adminpassword) {
-                res.json(`You are not an admin`)
+    if(!req.body.username || !req.body.password){
+        res.json({message:'fill all inputs and login'})
+    }
+    else{
+        admin.findOne({username:req.body.username}, (err, admin) => {
+            if (err) {
+                res.status(403).json({
+                    message:`Problem loging in superuser`
+                })
+            }
+            else if(!admin){
+                res.json({message:'Invalid username'})
             }
             else {
-                const token = jwt.sign({id:admin.id,username:admin.username, password:admin.password}, config.adminsecret, {expiresIn:86400})
-                res.json({
-                    message:`Welcome admin ${req.body.username}`,
-                    token:token
-                })
-                //req.redirect('/')
-
+                const adminpassword = bcrypt.compareSync(req.body.password, admin.password)
+                if (!adminpassword) {
+                    res.json({
+                        message:`Wrong password`
+                    })
+                }
+                else {
+                    const adminToken = jwt.sign({id:admin.id,username:admin.username}, config.adminsecret, {expiresIn:'5h'})
+                    res.json({
+                        message:`welcome`,
+                        admintoken:adminToken
+                    })
+    
+                }
             }
-        }
-    })
+        })
+    }
+    
 }
 
 exports.getAllAdmin = (req, res) => {

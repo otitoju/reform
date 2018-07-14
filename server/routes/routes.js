@@ -8,7 +8,7 @@ const adminVerify = require('../controllers/adminverify')
 const recipecontroller = require('../controllers/recipecontroller')
 
 router.get('/log', usercontroller.Login)
-router.get('/reg/:token',verifyToken, usercontroller.registerUser)
+//router.get('/reg/:token',verifyToken, usercontroller.registerUser)
 router.get('/postrecipe', recipecontroller.create)
 
 //USER ROUTES
@@ -26,15 +26,18 @@ router.get('/admin', admin.getAllAdmin)
 
 //Recipe routes
 router.post('/recipe', recipecontroller.createRecipe)
-router.get('/recipe/get',adminVerify, recipecontroller.getAllRecipe)
-router.get('/recipe/get/:id', adminVerify, recipecontroller.getSingleRecipe)
+router.get('/recipe/get', recipecontroller.getAllRecipe)
+router.get('/recipe/get/:id', recipecontroller.getSingleRecipe)
 router.put('/recipe/update/:id', recipecontroller.updateRecipe)
 router.delete('/recipe/delete/:id', recipecontroller.deleteRecipe)
 
 //Auth routes
 router.put('/reset/:email', authcontroller.resetPassword)
-router.post('/forgot', authcontroller.forgotPassword)
+router.post('/forgot',verifyToken, authcontroller.forgotPassword)
 router.post('/report', authcontroller.reportIssues)
 router.post('/register', authcontroller.register)
+router.get('/decode', authcontroller.getToken)
+
+router.get('*', authcontroller.pagenotfound)
 
 module.exports = router

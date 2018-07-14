@@ -1,0 +1,31 @@
+<header class="jumbotron" id="header">
+    <% include ../partials/header %>
+</header>
+
+<main>
+    <div class="jumbotron" id="recipe">
+        <h1>Create recipe</h1>
+       <form action="" method="post">
+           <div class="form-group">
+               <label for="name">Food name</label>
+               <input type="text" name="name" class="form-control" placeholder="Enter food name" id="food" required>
+           </div>
+           <div class="form-group">
+                <label for="ingredient">Ingredients</label>
+                <input type="text"  name="ingredient" class="form-control" placeholder="Enter food ingredient here..." id="ingredient" required>
+            </div>
+            <div class="form-group">
+                <label for="procedure">Procedure</label>
+                <input type="textarea"  name="procedure" class="form-control" placeholder="Enter food procedure here..." id="procedure" required>
+            </div>
+            <div class="form-group">
+                <input type="file"  name="file" class="form-control" id="file" required>
+            </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Create recipe</button>
+       </form>
+    </div>
+</main>
+
+<footer>
+    <% include ../partials/footer %>
+</footer>

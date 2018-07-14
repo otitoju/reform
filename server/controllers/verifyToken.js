@@ -3,8 +3,9 @@ const config = require('../config/config')
 const user = require('../models/user')
 //const admin = require('../models/admin')
 
-const verifyToken = async (req, res, next) => {
-    let token = req.headers['x-access-token'];
+const verifyToken =  (req, res, next) => {
+    //const token = req.headers['x-access-token']
+    let token = req.headers['authorization'].split(" ")[1];
     if (!token) {
         res.json({
             message:`No token provided`,
@@ -16,20 +17,15 @@ const verifyToken = async (req, res, next) => {
         jwt.verify(token, config.secret, (err, decoded) => {
             if (err) {
                 res.json({
-                    message:`Authentication Error`,
+                    message:`Authentication Error or token expired, please try again`,
                     auth:false,
                     token:false
                 })
             }
             else {
-                if (req.user = decoded ){
-                    
+                req.user = decoded
                     next();
-                }
                 
-                else{
-                    res.json(`you are not a user`)
-                } 
             }
         })
     }

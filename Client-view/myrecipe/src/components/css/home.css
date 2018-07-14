@@ -1,0 +1,72 @@
+.containers{
+    background-image: url("meat.jpg");
+    margin-top: 40px;
+    height: 450px;
+
+  }
+  h4{
+   margin-top: 15px
+  }
+  .containers #inside{
+    color: white;
+    padding: 210px;
+    font-size: 47px;
+    font-family: serif;
+  }
+  #wrapper{
+    text-align: center;
+    padding: 50px;
+  }
+  #signins{
+   width: 450px;
+   height: 45px;
+   border-radius: 15px;
+   color: white;
+   font-size: 16px;
+   transition-duration: .5s;
+   margin-top: 15px;
+   outline: none;
+ }
+ #signups{
+    width: 450px;
+    height: 45px;
+    border-radius: 15px;
+    color: white;
+    font-size: 16px;
+    transition-duration: .5s;
+    margin-top: 15px;
+    outline: none;
+  }
+  @media (max-width: 650px) {
+    .containers{
+      background-image: url("basket.jpg");
+      margin-top: 40px;
+      height: 10%;
+  
+    }
+    #body{
+      background-color:white;
+      margin:auto;
+      
+
+    }
+    #signins{
+      width: 150px;
+      height: 45px;
+    }
+    #signups{
+      width: 150px;
+      height: 45px;
+    }
+    #wrapper{
+      text-align: center;
+    }
+    .containers #inside{
+      color: white;
+      padding: 110px;
+      margin:0 auto;
+      font-size: 27px;
+      font-family: serif;
+    }
+  }
+  

@@ -5,22 +5,12 @@ const user = require('../models/user');
 const config = require('../config/config')
 //const flash = require('req-flash')
 
-exports.registerUser = (req, res) => {
-    var token = jwt.sign({id:user.id,email:user.email,password:user.password}, config.secret, {expiresIn:'2h'})
-                 
-                // var values = {
-                //     id:user.id,
-                //     email:user.email,
-                //     password:user.password
-                // }
-                localstorage.setItem('user', JSON.stringify({token:token}))
-                token = localstorage.getItem('user');
-    res.render('../../views/pages/register', {token:token})
-}
+const userExist = user.email
+
 exports.admincreateUser = async (req, res) => {
     const body = req.body;
     const hashpassword = bcrypt.hashSync(req.body.password,10);
-    if (!body.name && !body.email && !body.password) {
+    if (!body.name || !body.email || !body.password) {
         res.status(403).json({
             message:`Please fill all required input fields`
         })
@@ -57,24 +47,46 @@ exports.getSingleUser = async (req, res) => {
     })
 }
 //update user profile
-exports.updateUserProfile =  (req, res) => {
-    user.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, user) => {
-        if (err) {
-            res.status(500).send("There was a problem updating the user.");
-        }
-        else {
-            res.status(200).send({
-                message:'Updated',
-                user:user
-            });
-        }
+exports.updateUserProfile = async (req, res) => {
+    const token = await req.headers['authorization'].split(" ")[1]
+    const decode = await jwt.verify(token, config.secret)
+    const update = await user.findByIdAndUpdate(req.params.id, req.body, {new:true})
+    let id = decode.id
+    let name = decode.name
+    let email = decode.email
+    res.status(200).json({
+        message:'updated',
+        id:id
+    })
+    console.log(id)
+
+    // user.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, user) => {
+    //     if (err) {
+    //         res.status(500).send("There was a problem updating the user.");
+    //     }
+    //     else {
+    //         res.status(200).send({
+    //             message:'Updated',
+    //             user:user
+    //         });
+    //     }
         
-    })  
+    // })  
 }
 //get all users
 exports.getAllUser =  async (req, res) => {
     const allUser = await user.find()
-    res.json(allUser)
+    const token = await req.headers['authorization'].split(" ")[1]
+    const decode = await jwt.verify(token, config.secret)
+    let name = decode.name
+    let id = decode.id
+    let email = decode.email
+    res.json({
+        allUser:allUser,
+        id:id,
+        name:name,
+        email:email
+    })
 }
 //delete users
 exports.deleteUser = async (req, res) => {
@@ -90,32 +102,32 @@ exports.Login = (req, res) =>{
 exports.userLogin = (req, res) => {
     if(!req.body.email || !req.body.password){
         res.status(403).json({
-            message:'Please fill all input fields '
+            message:'fill all'
         })
     }
     else{
         user.findOne({email:req.body.email}, (err, user) => {
             if (err){
-                res.json({
+                res.status(500).json({
                     message:'Unable to login'
                 })
             }
             else if(!user){
-                res.json({
+                res.status(401).json({
                     message:`No user with such email`
                 })
             }
             else{
                 isUserPassword = bcrypt.compareSync(req.body.password, user.password)
                 if(!isUserPassword) {
-                    res.json({
+                    res.status(401).json({
                         message:'Invalid or wrong password'
                     })
                 }
                 else{
                     var token = jwt.sign({id:user.id,email:user.email,name:user.name}, config.secret, {expiresIn:'2h'})
                      
-                    res.json({
+                    res.status(200).json({
                         message:'Login successful',
                         token:token
                     })

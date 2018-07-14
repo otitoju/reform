@@ -38,32 +38,49 @@ exports.register = (req, res, next) => {
 
 
 //get user data from token
-exports.getToken = (req, res) => {
-    //const token = req.headers.authorization
-    const token = req.headers['x-access-token']
-    if (!token) {
-        res.json(`No user with such token`)
+exports.getToken = async (req, res, next) => {
+    const token = req.headers['x-access-token'];
+    if (!token){
+      res.json({
+        message:`No token provided`,
+        token:null
+      })
     }
-    else{
-        jwt.verify(token, config.secret, (err, decoded) => {
-            if (err) {
-                res.json(`Verification failed`)
-            }
-            else{
-                user.findById(decoded.id, {password:0}, (err, user) => {
-                    if (!user){
-                        res.json(`No user found`)
-                    }
-                    else{
-                        res.json({
-                            user:user
-                        })
-                    }
+    else { //VERIFY TOKEN AND RETURN USER WITH THE TOKEN
+            await jwt.verify(token, config.secret, (err, decoded) => {
+              if (err) {
+                res.json({
+                  message:`Authenication failed`,
+                  token:null
                 })
-            }
-        })
-    }
-}
+              }
+              else {
+                  user.findById(decoded.id, {password:0}, (err, user) => {
+                      if (err) {
+                        res.json({
+                          message:`Error decoding token`,
+                          auth:false,
+                          token:null
+                        })
+                      }
+                      else if (!user) {
+                        res.json({
+                          message:`No user found`
+                        })
+                      }
+                      else {
+                        res.json({
+                          message:`Decoding successful`,
+                          auth:true,
+                          user:user
+                        })
+                      }
+                })
+              }
+            })
+          }
+      
+  }
 //login
 exports.loginUser = (req, res) => {
     user.findOne({email:req.body.email}, (err, user) => {
@@ -119,48 +136,56 @@ exports.reportIssues = (req, res) => {
 
 //FORGOT PASSWORD
 exports.forgotPassword = (req, res) => {
-    user.findOne({email:req.body.email}, (err, user) => {
-        if (!user) {
-            res.status(401).json({
-                message:'No user with such email'
-            })
-        }
-        else {
-            if (req.body.secret === user.secret) {
-                user.resetexpires = Date.now() + 3600000 //1h 
-                user.save()
-                var transport = nodemailer.createTransport({
-                    service:'Gmail',
-                    auth:{
-                        user:'otitojuoluwapelumi@gmail.com',
-                        pass:process.env.GMAILPASS
-                    }
-                })
-                var mailOptions = {
-                    from:'otitojuoluwapelumi@gmail.com',
-                    to:req.body.email,
-                    subject:'Password Recovery',
-                    html:'<p>You requested for reset password and it will expire in 1hour time, please follow this link to reset your password http://'+req.headers.host+'/reset/'+req.body.email+'</p>'
-                }
-                transport.sendMail(mailOptions, (err) => {
-                    if (err) {
-                        res.status(403).json({
-                            message:'Request failed, please try again'
-                        })
-                    }
-                    else{}
-                    res.status(200).json({
-                        message:'A message has been sent to your email '
-                    })
+    if(!req.body.email || !req.body.secret){
+        res.status(401).json({
+            message:'Please fill in all fields'
+        })
+    }
+    else{
+        user.findOne({email:req.body.email}, (err, user) => {
+            if (!user) {
+                res.status(401).json({
+                    message:'No user with such email'
                 })
             }
             else {
-                res.status(401).json({
-                    message:'Incorrect information'
-                })
+                if (req.body.secret === user.secret) {
+                    user.resetexpires = Date.now() + 3600000 //1h 
+                    user.save()
+                    var transport = nodemailer.createTransport({
+                        service:'Gmail',
+                        auth:{
+                            user:'otitojuoluwapelumi@gmail.com',
+                            pass:process.env.GMAILPASS
+                        }
+                    })
+                    var mailOptions = {
+                        from:'otitojuoluwapelumi@gmail.com',
+                        to:req.body.email,
+                        subject:'Password Recovery',
+                        html:'<p>You requested for reset password and it will expire in 1hour time, please follow this link to reset your password http://'+req.headers.host+'/reset/'+req.body.email+'</p>'
+                    }
+                    transport.sendMail(mailOptions, (err) => {
+                        if (err) {
+                            res.status(403).json({
+                                message:'Request failed, please try again'
+                            })
+                        }
+                        else{}
+                        res.status(200).json({
+                            message:'A message has been sent to your email '
+                        })
+                    })
+                }
+                else {
+                    res.status(401).json({
+                        message:'Incorrect information'
+                    })
+                }
             }
-        }
-    })
+        })
+    }
+    
 }
 
 //RESET PASSWORD
@@ -199,4 +224,7 @@ exports.resetPassword = (req, res) => {
             
         }
     } )
+}
+exports.pagenotfound = (req, res)=>{
+    res.json({message:`page not found`})
 }
