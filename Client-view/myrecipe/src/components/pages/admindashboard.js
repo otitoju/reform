@@ -9,6 +9,9 @@ export default class admindashboard extends Component {
           this.props.history.push('/')
       }
     }
+    logout(){
+      localStorage.removeItem('AdminToken')
+    }
     
   render() {
     return (
@@ -22,6 +25,11 @@ export default class admindashboard extends Component {
           <div className="form-field">
                 <Link to="/users">
                 <input type="submit" className="btn-small waves-effect" value="View users"/>
+                </Link>
+          </div>
+          <div className="form-field">
+                <Link to="/">
+                <input type="submit" className="btn-small waves-effect" value="Logout" onClick={this.logout}/>
                 </Link>
           </div>
       </div>

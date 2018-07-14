@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import '../css/fetchdata.css'
+import pic from './images.jpg'
 
 export default class fetchData extends Component {
     constructor(){
@@ -81,7 +82,7 @@ export default class fetchData extends Component {
                     {allRecipe.map(rec => {
                         const {_id,name, ingredients, procedure} = rec
                         return <div className="card-panel" key={_id}>
-                                <img src="./crayfish.jpg"/>
+                                <img src={pic}/>
                                 <div className="caption">
                             <h3>{name}</h3>
                                 <ul>

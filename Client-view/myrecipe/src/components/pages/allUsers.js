@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import '../css/allusers.css'
 
 export default class allUsers extends Component {
     constructor(){
@@ -8,7 +9,7 @@ export default class allUsers extends Component {
         }
     }
     componentDidMount = () => {
-        const token = JSON.parse(localStorage.getItem('token'))
+        const token = JSON.parse(localStorage.getItem('AdminToken'))
         if(!token){
             this.props.history.push('/')
         }
@@ -32,12 +33,12 @@ export default class allUsers extends Component {
     return (
       <div>
         <h1>All users</h1>
-            <div>
-                {allUsers.map(res => {
-                    const {_id,name,email} = res
-                    return <div key={_id}>
-                        <table className="table table-condensed table-bordered">
+        <fragment>
+            <table className="table table-condensed table-bordered">
                             <thead>
+                                <th>
+                                    sn
+                                </th>
                                 <th>
                                     ID
                                 </th>
@@ -48,18 +49,21 @@ export default class allUsers extends Component {
                                     EMAIL
                                 </th>
                             </thead>
+                            
                             <tbody>
-                                <tr>
-                                    <td>{_id}</td>
-                                    <td>{name}</td>
-                                    <td>{email}</td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                        </div>
+                {allUsers.map(res => {
+                    const {_id,name,email} = res
+                    return <tr key={_id}>
+                                    <td></td>
+                                    <td><b>{_id}</b></td>
+                                    <td><b>{name}</b></td>
+                                    <td><b>{email}</b></td>
+                                </tr>       
                 })}
-            </div>
+                </tbody>
+                
+            </table>
+            </fragment>
       </div>
     )
   }

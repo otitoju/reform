@@ -3,7 +3,8 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const user = require('../models/user');
 const config = require('../config/config')
-//const flash = require('req-flash')
+const admin = require('../models/admin')
+const adminConfig = require('../config/adminconfig')
 
 const userExist = user.email
 
@@ -77,7 +78,7 @@ exports.updateUserProfile = async (req, res) => {
 exports.getAllUser =  async (req, res) => {
     const allUser = await user.find()
     const token = await req.headers['authorization'].split(" ")[1]
-    const decode = await jwt.verify(token, config.secret)
+    const decode = await jwt.verify(token, adminConfig.adminsecret)
     let name = decode.name
     let id = decode.id
     let email = decode.email
