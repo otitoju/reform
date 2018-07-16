@@ -61,4 +61,63 @@ exports.getAllAdmin = (req, res) => {
     });
     
 }
-
+// admin dashboard
+exports.getAdminUsername = async (req, res) => {
+    
+    const token = await req.headers['authorization'].split(" ")[1]
+    const decoded = await jwt.verify(token, config.adminsecret)
+    let username = decoded.username
+    res.status(200).json({
+        username:username
+    })
+}
+//upload image
+// const storage = multer.diskStorage({
+//     destination:'../images/',
+//     filename:(req, file, cb)=>{
+//         cb(null, file.fieldname + Date.now() + path.extname(file.originalname))
+//     }
+// })
+// const upload = multer({
+//     storage:storage,
+//     limits:{fileSize:250000},
+//     fileFilter:(req, file, cb) => {
+//         checkFileType(file, cb)
+//     }
+// }).single('photo')
+// const checkFileType = (file, cb)=>{
+//     //file type
+//     const fileType = /jpeg|jpg|png/
+//     //file extension
+//     const extname = fileType.test(path.extname(file.originalname).toLowerCase)
+//     //mimetype
+//     const mime = fileType.test(file.mimetype)
+//     if (mime && extname){
+//         return cb(null, true)
+//     }
+//     else{
+//         cb('Error: Images only')
+//     }
+// }
+// exports.uploadImages = (req, res) => {
+//     upload(req, res, (err) => {
+//         if(err){
+//             res.json({
+//                 message:err
+//             })
+//         }
+//         else{
+//             if(req.file == undefined){
+//                 res,json({
+//                     message:'Error: No file selected'
+//                 })
+//             }
+//             else{
+//                 res.json({
+//                     message:'File uploaded',
+//                     file:`images/${req.file.filename}`
+//                 })
+//             }
+//         }
+//     })
+// }

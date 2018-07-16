@@ -19,10 +19,12 @@ router.get('/user', usercontroller.getAllUser)
 router.delete('/user/:id', usercontroller.deleteUser)
 router.post('/login', usercontroller.userLogin)
 router.put('/change', usercontroller.changePassword)
+router.get('/userprofile', usercontroller.userProfile)
 //Admin routes
 router.post('/createsuperuser',  admin.createSuperUser)
 router.post('/admin', admin.loginSuperUser)
 router.get('/admin', admin.getAllAdmin)
+router.get('/adminusername', admin.getAdminUsername)
 
 //Recipe routes
 router.post('/recipe', recipecontroller.createRecipe)

@@ -17,7 +17,7 @@ export default class userprofile extends Component {
         if (!token){
             this.props.history.push('/')
         }
-      fetch('/user', {
+      fetch('/userprofile', {
           headers:{
               'Accept':'application/json',
               'Content-Type':'application',

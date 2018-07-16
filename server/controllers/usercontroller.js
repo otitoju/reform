@@ -89,6 +89,22 @@ exports.getAllUser =  async (req, res) => {
         email:email
     })
 }
+
+// user profile
+exports.userProfile =  async (req, res) => {
+    const User = await user.find()
+    const token = await req.headers['authorization'].split(" ")[1]
+    const decode = await jwt.verify(token, config.secret)
+    let name = decode.name
+    let id = decode.id
+    let email = decode.email
+    res.json({
+        User:User,
+        id:id,
+        name:name,
+        email:email
+    })
+}
 //delete users
 exports.deleteUser = async (req, res) => {
     const removeUser = await user.findByIdAndRemove(req.params.id)
