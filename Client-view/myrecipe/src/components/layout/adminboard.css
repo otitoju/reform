@@ -64,3 +64,19 @@ hr{
     width:50%;
     margin: auto;
 }
+#user{
+    right:200px;
+    border:1px solid;
+}
+#use{
+    background: red;
+    float:left;
+    border-bottom: 1px solid
+}
+h5:hover{
+ cursor: pointer;
+}
+h5{
+    font-size: 24px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}

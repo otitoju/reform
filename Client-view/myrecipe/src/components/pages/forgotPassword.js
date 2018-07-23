@@ -42,7 +42,7 @@ export default class forgotPassword extends Component {
     return (
         <div>
       
-            <div className="card hoverable" id="forgot">
+            <div className="card" id="forgot">
                 <div className="card-action teal lighten-1 white-text">
                     <h3>Forgot password</h3>
                 </div>

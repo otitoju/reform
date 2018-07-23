@@ -168,13 +168,15 @@ exports.forgotPassword = (req, res) => {
                     transport.sendMail(mailOptions, (err) => {
                         if (err) {
                             res.status(403).json({
-                                message:'Request failed, please try again'
+                                message:'Request failed, please check your network settings and try again'
                             })
                         }
-                        else{}
-                        res.status(200).json({
-                            message:'A message has been sent to your email '
-                        })
+                        else{
+                            res.status(200).json({
+                                message:'A message has been sent to your email '
+                            })
+                        }
+                        
                     })
                 }
                 else {

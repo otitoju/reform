@@ -3,11 +3,21 @@
     margin:0 auto;
     width: 50%;
 }
+#uses{
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold
+}
 @media (max-width: 650px) {
     #Ucard{
         margin-top: 5%;
         margin:0 auto;
         width: 350px;
+    }
+    #uses{
+        font-size: 14px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-weight: bold
     }
 }
 @media (max-width: 350px) {
@@ -15,5 +25,10 @@
         margin-top: 5%;
         margin:0 auto;
         width: 300px;
+    }
+    #uses{
+        font-size: 14px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-weight: bold
     }
 }

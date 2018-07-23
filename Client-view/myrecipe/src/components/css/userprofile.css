@@ -8,10 +8,20 @@
 #pic{
     margin: auto;
     width: 30%;
-    height: 400px;
+    height: 200px;
+    
 }
 #Pbtn{
     margin-bottom: 5px
+}
+img{
+    height: 200px;
+    width:200px;
+}
+#contain{
+    left: 40%;
+    position: relative;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 @media (max-width: 850px) {
     #profile{

@@ -4,6 +4,12 @@
     width: 50%;
     margin-top: 5%
 }
+#pre{
+    visibility: hidden;
+}
+#pred{
+    visibility: hidden;
+}
 @media (max-width: 650px) {
     h3{
         font-size: 20px;

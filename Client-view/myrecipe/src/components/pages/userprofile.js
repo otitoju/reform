@@ -8,12 +8,16 @@ export default class userprofile extends Component {
         this.state = {
             username:'',
             email:'',
-            id:''
+            id:'',
+            pic:''
         }
 
     }
     componentDidMount = () => {
         const token = JSON.parse(localStorage.getItem('token'))
+        const id = JSON.parse(localStorage.getItem('userId'))
+        this.setState({id:id})
+        //console.log(id)
         if (!token){
             this.props.history.push('/')
         }
@@ -26,34 +30,64 @@ export default class userprofile extends Component {
       })
       .then(res => res.json())
       .then(result => {
+          //console.log(result.id)
         this.setState({
             username:result.name,
             email:result.email,
-            id:result._id
+            pic:result.pic
         })
       })
       .catch(err => console.log(err))
     }
     
   render() {
-      const {username, email, id } = this.state
+      const {username, email, id ,pic} = this.state
 
     return (
       <div>
-        <div className="card" key={id} id="profile">
-                <center><h1>User profile</h1></center>
-                <hr/>
-                <div className="card-panel" id="pic">
-                    <h2>Profile pic to be mounted</h2>
-                </div>
-                <hr/>
-                <h3>Username: {username}</h3>
-                <h3>Email: {email}</h3>
-                <div id="Pbtn">
-                <Link to="/chgpassword"><input type="button" className="btn btn-default red" value="Change password"/></Link><br/>
-               <Link to="/update"><input type="button" className="btn btn-small gray" value="Edit profile"/></Link>
-               </div>
-        </div>
+                <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+                    <div className="container">
+                        <div id="contain">
+                        <Link className="navbar-brand" to="/">
+                            Online Recipe
+                        </Link>
+                        </div>
+                        <button className="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarNav">
+                            <span className="navbar-toggler-icon"/>
+                        </button>
+                        <div className="collapse navbar-collapse" id="navbarNav">
+                            <ul className="navbar-nav ml-auto">
+        
+                                <li className="nav-item">
+                                </li>
+                                
+                            </ul>
+                        
+                        </div>
+                    </div>
+                </nav>
+            
+             <div className="col-sm-6 col-md-4" id="row">
+                <div className="card-panel" key={id}>
+                                <img src={pic} />
+                                <div className="caption">
+                            <h3 id="uses">Username: {username}</h3>
+                            <h3 id="uses">Email: {email}</h3>
+                                <ul>
+                                   
+                                   <li> <Link to="/chgpassword"><input type="button" className="btn btn-default red" value="Change password"/></Link></li>
+                                   <li> <Link to={`/update/${id}`}><input type="button" className="btn btn-default gray" value="Edit profile"/></Link></li><br/><br/>
+                                  <li> <Link to={`/img/${id}`}><input type="button" className="btn btn-primary gray" value="Upload image"/></Link></li>
+                                   
+                                </ul>
+                                    
+                                   </div> 
+                </div> 
+            </div>
+
       </div>
     )
   }

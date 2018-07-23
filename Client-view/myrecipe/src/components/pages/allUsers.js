@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
 import '../css/allusers.css'
 
 export default class allUsers extends Component {
@@ -32,6 +33,31 @@ export default class allUsers extends Component {
       const {allUsers} = this.state
     return (
       <div>
+                  <nav className="navbar navbar-expand-sm navbar-dark bg mb-4">
+                    <div className="container">
+                        <Link className="navbar-brand" to="/">
+                            Classic Recipe administrative site
+                        </Link>
+                        <button className="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarNav">
+                            <span className="navbar-toggler-icon"/>
+                        </button>
+                        <div className="collapse navbar-collapse" id="navbarNav">
+                            <ul className="navbar-nav ml-auto">
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/">
+                                    Visit site
+                                    </Link>
+                                </li>
+                                
+                                
+                            </ul>
+                        
+                        </div>
+                    </div>
+              </nav>
         <h1>All users</h1>
         <fragment>
             <table className="table table-condensed table-bordered">
@@ -48,16 +74,20 @@ export default class allUsers extends Component {
                                 <th>
                                     EMAIL
                                 </th>
+                                <th>
+                                    SECRET
+                                </th>
                             </thead>
                             
                             <tbody>
                 {allUsers.map(res => {
-                    const {_id,name,email} = res
+                    const {_id,name,email, secret} = res
                     return <tr key={_id}>
                                     <td></td>
                                     <td><b>{_id}</b></td>
                                     <td><b>{name}</b></td>
                                     <td><b>{email}</b></td>
+                                    <td><b>{secret}</b></td>
                                 </tr>       
                 })}
                 </tbody>

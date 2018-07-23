@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
+import { Route, Switch} from 'react-router-dom'
 import './App.css';
 import Login from './components/pages/login'
 import Register from './components/pages/register'
@@ -17,29 +17,41 @@ import Admin from './components/pages/adminLogin'
 import Admindashboard from './components/pages/admindashboard'
 import Alluser from './components/pages/allUsers'
 import userprofile from './components/pages/userprofile'
+import notFound from './components/pages/notfound'
+import pic from './components/pages/pics'
+import RecipePhoto from './components/pages/recipeImage'
+import Single from './components/pages/fetchsingledata'
+import Footer from './components/layout/footer'
 
 
 class App extends Component {
 
   render() {
+
     return (
       <div className="App">
-          <Navbar />
-          <Route path="/reset" exact={true} component={Reset}/>
-          <Route path="/userprofile" exact={true} component={userprofile}/>
-          <Route path="/users" exact={true} component={Alluser}/>
-          <Route path="/adminhome" exact={true} component={Admindashboard}/>
-          <Route path="/admin" exact={true} component={Admin}/>
-          <Route path="/dashboard" exact={true} component={Dashboard}/>
-          <Route path="/report" exact={true} component={Report}/>
-          <Route path="/forgot" exact={true} component={Forgotpassword}/>
-          <Route path="/login" exact={true} component={Login}/>
-          <Route path="/" exact={true} component={Home}/>
-          <Route path="/create" exact={true} component={Recipe}/>
-          <Route path="/register" exact={true} component={Register}/>
-          <Route path="/update" exact={true} component={Changeprofile}/>
-          <Route path="/chgpassword" exact={true} component={Changepassword}/>
-          <Route path="/recipe" exact={true} component={Recipes}/>
+          {/* <Navbar /> */}
+          <Switch>
+          <Route path="/img/:id" strict exact={true} component={pic}/>
+          <Route path="/post/:id" strict exact={true} component={Single}/>
+          <Route path="/reset" strict exact={true} component={Reset}/>
+          <Route path="/userprofile" strict exact={true} component={userprofile}/>
+          <Route path="/users" strict exact={true} component={Alluser}/>
+          <Route path="/adminhome" strict exact={true} component={Admindashboard}/>
+          <Route path="/admin" strict exact={true} component={Admin}/>
+          <Route path="/dashboard" strict exact={true} component={Dashboard}/>
+          <Route path="/photo/:id" strict exact={true} component={RecipePhoto}/>
+          <Route path="/report" strict exact={true} component={Report}/>
+          <Route path="/forgot" strict exact={true} component={Forgotpassword}/>
+          <Route path="/login" strict exact={true} component={Login}/>
+          <Route path="/" strict exact={true} component={Home}/>
+          <Route path="/create" strict exact={true} component={Recipe}/>
+          <Route path="/register" strict exact={true} component={Register}/>
+          <Route path="/update/:id" strict exact={true} component={Changeprofile}/>
+          <Route path="/chgpassword" strict exact={true} component={Changepassword}/>
+          <Route path="/recipe" strict exact={true} component={Recipes}/>
+          <Route path="*" exact={true} component={notFound}/>
+          </Switch>
       </div>
 
     );

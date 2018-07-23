@@ -3,6 +3,8 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const config = require('../config/adminconfig')
 const admin = require('../models/admin')
+const multer = require('multer')
+const path = require('path')
 
 
 //CREATE ADMIN SUPERUSER
@@ -27,7 +29,7 @@ exports.loginSuperUser = (req, res) => {
     else{
         admin.findOne({username:req.body.username}, (err, admin) => {
             if (err) {
-                res.status(403).json({
+                res.status(500).json({
                     message:`Problem loging in superuser`
                 })
             }
@@ -72,52 +74,52 @@ exports.getAdminUsername = async (req, res) => {
     })
 }
 //upload image
-// const storage = multer.diskStorage({
-//     destination:'../images/',
-//     filename:(req, file, cb)=>{
-//         cb(null, file.fieldname + Date.now() + path.extname(file.originalname))
-//     }
-// })
-// const upload = multer({
-//     storage:storage,
-//     limits:{fileSize:250000},
-//     fileFilter:(req, file, cb) => {
-//         checkFileType(file, cb)
-//     }
-// }).single('photo')
-// const checkFileType = (file, cb)=>{
-//     //file type
-//     const fileType = /jpeg|jpg|png/
-//     //file extension
-//     const extname = fileType.test(path.extname(file.originalname).toLowerCase)
-//     //mimetype
-//     const mime = fileType.test(file.mimetype)
-//     if (mime && extname){
-//         return cb(null, true)
-//     }
-//     else{
-//         cb('Error: Images only')
-//     }
-// }
-// exports.uploadImages = (req, res) => {
-//     upload(req, res, (err) => {
-//         if(err){
-//             res.json({
-//                 message:err
-//             })
-//         }
-//         else{
-//             if(req.file == undefined){
-//                 res,json({
-//                     message:'Error: No file selected'
-//                 })
-//             }
-//             else{
-//                 res.json({
-//                     message:'File uploaded',
-//                     file:`images/${req.file.filename}`
-//                 })
-//             }
-//         }
-//     })
-// }
+const storage = multer.diskStorage({
+    destination:'../images/',
+    filename:(req, file, cb)=>{
+        cb(null, file.fieldname + Date.now() + path.extname(file.originalname))
+    }
+})
+const upload = multer({
+    storage:storage,
+    limits:{fileSize:250000},
+    fileFilter:(req, file, cb) => {
+        checkFileType(file, cb)
+    }
+}).single('photo')
+const checkFileType = (file, cb)=>{
+    //file type
+    const fileType = /jpeg|jpg|png/
+    //file extension
+    const extname = fileType.test(path.extname(file.originalname).toLowerCase)
+    //mimetype
+    const mime = fileType.test(file.mimetype)
+    if (mime || extname){
+        return cb(null, true)
+    }
+    else{
+        cb('Error: Images only')
+    }
+}
+exports.uploadImages = (req, res) => {
+    upload(req, res, (err) => {
+        if(err){
+            res.json({
+                message:err
+            })
+        }
+        else{
+            if(req.file == undefined){
+                res,json({
+                    message:'Error: No file selected'
+                })
+            }
+            else{
+                res.json({
+                    message:'File uploaded',
+                    file:`images/${req.file.filename}`
+                })
+            }
+        }
+    })
+}

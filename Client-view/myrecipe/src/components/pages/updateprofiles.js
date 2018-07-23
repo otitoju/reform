@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import '../css/updateprofile.css'
-
-
+import {Link} from 'react-router-dom'
+//import axios from 'axios'
 
 
 export default class updateprofiles extends Component {
@@ -34,10 +34,12 @@ export default class updateprofiles extends Component {
         })
     }
     handleUpdate(e){
-        const token = JSON.parse(localStorage.getItem('token'))
         e.preventDefault()
+        const token = JSON.parse(localStorage.getItem('token'))
+        const id = JSON.parse(localStorage.getItem('userId'))
+    
             fetch(`/update/${id}`, {
-                method:'post',
+                method:'PUT', 
                 headers:{
                     'Accept':'application/json',
                     'Content-Type':'application/json',
@@ -49,15 +51,15 @@ export default class updateprofiles extends Component {
                     secret:this.state.secret
                 })
             })
-            .then(res => res.json())
-            .then(res =>{
-                alert(res.message)
-                this.setState({
-                    id:res.id
-                })
-            })
+            .then(res => console.log(res))
+            // .then(res =>{
+            //     alert(res.message)
+            //     this.setState({
+            //         id:res.id
+            //     })
+            //})
             .catch(err => console.log(err))
-            const id = this.state.id
+             
 
        
     }
@@ -66,35 +68,37 @@ export default class updateprofiles extends Component {
         if(!token){
             this.props.history.push('/')
         }
-        const id = this.state.id
-        console.log(id)
-        fetch(`/update/${id}`, {
-            method:'POST',
-            headers:{
-                'Accept':'application/json',
-                'Content-Type':'application/json',
-                'Authorization':`Bearer ${token}`
-            },
-            body:JSON.stringify({
-                name:this.state.name,
-                email:this.state.email,
-                secret:this.state.secret
-            })
-        })
-        .then(res => res.json())
-        .then(res =>{
-            alert(res.message)
-            this.setState({
-                id:res.id
-            })
-        })
-        .catch(err => console.log(err))
+       
     }
     
   render() {
     return (
       <div id="bodie">
-          <div className="card hoverable" id="Ucard">
+                <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+                    <div className="container">
+                        <div id="contain">
+                        <Link className="navbar-brand" to="/">
+                            Online Recipe
+                        </Link>
+                        </div>
+                        <button className="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarNav">
+                            <span className="navbar-toggler-icon"/>
+                        </button>
+                        <div className="collapse navbar-collapse" id="navbarNav">
+                            <ul className="navbar-nav ml-auto">
+        
+                                <li className="nav-item">
+                                </li>
+                                
+                            </ul>
+                        
+                        </div>
+                    </div>
+                </nav>
+          <div className="card" id="Ucard">
                   <div className="card-action teal lighten-1 white-text">
                       <h3>Change profile</h3>
                   </div>

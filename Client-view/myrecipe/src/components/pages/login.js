@@ -1,9 +1,9 @@
 import React, { Component} from 'react';
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import '../css/login.css'
-//import Dashboard from './dashboard'
-import '../css/MaterialDesign-Webfont-master/css/materialdesignicons.min.css'
+//import '../css/MaterialDesign-Webfont-master/css/materialdesignicons.min.css'
 import '../css/materialize.min.css'
+// import Navbar from '../layout/Navbar'
 
 class login extends Component{
     constructor(){
@@ -11,6 +11,7 @@ class login extends Component{
         this.state= {
             email:"",
             password:"",
+            isLoading:false
             
         }
         this.handleSubmit= this.handleSubmit.bind(this)
@@ -30,6 +31,7 @@ class login extends Component{
         this.setState({password:e.target.value})
     }
     handleSubmit(e) {
+        let a = document.getElementById('pre').style.visibility = 'visible'
         e.preventDefault()
          fetch('/login', {
             method:"POST",
@@ -48,6 +50,7 @@ class login extends Component{
             
             console.log(res.msg)
             localStorage.setItem('token', JSON.stringify(res.token));
+            localStorage.setItem('userId', JSON.stringify(res.id))
             if(res.message === 'Login successful'){
                 this.props.history.push('/recipe')
             } 
@@ -63,6 +66,7 @@ class login extends Component{
             else if(res.message === 'Invalid or wrong password'){
                 alert('Invalid or wrong password')
             }
+            let b = document.getElementById('pre').style.visibility = 'hidden'
         })
         .catch(error => console.log(error)) 
         
@@ -71,6 +75,36 @@ class login extends Component{
     render(){
     return(
          <div>
+              
+              <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+                    <div className="container">
+                        <Link className="navbar-brand" to="/">
+                            Online Recipe
+                        </Link>
+                        <button className="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarNav">
+                            <span className="navbar-toggler-icon"/>
+                        </button>
+                        <div className="collapse navbar-collapse" id="navbarNav">
+                            <ul className="navbar-nav ml-auto">
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/">
+                                    Home
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/register">
+                                        Signup
+                                    </Link>
+                                </li>
+                                
+                            </ul>
+                        
+                        </div>
+                    </div>
+              </nav>
              <form>
                     <div className="card" id="Lcard">
                         <div className="card-action teal lighten-1 white-text">
@@ -104,6 +138,17 @@ class login extends Component{
                     </div>
            
             </form>
+            <div class="preloader-wrapper big active" id="pre">
+                <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                    <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+                </div>
+            </div>
             
       </div>
 )}

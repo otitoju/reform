@@ -6,11 +6,46 @@ const config = require('../config/config')
 const admin = require('../models/admin')
 const adminConfig = require('../config/adminconfig')
 
-const userExist = user.email
+//const userExist = user.email
+
+const multer = require('multer')
+const path = require('path')
+
+const storage = multer.diskStorage({
+    filename:function(req, file, cb){
+        cb(null, Date.now()+file.originalname)
+    }
+})
+const imageFilter = function(req, file, cb){
+    if(!file.originalname.match(/\.(jpeg|jpg|png)$/i)){
+        return cb(new Error('Only image files are allowed'), false)
+    }
+    else{
+        cb(null,true)
+    }
+}
+var upload = multer({
+    storage:storage,
+    fileFilter:imageFilter
+})  
+var configpic = require('../routes/config')
+var cloudinary = require('cloudinary')
+cloudinary.config({
+    cloud_name: configpic.cloud_name,
+    api_key : configpic.api_key,
+    api_secret : configpic.api_secret
+})
 
 exports.admincreateUser = async (req, res) => {
     const body = req.body;
     const hashpassword = bcrypt.hashSync(req.body.password,10);
+
+    // var image = req.file.path
+    // const result = await cloudinary.uploader.upload(image)
+    // const img =  result.original_filename
+    // let imgUrl = result.secure_url
+    // let publicId = result.public_id
+
     if (!body.name || !body.email || !body.password) {
         res.status(403).json({
             message:`Please fill all required input fields`
@@ -31,7 +66,8 @@ exports.admincreateUser = async (req, res) => {
             name:body.name,
             email:body.email,
             password:hashpassword,
-            secret:body.secret
+            secret:body.secret,
+            //pic:imgUrl
         })
         res.json({
             message:`Registration successful`,
@@ -49,30 +85,30 @@ exports.getSingleUser = async (req, res) => {
 }
 //update user profile
 exports.updateUserProfile = async (req, res) => {
-    const token = await req.headers['authorization'].split(" ")[1]
-    const decode = await jwt.verify(token, config.secret)
-    const update = await user.findByIdAndUpdate(req.params.id, req.body, {new:true})
-    let id = decode.id
-    let name = decode.name
-    let email = decode.email
-    res.status(200).json({
-        message:'updated',
-        id:id
-    })
-    console.log(id)
+    //const token = await req.headers['authorization'].split(" ")[1]
+    //const decode = await jwt.verify(token, config.secret)
+    //const update = await user.findByIdAndUpdate(req.params.id, req.body, {new:true})
+    // let id = decode.id
+    // let name = decode.name
+    // let email = decode.email
+    // res.status(200).json({
+    //     message:'updated',
+    //     id:id
+    // })
+    //console.log('hello')
 
-    // user.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, user) => {
-    //     if (err) {
-    //         res.status(500).send("There was a problem updating the user.");
-    //     }
-    //     else {
-    //         res.status(200).send({
-    //             message:'Updated',
-    //             user:user
-    //         });
-    //     }
+    user.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, user) => {
+        if (err) {
+            res.status(500).send("There was a problem updating the user.");
+        }
+        else {
+            res.status(200).send({
+                message:'Updated',
+               // user:user
+            });
+        }
         
-    // })  
+    })  
 }
 //get all users
 exports.getAllUser =  async (req, res) => {
@@ -98,11 +134,13 @@ exports.userProfile =  async (req, res) => {
     let name = decode.name
     let id = decode.id
     let email = decode.email
+    let pic = decode.pic
     res.json({
         User:User,
         id:id,
         name:name,
-        email:email
+        email:email,
+        pic:pic
     })
 }
 //delete users
@@ -142,11 +180,13 @@ exports.userLogin = (req, res) => {
                     })
                 }
                 else{
-                    var token = jwt.sign({id:user.id,email:user.email,name:user.name}, config.secret, {expiresIn:'2h'})
+                    var token = jwt.sign({id:user.id,email:user.email,name:user.name,pic:user.pic}, config.secret, {expiresIn:'2h'})
+                    var id = user.id
                      
                     res.status(200).json({
                         message:'Login successful',
-                        token:token
+                        token:token,
+                        id:id
                     })
                 }
             }

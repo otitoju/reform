@@ -1,25 +1,33 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
 export default class dashboard extends Component {
 constructor(){
     super()
+    this.state ={
+      image:''
+    }
 this.handleName=this.handleName.bind(this)
 }
 componentDidMount() {
-    this.handleName()
-}
-handleName(){
-    var local = JSON.parse(localStorage.getItem('token'))
-    console.log(local)
-    var a = document.getElementsByTagName('h2')
-    a.innerHTML = local
+    //this.handleName()
+    axios.get('/imga',{
+      headers:{
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+      }
+    })
+    .then( res => res.json())
+    .then(res => {
+      this.setState({image:res.image})
+    })
 }
     
   render() {
+
     return (
       <div>
-        <h1>Welcome to dashboard </h1>
-        <h2></h2>
+      image
       </div>
     )
   }

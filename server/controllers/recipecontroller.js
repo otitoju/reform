@@ -3,10 +3,8 @@ const recipe = require('../models/recipe')
 const user = require('../models/user')
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
+const adminConfig = require('../config/adminconfig')
 
-exports.create = (req, res) => {
-    res.render('../../views/pages/createrecipe')
-}
 exports.createRecipe = async (req, res) => {
     if (req.body.name == '' || req.body.ingredients =='' || req.body.procedure ==''){
         res.json({
@@ -14,20 +12,25 @@ exports.createRecipe = async (req, res) => {
         })
     }
     else{
+        const admintoken = await req.headers['authorization'].split(" ")[1];
+        const decode = await jwt.verify(admintoken, adminConfig.adminsecret)
+        let author = decode.username
         const Recipe = await recipe.create({
             name:req.body.name,
             ingredients:req.body.ingredients,
-            procedure:req.body.procedure
+            procedure:req.body.procedure,
+            author:author
         })
         res.status(200).json({
-            message:'Recipe created'
+            message:'Recipe created',
+            id:Recipe.id
         })
     }
 
 }
 // get all recipe
 exports.getAllRecipe = async (req, res, next) => {
-    const allRecipe = await recipe.find()
+    const allRecipe = await recipe.find().sort({'_id':-1})
     let food_id = allRecipe.id
     const token = await req.headers['authorization'].split(" ")[1];
     const decode = await jwt.verify(token, config.secret)

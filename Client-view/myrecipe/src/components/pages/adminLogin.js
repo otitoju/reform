@@ -20,6 +20,7 @@ export default class adminLogin extends Component {
     }
     handleSubmit(e){
         e.preventDefault()
+        let loading = document.getElementById('pred').style.visibility = 'visible'
         //alert(this.state.username)
         fetch('/admin', {
             method:"POST",
@@ -35,11 +36,24 @@ export default class adminLogin extends Component {
         })
         .then(res => res.json())
         .then(result =>{
-            alert(result.message)
+            //alert(result.message)
             localStorage.setItem('AdminToken', JSON.stringify(result.admintoken))
-            if(result.message == 'welcome'){
+            if(result.message === 'welcome'){
                 this.props.history.push('/adminhome')
             }
+            else if(result.message === 'fill all inputs and login'){
+                alert('fill all inputs and login')
+            }
+            else if(result.message === `Problem loging in superuser`){
+                alert(`Problem logging in superuser, try again`)
+            }
+            else if(result.message === 'Invalid username'){
+                alert('Oh snap!, Check your username and try again.')
+            }
+            else if(result.message === `Wrong password`){
+                alert(`Wrong password, make sure you enter correct password`)
+            }
+            loading = document.getElementById('pred').style.visibility = 'hidden'
         })
         .catch(err => console.log(err))
     }
@@ -47,21 +61,21 @@ export default class adminLogin extends Component {
     return (
       <div>
           <form>
-                    <div className="card hoverable" id="Lcard">
-                        <div className="card-action teal lighten-1 white-text">
+                    <div className="card" id="Lcard">
+                        <div className="card-action red lighten-1 white-text">
                             <h3> Admin Login form</h3>
                         </div>
                         <div className="card-content">
                             <div className="form-field">
                                 <label htmlFor="username">Username</label>
-                                <i className="mdi mdi-email"><input type="email" placeholder="Admin" value={this.state.username} onChange={this.handleUsername}/></i>
+                                <i className="mdi mdi-email"><input type="text" placeholder="Admin" value={this.state.username} onChange={this.handleUsername}/></i>
                             </div>
                             <div className="form-field">
                             <label htmlFor="password">Password</label>
                             <i className="mdi mdi-lock"> <input type="password" value={this.state.password} onChange={this.handlePin} placeholder="Admin password"/></i>
                             </div>
                             <div className="form-field">
-                                <input type="submit" className="btn-small waves-effect" value="Login" onClick={this.handleSubmit}/>
+                                <input type="submit" className="btn-small red" value="Login" onClick={this.handleSubmit}/>
                             </div>
         
                             <div className="form-field">
@@ -79,6 +93,17 @@ export default class adminLogin extends Component {
                     </div>
            
             </form>
+            <div class="preloader-wrapper big active" id="pred">
+                <div class="spinner-layer spinner-red-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                    <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+                </div>
+            </div>
       </div>
     )
   }

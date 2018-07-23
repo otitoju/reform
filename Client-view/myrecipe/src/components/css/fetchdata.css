@@ -10,9 +10,38 @@
 
 #buttons #logout{
     float: right;
-    margin-right: 15px
+    margin-right: 15px;
+    visibility: hidden;
 }
 #buttons #view{
     float: right;
-    margin-right: 15px
+    margin-right: 15px;
+    visibility: hidden;
+}
+#pres{
+    visibility: hidden;
+}
+@media (max-width: 650px) {
+    #buttons #logout{
+        float: right;
+        margin-right: 15px;
+        visibility: visible;
+        width: 20px;
+    }
+    #buttons #view{
+        float: right;
+        margin-right: 15px;
+        visibility: visible;
+    } 
+}
+@media (max-width: 350px) {
+    h3{
+        font-size: 14px;
+        text-align: center
+    }
+    #LCard{
+        margin: auto;
+        width: 250px;
+        margin-top: 5%
+    }
 }

@@ -9,7 +9,9 @@ const userSchema = new mongoose.Schema({
     date:Date,
     resettoken: String,
     resetexpires:Date,
-    secret: String
+    secret: String,
+    pic:String,
+    test:String
 })
 //userSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model('user', userSchema);

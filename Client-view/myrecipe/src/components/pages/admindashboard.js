@@ -9,7 +9,8 @@ export default class admindashboard extends Component {
     this.state = {
       username:''
     }
-
+    this.viewUser = this.viewUser.bind(this)
+    this.createRecipe = this.createRecipe.bind(this)
   }
     componentDidMount = () => {
       const admin = JSON.parse(localStorage.getItem('AdminToken'))
@@ -36,41 +37,82 @@ export default class admindashboard extends Component {
     }
     logout(){
       localStorage.removeItem('AdminToken')
+      localStorage.removeItem('recipeId')
     }
     togglesidebar(){
-document.getElementById('side').classList.toggle('active')
+      document.getElementById('side').classList.toggle('active')
+    }
+    viewUser(){
+      this.props.history.push('/users')
+    }
+    createRecipe(){
+      this.props.history.push('/create')
     }
     
   render() {
     const { username } = this.state
     return (
       <div>
+        <nav className="navbar navbar-expand-sm navbar-dark bg mb-4">
+                    <div className="container">
+                        <Link className="navbar-brand" to="/">
+                            Classic Recipe administrative site
+                        </Link>
+                        <button className="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarNav">
+                            <span className="navbar-toggler-icon"/>
+                        </button>
+                        <div className="collapse navbar-collapse" id="navbarNav">
+                            <ul className="navbar-nav ml-auto">
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/">
+                                    Visit site
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/profile">
+                                        Profile
+                                    </Link>
+                                </li>
+                                  <li className="nav-link">Welcome Admin {username}</li>
+                                  <li className="nav-item">
+                                    <Link className="nav-link" to="/admin">
+                                    <input type="submit" className="btn-small waves-effect red" value="Logout" onClick={this.logout} id="btl"/>
+                                    </Link>
+                                </li>
+                            </ul>
+                        
+                        </div>
+                    </div>
+              </nav>
         <div id="side">
-        <div id="toggle" onClick={this.togglesidebar}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-            <div id="circle"></div>
+            <div id="toggle" onClick={this.togglesidebar}>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+              <div id="circle"></div>
               <hr/>
-        <div id="btns">
-            <Link to="/create">
-            <input type="button" className="btn-small waves-effect blue" value="Create recipe" id="btc"/>
-            </Link>
-            <Link to="/users">
-            <input type="button" className="btn-small waves-effect" value="View users" id="btd"/>
-            </Link>
-            <Link to="/">
-            <input type="submit" className="btn-small waves-effect red" value="Logout" onClick={this.logout} id="btl"/>
-            </Link>
+              <div id="btns">
+                  <Link to="">
+                  <input type="button" className="btn-small waves-effect blue" value="Profile" id="btc"/>
+                  </Link>
+                  <Link to="">
+                  <input type="button" className="btn-small waves-effect" value="Change password" id="btd"/>
+                  </Link>
+                  
+              </div>
         </div>
-        </div>
-          <center><h1>Welcome Admin {username}</h1></center>
           <div className="card" id="Acard">
-              <div className="card-action blue lighten-1 white-text">
+              <div className="card-action red lighten-1 white-text">
                   <h3>Site administration</h3>
               </div>
-                <div className="card-content">
+                <div className="">
+                    <h5 onClick={this.viewUser}>View registered users</h5>
+                    <h5 onClick={this.createRecipe}>Create new recipe</h5>
+                    <h5>View site admins</h5>
                 </div>
           </div>
 
