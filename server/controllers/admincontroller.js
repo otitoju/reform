@@ -3,8 +3,6 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const config = require('../config/adminconfig')
 const admin = require('../models/admin')
-const multer = require('multer')
-const path = require('path')
 const recipe = require('../models/recipe')
 
 
