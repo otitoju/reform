@@ -49,7 +49,7 @@ router.post('/register', authcontroller.register)
 router.get('/decode', authcontroller.getToken)
 
 // router.get('*', authcontroller.pagenotfound)
-router.post('/image', admin.uploadImages)
+
 
 
 //Using cloudinary
