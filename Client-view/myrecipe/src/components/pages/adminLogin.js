@@ -60,6 +60,35 @@ export default class adminLogin extends Component {
   render() {
     return (
       <div>
+          <nav className="navbar navbar-expand-sm navbar-dark  mb-4">
+                    <div className="container">
+                        <Link className="navbar-brand" to="/">
+                            Online Recipe
+                        </Link>
+                        <button className="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarNav">
+                            <span className="navbar-toggler-icon"/>
+                        </button>
+                        <div className="collapse navbar-collapse" id="navbarNav">
+                            <ul className="navbar-nav ml-auto">
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/">
+                                    Home
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/createsuperuser">
+                                        Createsuperuser
+                                    </Link>
+                                </li>
+                                
+                            </ul>
+                        
+                        </div>
+                    </div>
+                </nav>
           <form>
                     <div className="card" id="Lcard">
                         <div className="card-action red lighten-1 white-text">
@@ -84,7 +113,7 @@ export default class adminLogin extends Component {
                             </Link>
                             </div><br/>
                             <div className="form-field">
-                            <Link to="/register">
+                            <Link to="/createsuperuser">
                             <label>Don't have an account yet?</label>
                             </Link>
                             </div>

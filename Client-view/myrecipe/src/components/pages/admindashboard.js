@@ -11,6 +11,7 @@ export default class admindashboard extends Component {
     }
     this.viewUser = this.viewUser.bind(this)
     this.createRecipe = this.createRecipe.bind(this)
+    this.deleteRecipe = this.deleteRecipe.bind(this)
   }
     componentDidMount = () => {
       const admin = JSON.parse(localStorage.getItem('AdminToken'))
@@ -47,6 +48,9 @@ export default class admindashboard extends Component {
     }
     createRecipe(){
       this.props.history.push('/create')
+    }
+    deleteRecipe(){
+      this.props.history.push('/ctrlrecipe')
     }
     
   render() {
@@ -112,6 +116,7 @@ export default class admindashboard extends Component {
                 <div className="">
                     <h5 onClick={this.viewUser}>View registered users</h5>
                     <h5 onClick={this.createRecipe}>Create new recipe</h5>
+                    <h5 onClick={this.deleteRecipe}>Delete recipe</h5>
                     <h5>View site admins</h5>
                 </div>
           </div>

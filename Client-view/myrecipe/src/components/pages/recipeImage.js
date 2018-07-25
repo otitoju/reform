@@ -27,23 +27,21 @@ export default class recipeImage extends Component {
           })
           .then(res => {
             console.log(res)
+            alert(res.message)
               //this.setState({msg:res.data.secure_url})
           })
           .catch(err => console.log(err))
           
         }
         handleChange(e){
-          
           this.setState({photo:e.target.files[0]})
         }
-        handleName(e){
-            this.setState({name:e.target.value})
-        }
+        
         render() {
           const {msg} = this.state
           return (
             <div>
-              
+              <h1>Upload recipe image here </h1>
               <img src={msg}/>
                   <label>
                       choose a file

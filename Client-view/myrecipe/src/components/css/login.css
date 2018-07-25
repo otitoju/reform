@@ -17,7 +17,7 @@
     }
     #LCard{
         margin: auto;
-        width: 350px;
+        width: 450px;
         margin-top: 5%
     }
 }
@@ -28,7 +28,8 @@
     }
     #LCard{
         margin: auto;
-        width: 250px;
-        margin-top: 5%
+        width: 300px;
+        margin-top: 5%;
+        
     }
 }

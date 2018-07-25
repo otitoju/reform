@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
+import Rcard from './recipe.jpg'
 
 export default class fetchsingledata extends Component {
     constructor() {
@@ -8,18 +10,20 @@ export default class fetchsingledata extends Component {
             recipe:null,
             photo:'',
             ingredients:'',
-            procedure:''
+            procedure:'',
+            author:''
         }
         this.getSingleRecipe = this.getSingleRecipe.bind(this)
     }
     getSingleRecipe(id){
          axios.get(`/recipe/get/${id}`)
         .then(res =>{
-            console.log(res)
+            //console.log(res)
             this.setState({recipe:res.data.recipe.name,
             photo:res.data.recipe.photo,
             ingredients:res.data.recipe.ingredients,
-            procedure:res.data.recipe.procedure
+            procedure:res.data.recipe.procedure,
+            author:res.data.recipe.author
             })
         } )
         .catch(err => console.log(err))
@@ -31,21 +35,53 @@ export default class fetchsingledata extends Component {
     
     
   render() {
-      const {recipe, photo, ingredients, procedure} = this.state
+      const {recipe, photo, ingredients, procedure, author} = this.state
     return (
-        <div class="card">
-    <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src={photo}/>
-    </div>
-    <div class="card-content">
-      <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-      <p><a href="#">This is a link</a></p>
-    </div>
-    <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-      <p>Here is some more information about this product that is only revealed once clicked on.</p>
-    </div>
+        <div>
+                <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+                    <div className="container">
+                        <Link className="navbar-brand" to="/">
+                            Online Recipe
+                        </Link>
+                        <button className="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarNav">
+                            <span className="navbar-toggler-icon"/>
+                        </button>
+                        <div className="collapse navbar-collapse" id="navbarNav">
+                            <ul className="navbar-nav ml-auto">
+                                <li className="nav-item">
+                                    <button className="btn btn-default" onClick={this.viewProfile} id="view">View profile</button>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to="/"><button className="btn btn-default red" onClick={this.logout} id="logout">Logout</button></Link>
+                                </li>
+                                
+                            </ul>
+                        
+                        </div>
+                    </div>
+                </nav>
+            <div className="col-sm-6 col-md-4">
+                <div className="card">
+                    <div className="card-image">
+                        <img src={photo}/>
+                        <span className="card-title"><strong>{recipe}</strong></span>
+                    </div>
+                        <div className="card-content">
+                            <h3><strong>Ingredients:</strong></h3>
+                            <p>{ingredients}</p>
+                            <h3><strong>Procedure:</strong></h3>
+                            <p>{procedure}</p>
+                        </div>
+                        <div className="card-action">
+                            posted by {author}
+                        </div>
+                </div>
+            </div>
   </div>
+
     )
   }
 }

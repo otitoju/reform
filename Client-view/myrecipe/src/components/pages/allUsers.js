@@ -8,6 +8,7 @@ export default class allUsers extends Component {
         this.state = {
             allUsers:[]
         }
+        //this.handleDel = this.handleDel.bind(this)
     }
     componentDidMount = () => {
         const token = JSON.parse(localStorage.getItem('AdminToken'))
@@ -23,12 +24,16 @@ export default class allUsers extends Component {
       })
       .then(res => res.json())
       .then(users => {
-          console.log(users.allUser)
+         // console.log(users.allUser)
            this.setState({allUsers:users.allUser})
       })
       .catch(err => console.log(err))
     }
-    
+    // handleDel(id){
+    //     axios.delete(`/user/${id}`)
+    //     .then(res => console.log(res))
+    //     .catch(err => console.log(err))
+    // }
   render() {
       const {allUsers} = this.state
     return (
@@ -57,7 +62,7 @@ export default class allUsers extends Component {
                         
                         </div>
                     </div>
-              </nav>
+                  </nav>
         <h1>All users</h1>
         <fragment>
             <table className="table table-condensed table-bordered">
@@ -77,6 +82,9 @@ export default class allUsers extends Component {
                                 <th>
                                     SECRET
                                 </th>
+                                <th>
+                                    Action
+                                </th>
                             </thead>
                             
                             <tbody>
@@ -88,6 +96,7 @@ export default class allUsers extends Component {
                                     <td><b>{name}</b></td>
                                     <td><b>{email}</b></td>
                                     <td><b>{secret}</b></td>
+                                    <td><Link to={`/dashboard/${_id}`}>Del</Link></td>
                                 </tr>       
                 })}
                 </tbody>

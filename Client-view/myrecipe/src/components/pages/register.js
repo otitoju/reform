@@ -41,6 +41,10 @@ export default class register extends Component {
         .then(res => {
            // alert(res.message)
             this.setState({info:res.message})
+            if(res.message === `Registration successful`){
+                alert('Registration successul, you can now log in')
+                this.props.history.push('/login')
+            }
             //document.getElementById('info').style.visibility=true
         })
         .catch(err => console.log(err))
@@ -61,7 +65,7 @@ export default class register extends Component {
       const {info} = this.state
 
     return (
-      <div id="bodi">
+      <div>
                 <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                     <div className="container">
                         <Link className="navbar-brand" to="/">
@@ -93,24 +97,12 @@ export default class register extends Component {
                 </nav>
             <div id="info" class="alert alert-success" role="alert">{info}</div>
             {/* <Navbar /> */}
-            <div class="alert alert-success" role="alert">
-  <strong>Well done!</strong> You successfully read this important alert message.
-</div>
-<div class="alert alert-info" role="alert">
-  <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-</div>
-<div class="alert alert-warning" role="alert">
-  <strong>Warning!</strong> Better check yourself, you're not looking too good.
-</div>
-<div class="alert alert-danger" role="alert">
-  <strong>Oh snap!</strong> Change a few things up and try submitting again.
-</div>
+ 
 
-
-          <div>
+          <div id="forgot">
           <form>
           
-              <div className="card" id="cards">
+              <div className="card" >
                   <div className="card-action teal lighten-1 white-text" id="act">
                       <h3>Register form</h3>
                   </div>

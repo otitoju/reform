@@ -106,7 +106,7 @@ class login extends Component{
                     </div>
               </nav>
              <form>
-                    <div className="card" id="Lcard">
+                    <div className="card" id="forgot">
                         <div className="card-action teal lighten-1 white-text">
                             <h3>Login form</h3>
                         </div>

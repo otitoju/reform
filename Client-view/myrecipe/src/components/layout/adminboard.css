@@ -78,5 +78,17 @@ h5:hover{
 }
 h5{
     font-size: 24px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+    font-family: fantasy
+}
+@media (max-width:767px) {
+    #Acard{
+        width:500px;
+        margin: auto;
+    }  
+}
+@media (max-width:350px) {
+    #Acard{
+        width:300px;
+        margin: auto;
+    }  
 }

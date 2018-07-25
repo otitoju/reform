@@ -51,7 +51,7 @@ exports.getSingleRecipe = async (req, res) => {
     res.json({
         recipe:singleRecipe
     })
-    console.log(singleRecipe.name)
+    //console.log(singleRecipe.name)
 }
 //update recipe
 exports.updateRecipe = async (req, res) => {

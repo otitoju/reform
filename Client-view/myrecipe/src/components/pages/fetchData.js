@@ -115,11 +115,10 @@ export default class fetchData extends Component {
                         return <div className="card-panel" key={_id}>
                                 <img src={photo}/>
                                 <div className="caption">
-                                    <h3>{name}</h3>
+                                    <h3><strong>{name}</strong></h3>
                                         <ul>
                                             <h4>posted by {author}</h4>
-                                            <li><h6>Ingredients: {ingredients}</h6></li>
-                                            <li>Procedure: {procedure}</li>
+                                            <p id="time">time: 24hrs ago</p>
                                         </ul>
                                     <Link to={`post/${_id}`}><button className="btn-small" >View</button></Link>
                                    </div> 

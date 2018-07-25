@@ -32,6 +32,7 @@ router.post('/createsuperuser',  admin.createSuperUser)
 router.post('/admin', admin.loginSuperUser)
 router.get('/admin', admin.getAllAdmin)
 router.get('/adminusername', admin.getAdminUsername)
+router.get('/ctrlrecipe', admin.ctrlRecipe)
 
 //Recipe routes
 router.post('/recipe', adminVerify, recipecontroller.createRecipe)
@@ -104,16 +105,23 @@ router.get('/imga', async(req, res)=> {
 const recipee = require('../models/recipe')
 router.put('/recipeimage/:id', upload.single('photo'), async(req, res) => {
     var image = req.file.path
-    const result = await cloudinary.uploader.upload(image)
-    const img =  result.original_filename
-    let imgUrl = result.secure_url
-    let publicId = result.public_id
-    const Recipe = await recipee.findByIdAndUpdate(req.params.id,{
-        photo:imgUrl
-    }, {new:true})
-    res.json({
-        recipe:Recipe,
-    })
+    if(!image){
+        res.json({message:`Error: No file selected`})
+    }
+    else{
+        const result = await cloudinary.uploader.upload(image)
+        const img =  result.original_filename
+        let imgUrl = result.secure_url
+        let publicId = result.public_id
+        const Recipe = await recipee.findByIdAndUpdate(req.params.id,{
+            photo:imgUrl
+        }, {new:true})
+        res.json({
+            recipe:Recipe,
+            message:'Message: Picture uploaded successfully'
+        })
+    }
+    
 })
 
 module.exports = router

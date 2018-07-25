@@ -5,20 +5,28 @@ const config = require('../config/adminconfig')
 const admin = require('../models/admin')
 const multer = require('multer')
 const path = require('path')
+const recipe = require('../models/recipe')
 
 
 //CREATE ADMIN SUPERUSER
 exports.createSuperUser =async (req, res) => {
     const hashpassword = bcrypt.hashSync(req.body.password,10)
-    const Admin = await admin.create({
-        username:req.body.username,
-        password:hashpassword,
-        email:req.body.email
-    })
-    res.status(200).json({
-        message:`${req.body.username} is now an admin`,
-        Admin:Admin
-    })
+    if(req.body.username == '' || req.body.email == '' || req.body.password == ''){
+        res.status(403).json({
+            message:'Please fill in all inputs'
+        })
+    }
+    else{
+        const Admin = await admin.create({
+            username:req.body.username,
+            password:hashpassword,
+            email:req.body.email
+        })
+        res.status(200).json({
+            message:`registered`,
+            Admin:Admin
+        })
+    }
     
 }
 //LOGIN SUPERUSER
@@ -122,4 +130,9 @@ exports.uploadImages = (req, res) => {
             }
         }
     })
+}
+//admin control recipe
+exports.ctrlRecipe = async(req, res) => {
+    const Recipe = await recipe.find().sort({'_id':-1})
+    res.json({message:Recipe})
 }

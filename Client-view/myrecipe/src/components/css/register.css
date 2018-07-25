@@ -53,11 +53,5 @@ h3{
     }
     
   }
-@media (max-width: 350px) {
-    #bodi{
-        width:300px;
-        margin: auto;
-        margin-top:5%;
-    }
-}
+
   

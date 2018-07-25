@@ -7,27 +7,33 @@ constructor(){
     this.state ={
       image:''
     }
-this.handleName=this.handleName.bind(this)
+//this.handleName=this.handleName.bind(this)
+this.handleDel = this.handleDel.bind(this)
 }
 componentDidMount() {
-    //this.handleName()
-    axios.get('/imga',{
-      headers:{
-        'Accept':'application/json',
-        'Content-Type':'application/json'
-      }
-    })
-    .then( res => res.json())
-    .then(res => {
-      this.setState({image:res.image})
-    })
+    this.handleDel(this.props.match.params.id)
+    // axios.get('/imga',{
+    //   headers:{
+    //     'Accept':'application/json',
+    //     'Content-Type':'application/json'
+    //   }
+    // })
+    // .then( res => res.json())
+    // .then(res => {
+    //   this.setState({image:res.image})
+    // })
+}
+handleDel(_id){
+  axios.delete(`/user/${_id}`)
+  .then(res => console.log(res))
+  .catch(err => console.log(err))
 }
     
   render() {
 
     return (
       <div>
-      image
+          <button onClick={this.handleDel}>DEL</button>
       </div>
     )
   }
