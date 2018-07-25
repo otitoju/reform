@@ -93,6 +93,7 @@ router.put('/img/:id', upload.single('pic'), async(req, res) => {
         //imgUrl:imgUrl
     })
 })
+const env = require('dotenv').config()
 //get all pic
 router.get('/imga', async(req, res)=> {
     const result = await pic.find()

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import '../css/home.css'
+import logo from '../logo/logo1.PNG'
 
 export default class home extends Component {
   render() {
@@ -9,7 +10,7 @@ export default class home extends Component {
               <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                     <div className="container">
                         <Link className="navbar-brand" to="/">
-                            Online Recipe
+                           <img src={logo} style={{height:'40px'}}/>
                         </Link>
                         <button className="navbar-toggler"
                         type="button"

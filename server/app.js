@@ -5,6 +5,7 @@ const app = express()
 const routes = require('./routes/routes')
 const path = require('path')
 const db = require('./config/dbconfig')
+const env = require('dotenv').config()
 
 
 app.use(bodyParser.urlencoded({ extended: true }))
