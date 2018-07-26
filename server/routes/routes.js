@@ -48,7 +48,7 @@ router.post('/report', authcontroller.reportIssues)
 router.post('/register', authcontroller.register)
 router.get('/decode', authcontroller.getToken)
 
-// router.get('*', authcontroller.pagenotfound)
+
 
 
 
