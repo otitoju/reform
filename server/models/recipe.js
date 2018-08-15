@@ -8,6 +8,7 @@ const recipeSchema = new mongoose.Schema({
     procedure:String,
     photo:String,
     author:{type:String, ref:'admin'},
-    time:Date
+    time:{type:Date, default:Date.now()},
+    comment:[{type:mongoose.Schema.Types.ObjectId, ref:'comment'}]
 })
 module.exports = mongoose.model('recipe', recipeSchema)

@@ -40,6 +40,8 @@ router.get('/recipe/get', recipecontroller.getAllRecipe)
 router.get('/recipe/get/:id', recipecontroller.getSingleRecipe)
 router.put('/recipe/update/:id', recipecontroller.updateRecipe)
 router.delete('/recipe/delete/:id', recipecontroller.deleteRecipe)
+router.get('/search', recipecontroller.fuzzySearch )
+router.post('/comment', recipecontroller.createNewComment)
 
 //Auth routes
 router.put('/reset/:email', authcontroller.resetPassword)

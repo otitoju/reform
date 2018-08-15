@@ -4,6 +4,7 @@ const user = require('../models/user')
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
 const adminConfig = require('../config/adminconfig')
+const comments = require('../models/comment')
 
 exports.createRecipe = async (req, res) => {
     if (req.body.name == '' || req.body.ingredients =='' || req.body.procedure ==''){
@@ -62,4 +63,34 @@ exports.updateRecipe = async (req, res) => {
 exports.deleteRecipe = async (req, res) => {
     const removeRecipe = await recipe.findByIdAndRemove(req.params.id)
     res.json(removeRecipe)
+}
+//fuzzy search
+function escapeRegex(text){
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\$]/g, "\\$&")
+}
+exports.fuzzySearch =  (req, res) => {
+    if(req.query.search){
+        var regex = new RegExp(escapeRegex(req.query.search, 'gi'))
+        recipe.find({name: regex}, (err, result) => {
+            if(err){
+                res.json({message:'Unable to complete seach'})
+            }
+            else{
+                res.json(result)
+            }
+        })
+    }
+    
+}
+//Add comments
+exports.createNewComment = (req, res) => {
+    const recipeId = recipe.findById(req.params.id)
+    const Comment = comments.create({
+        name:req.body.name,
+        comment:req.body.comment
+    })
+    if(recipeId){
+        Comment === recipe.comment
+        console.log(Comment)
+    }
 }
