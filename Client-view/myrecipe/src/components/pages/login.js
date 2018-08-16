@@ -2,7 +2,7 @@ import React, { Component} from 'react';
 import { Link } from 'react-router-dom'
 import '../css/login.css'
 //import '../css/MaterialDesign-Webfont-master/css/materialdesignicons.min.css'
-import '../css/materialize.min.css'
+//import '../css/materialize.min.css'
 // import Navbar from '../layout/Navbar'
 
 class login extends Component{
@@ -105,7 +105,7 @@ class login extends Component{
                         </div>
                     </div>
               </nav>
-             <form>
+             {/* <form>
                     <div className="card" id="forgot">
                         <div className="card-action teal lighten-1 white-text">
                             <h3>Login form</h3>
@@ -137,7 +137,43 @@ class login extends Component{
                         
                     </div>
            
-            </form>
+            </form> */}
+                  <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="text-center"> User <small>Account Login</small></h1>
+          </div>
+        </div>
+      </div>
+            <section id="main">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+            <form id="login"  className="well">
+                  <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" class="form-control" placeholder="Enter Email"  value={this.state.email} onChange={this.handleEmail} required/>
+                  </div>
+                  <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" placeholder="Password" value={this.state.password} onChange={this.handlePassword} required/>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block" onClick={this.handleSubmit}>Login</button>
+                  <div className="form-group">
+                            <Link to="/forgot">
+                            <label>Forgot your password?</label>
+                            </Link>
+                            </div><br/>
+                            <div className="form-group">
+                            <Link to="/register">
+                            <label>Don't have an account yet?</label>
+                            </Link>
+                            </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </section>
             <div class="preloader-wrapper big active" id="pre">
                 <div class="spinner-layer spinner-blue-only">
                 <div class="circle-clipper left">

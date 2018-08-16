@@ -9,11 +9,29 @@ export default class fetchData extends Component {
         this.state = {
             allRecipe:[],
             username:'',
-            isLoading:true
+            isLoading:true,
+            search:''
         }
         this.handleView = this.handleView.bind(this)
         this.logout = this.logout.bind(this)
         this.viewProfile = this.viewProfile.bind(this)
+        this.handleSearch = this.handleSearch.bind(this)
+        this.handleText = this.handleText.bind(this)
+    }
+    handleText(e){
+        this.setState({search:e.target.value})
+    }
+    handleSearch(e){
+        e.preventDefault()
+        fetch('/search', {
+            headers:{
+                'Accept':'application/json',
+                'Content-Type':'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
     }
     handleView(e){
         e.preventDefault()
@@ -99,6 +117,12 @@ export default class fetchData extends Component {
                     </div>
                 </nav>
           <p id="username">Welcome { username } </p>
+          <form className="form-inline" onSubmit={this.handleSearch} method="GET">
+                            <div className="form-group">
+                                <input type="text" className="form-control" placeholder="Search recipe name" value={this.state.search} onChange={this.handleText}/>
+                                <input type="submit" className="form-control" value="Search" />
+                            </div>
+                        </form>
             <h1>Recipes</h1>
            
             
@@ -111,14 +135,14 @@ export default class fetchData extends Component {
                 <div>
             <div className="col-sm-6 col-md-4" id="row">
                     {allRecipe.map(rec => {
-                        const {_id,name, ingredients, procedure, photo, author} = rec
+                        const {_id,name, ingredients, procedure, photo, author, time} = rec
                         return <div className="card-panel" key={_id}>
                                 <img src={photo}/>
                                 <div className="caption">
                                     <h3><strong>{name}</strong></h3>
                                         <ul>
                                             <h4>posted by {author}</h4>
-                                            <p id="time">time: 24hrs ago</p>
+                                            <p id="time">time: {time}</p>
                                         </ul>
                                     <Link to={`post/${_id}`}><button className="btn-small" >View</button></Link>
                                    </div> 

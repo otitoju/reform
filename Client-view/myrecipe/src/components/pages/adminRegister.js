@@ -58,7 +58,42 @@ export default class adminRegister extends Component {
       const {msg} = this.state
     return (
       <div>
-           <nav className="navbar navbar-expand-sm navbar-dark  mb-4">
+          <nav className="navbar navbar-expand-sm navbar-default bg mb-4">
+                    <div className="container">
+                        
+                        <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <Link className="navbar-brand" to="/">
+                                        Classic Recipe administrative site
+                                    </Link>
+                        
+                    </div>
+        
+                <div className="collapse navbar-collapse" id="navbar">
+                            <ul className="navbar-nav ml-auto">
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/">
+                                    Home
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                <Link className="nav-link" to="/admin">
+                                    Signin
+                                </Link>
+                            </li>
+                                
+                            </ul>
+                        
+                        </div>
+
+                    </div>
+              </nav>
+           {/* <nav className="navbar navbar-expand-sm navbar-dark  mb-4">
                     <div className="container">
                         <Link className="navbar-brand" to="/">
                             Online Recipe
@@ -86,9 +121,9 @@ export default class adminRegister extends Component {
                         
                         </div>
                     </div>
-                </nav>
+                </nav> */}
           <div id="info" class="alert alert-success" role="alert">{msg}</div>
-        <form>
+        {/* <form>
           
           <div className="card" id="cards">
               <div className="card-action red lighten-1 white-text" id="act">
@@ -112,7 +147,37 @@ export default class adminRegister extends Component {
                   </div>
               </div>
           </div>
-  </form>
+  </form> */}
+            <div class="container">
+                    <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="text-center"> Admin <small>Account Registration</small></h1>
+                    </div>
+                    </div>
+            </div>  
+            <section id="main">
+      <div class="container">
+        <div class="row">
+          <div className="col-md-4 col-md-offset-4">
+            <form id="login"  className="well">
+                  <div className="form-group">
+                    <label>Username</label>
+                    <input type="text" className="form-control" placeholder="Enter Username" required value={this.state.username} onChange={this.handleUsername}/>
+                  </div>
+                  <div className="form-group">
+                    <label>Email Address</label>
+                    <input type="email" className="form-control" placeholder="Enter Email" required  value={this.state.email} onChange={this.handleEmail}/>
+                  </div>
+                  <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" placeholder="Password" required  value={this.state.password} onChange={this.handlePassword}/>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block" onClick={this.handleSubmit}>Register</button>
+              </form>
+          </div>
+        </div>
+      </div>
+    </section> 
       </div>
     )
   }

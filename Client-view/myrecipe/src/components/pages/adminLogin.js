@@ -60,18 +60,23 @@ export default class adminLogin extends Component {
   render() {
     return (
       <div>
-          <nav className="navbar navbar-expand-sm navbar-dark  mb-4">
+                  <nav className="navbar navbar-expand-sm navbar-default bg mb-4">
                     <div className="container">
-                        <Link className="navbar-brand" to="/">
-                            Online Recipe
+                        
+                        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <Link className="navbar-brand" to="/">
+                            Classic Recipe administrative site
                         </Link>
-                        <button className="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#navbarNav">
-                            <span className="navbar-toggler-icon"/>
-                        </button>
-                        <div className="collapse navbar-collapse" id="navbarNav">
+                        
+        </div>
+        
+        <div className="collapse navbar-collapse" id="navbar">
                             <ul className="navbar-nav ml-auto">
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/">
@@ -87,9 +92,11 @@ export default class adminLogin extends Component {
                             </ul>
                         
                         </div>
+
                     </div>
-                </nav>
-          <form>
+              </nav>
+
+          {/* <form>
                     <div className="card" id="Lcard">
                         <div className="card-action red lighten-1 white-text">
                             <h3> Admin Login form</h3>
@@ -121,7 +128,43 @@ export default class adminLogin extends Component {
                         
                     </div>
            
-            </form>
+            </form> */}
+            <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="text-center"> Admin <small>Account Login</small></h1>
+          </div>
+        </div>
+      </div>
+                <section id="main">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+            <form id="login" class="well">
+                  <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" className="form-control" placeholder="Admin" value={this.state.username} onChange={this.handleUsername}/>
+                  </div>
+                  <div class="form-group">
+                    <label>Password</label>
+                    <input type="password"  className="form-control" value={this.state.password} onChange={this.handlePin} placeholder="Admin password"/>
+                  </div>
+                  <button type="submit" className="btn btn-primary btn-block" onClick={this.handleSubmit}>Login</button>
+                  <div className="form-group">
+                            <Link to="/forgot">
+                            <label>Forgot your password?</label>
+                            </Link>
+                            </div><br/>
+                            <div className="form-group">
+                            <Link to="/createsuperuser">
+                            <label>Don't have an account yet?</label>
+                            </Link>
+                            </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </section>
             <div class="preloader-wrapper big active" id="pred">
                 <div class="spinner-layer spinner-red-only">
                 <div class="circle-clipper left">
@@ -133,6 +176,7 @@ export default class adminLogin extends Component {
                 </div>
                 </div>
             </div>
+           
       </div>
     )
   }

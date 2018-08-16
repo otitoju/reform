@@ -40,57 +40,76 @@ export default class adminControlRecipe extends Component {
     const {allRecipe} = this.state
     return (
       <div>
-          <nav className="navbar navbar-expand-sm navbar-dark bg mb-4">
+         <nav className="navbar navbar-expand-sm navbar-default bg mb-4">
                     <div className="container">
-                        <Link className="navbar-brand" to="/">
+                        
+                        <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <Link className="navbar-brand" to="/">
                             Classic Recipe administrative site
                         </Link>
-                        <button className="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#navbarNav">
-                            <span className="navbar-toggler-icon"/>
-                        </button>
-                        <div className="collapse navbar-collapse" id="navbarNav">
-                            <ul className="navbar-nav ml-auto">
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/">
-                                    Visit site
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/profile">
-                                        Profile
-                                    </Link>
-                                </li>
-                                  
-                                  <li className="nav-item">
-
-                                </li>
-                            </ul>
-                        
-                        </div>
+                </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="index.html">Dashboard</a></li>
+                        <li><Link className="nav-link" to="/">
+                                                Visit site
+                                                </Link></li>
+                        <li><Link className="nav-link" to="/profile">
+                                                    Profile
+                                                </Link></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+            
+                        <li onClick={this.logout}><Link  to="/admin">
+                                                Logout
+                                                </Link></li>
+                    </ul>
                     </div>
-              </nav>
+                                </div>
+        </nav>
           <h1>Admin, please click on the delete button and delete a recipe</h1>
-        <div>
+          <div className="card-deck">
+        <div  class="col-md-4 col-md-offset-4">
         {allRecipe.map(res => {
             const {_id,name, ingredients, procedure, photo, author} = res
-            return <div className="card-panel" key={_id}>
-                    <img src={photo}/>
-                <div className="caption">
-                    <h3><strong>{name}</strong></h3>
+            return <div className="card" key={_id}>
+                    <img src={photo} className="card-img-top"  alt="food image"/>
+                <div className="card-body">
+                    <h5 className="card-title"><strong>{name}</strong></h5>
                         <ul >
                         <h4>posted by {author}</h4>
-                        <p><strong>Ingredients:</strong> {ingredients}</p>
-                        <p> <strong>Procedure:</strong> {procedure}</p>
+                        <p className="card-text"><strong>Ingredients:</strong> {ingredients}</p>
+                        <p className="card-text"> <strong>Procedure:</strong> {procedure}</p>
                         </ul>
-                <Link to={`del/${_id}`}><button className="btn-small"  >Delete</button></Link>
+                <Link to={`del/${_id}`}><button className="btn btn-danger"  >Delete</button></Link>
+                </div>
+                <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
                 </div>
             </div>
             
         })}
+            
         </div>
+        </div>
+        	{/* <div class="card-deck">
+  <div class="card">
+    <img class="card-img-top" src=".../100px180/" alt="Card image cap"/>
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Last updated 3 mins ago</small>
+    </div>
+  </div>
+  </div> */}
       </div>
     )
   }

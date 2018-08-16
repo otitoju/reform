@@ -11,19 +11,21 @@ export default class fetchsingledata extends Component {
             photo:'',
             ingredients:'',
             procedure:'',
-            author:''
+            author:'',
+            id:''
         }
         this.getSingleRecipe = this.getSingleRecipe.bind(this)
     }
     getSingleRecipe(id){
          axios.get(`/recipe/get/${id}`)
         .then(res =>{
-            //console.log(res)
+            console.log(res)
             this.setState({recipe:res.data.recipe.name,
             photo:res.data.recipe.photo,
             ingredients:res.data.recipe.ingredients,
             procedure:res.data.recipe.procedure,
-            author:res.data.recipe.author
+            author:res.data.recipe.author,
+            id:res.data.recipe._id
             })
         } )
         .catch(err => console.log(err))
@@ -35,7 +37,7 @@ export default class fetchsingledata extends Component {
     
     
   render() {
-      const {recipe, photo, ingredients, procedure, author} = this.state
+      const {recipe, photo, ingredients, procedure, author, id} = this.state
     return (
         <div>
                 <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
@@ -79,6 +81,9 @@ export default class fetchsingledata extends Component {
                             posted by {author}
                         </div>
                 </div>
+            </div>
+            <div className="jumbotron">
+                <Link to={`/comment/${id}`}><button>Add comment</button></Link>
             </div>
   </div>
 

@@ -44,11 +44,11 @@ export default class home extends Component {
               <h2>Start Your Cooking Journey</h2>
               <div id="main">
                   <Link to="/login">
-                  <button className="btn-large waves-effect" id="signins">Signin</button>
+                  <button className="btn btn-info waves-effect" id="signins">Signin</button>
                   </Link>
                   <h4>OR</h4>
                   <Link to="/register">
-                  <button id="signups" className="btn-large waves-effect">signup</button>
+                  <button id="signups" className="btn btn-info waves-effect">signup</button>
                   </Link>
               </div>
           </div>

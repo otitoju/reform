@@ -26,6 +26,7 @@ import AdminRegister from './components/pages/adminRegister'
 import AdminRecipe from './components/pages/adminControlRecipe'
 import adminControlRecipe from './components/pages/adminControlRecipe';
 import deleteRecipe from './components/pages/deleteRecipe';
+import comment from './components/pages/newComment'
 
 
 class App extends Component {
@@ -39,6 +40,7 @@ class App extends Component {
           <Route path="/img/:id" strict exact={true} component={pic}/>
           <Route path="/del/:id" strict exact={true} component={deleteRecipe}/>
           <Route path="/createsuperuser" strict exact={true} component={AdminRegister}/>
+          <Route path="/comment/:id" strict exact={true} component={comment}/>
           <Route path="/ctrlrecipe" strict exact={true} component={AdminRecipe}/>
           <Route path="/post/:id" strict exact={true} component={Single}/>
           <Route path="/reset" strict exact={true} component={Reset}/>

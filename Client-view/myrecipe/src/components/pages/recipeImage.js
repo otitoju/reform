@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 export default class recipeImage extends Component {
         constructor(){
@@ -41,15 +42,22 @@ export default class recipeImage extends Component {
           const {msg} = this.state
           return (
             <div>
-              <h1>Upload recipe image here </h1>
+             
+              <div class="col-md-9">
+
+            <div class="panel panel-default">
+              <div class="panel-heading main-color-bg">
+                <h3 class="panel-title">Upload recipe image here</h3>
+              </div>
+              <div class="panel-body">
               <img src={msg}/>
-                  <label>
-                      choose a file
-                          <input type="file" onChange={this.handleChange} />
-                  </label>
-                  <button onClick={this.handleView} >Submit</button>
-              
-              
+              <div class="form-group">
+                    <input type="file" class="form-control" onChange={this.handleChange}/>
+              </div>
+              <button onClick={this.handleView} className="btn btn-primary" >Upload</button>
+              </div>
+              </div>
+              </div>
             </div>
           )
         }

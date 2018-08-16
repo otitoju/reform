@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import '../css/bootstrap.min.css'
 import '../css/register.css'
 import {Link} from 'react-router-dom'
-// import Navbar from '../layout/Navbar'
 
 export default class register extends Component {
     constructor(){
@@ -96,40 +94,42 @@ export default class register extends Component {
                     </div>
                 </nav>
             <div id="info" class="alert alert-success" role="alert">{info}</div>
-            {/* <Navbar /> */}
- 
-
-          <div id="forgot">
-          <form>
-          
-              <div className="card" >
-                  <div className="card-action teal lighten-1 white-text" id="act">
-                      <h3>Register form</h3>
-                  </div>
-                  <div className="card-content" id="con">
-                    <div className="form-field">
-                            <label htmlFor="name">Name</label>
-                            <i className="mdi mdi-account"><input type="text" placeholder="Enter your name" value={this.state.name} onChange={this.handleName} required id="name"/></i>
+           
+              <div class="container">
+                    <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="text-center"> Create Account Here</h1>
                     </div>
-                      <div className="form-field">
-                          <label htmlFor="email">Email</label>
-                          <i className="mdi mdi-email"><input type="email" placeholder="E.g jameela@gmail.com" value={this.state.email} onChange={this.handleEmail} required/></i>
-                      </div>
-                      <div className="form-field">
-                          <label htmlFor="password">password</label>
-                          <i className="mdi mdi-lock"><input type="password" placeholder="Enter your password" value={this.state.password} onChange={this.handlePassword} required/></i>
-                      </div>
-                      <div className="form-field">
-                          <label htmlFor="secret">Secret</label>
-                          <i className="mdi mdi-security"><input type="text" placeholder="Enter a secret value" value={this.state.secret} onChange={this.handleSecret} required/></i>
-                      </div>
-                      <div className="form-field">
-                          <input type="submit" className="btn-small waves-effect" value="Register" onClick={this.handleSubmit} id="butt"/>
-                      </div>
+                    </div>
+                </div>
+                <section id="main">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+            <form id="login"  class="well">
+            <div class="form-group">
+                    <label>Fullname</label>
+                    <input type="text" class="form-control" placeholder="Enter Name" value={this.state.name} onChange={this.handleName} required/>
                   </div>
-              </div>
-      </form>
+                  <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" class="form-control" placeholder="Enter Email" value={this.state.email} onChange={this.handleEmail} required/>
+                  </div>
+                  <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" placeholder="Password"  value={this.state.password} onChange={this.handlePassword} required/>
+                  </div>
+                  <div class="form-group">
+                    <label>Secret</label>
+                    <input type="text" class="form-control" placeholder="Enter any safe word" value={this.state.secret} onChange={this.handleSecret} required/>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block" onClick={this.handleSubmit}>Login</button>
+              </form>
+          </div>
         </div>
+      </div>
+    </section>
+
       </div>
     )
   }

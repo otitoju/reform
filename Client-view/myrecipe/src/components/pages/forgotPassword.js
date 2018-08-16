@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import '../css/forgot.css'
+import { Link } from 'react-router-dom'
 
 export default class forgotPassword extends Component {
     constructor(){
@@ -42,7 +43,7 @@ export default class forgotPassword extends Component {
     return (
         <div>
       
-            <div className="card" id="forgot">
+            {/* <div className="card" id="forgot">
                 <div className="card-action teal lighten-1 white-text">
                     <h3>Forgot password</h3>
                 </div>
@@ -62,7 +63,46 @@ export default class forgotPassword extends Component {
                             </form>
                     </div>
            
+      </div> */}
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+                    <div className="container">
+                        <Link className="navbar-brand" to="/">
+                            Online Recipe
+                        </Link>
+                        <button className="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarNav">
+                            <span className="navbar-toggler-icon"/>
+                        </button>
+                    </div>
+                </nav>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="text-center"> Forgot password</h1>
+          </div>
+        </div>
       </div>
+      <section id="main">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+            <form id="login" action="index.html" class="well">
+                  <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="text" class="form-control" placeholder="Enter Email" required value={this.state.email} onChange={this.handleEmail}/>
+                  </div>
+                  <div class="form-group">
+                    <label>Secret</label>
+                    <input type="text" class="form-control" placeholder="secret" required value={this.state.secret} onChange={this.handleSecret}/>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block" onClick={this.handleForgot}>Send</button>
+              </form>
+          </div>
+        </div>
+      </div>
+    </section>
       </div>
     )
   }
