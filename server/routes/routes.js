@@ -6,6 +6,7 @@ const verifyToken = require('../controllers/verifyToken')
 const admin = require('../controllers/admincontroller')
 const adminVerify = require('../controllers/adminverify')
 const recipecontroller = require('../controllers/recipecontroller')
+const { catchErrors } = require('../handlers/errorhandler')
 
 const user = require('../models/user')
 const bodyParser = require('body-parser');
