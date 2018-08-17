@@ -4,7 +4,7 @@ const user = require('../models/user')
 //const admin = require('../models/admin')
 
 const verifyToken =  (req, res, next) => {
-    //const token = req.headers['x-access-token']
+    
     let token = req.headers['authorization'].split(" ")[1];
     if (!token) {
         res.json({
