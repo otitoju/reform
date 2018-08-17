@@ -3,6 +3,7 @@ import axios from 'axios'
 import {Link} from 'react-router-dom'
 import Rcard from './recipe.jpg'
 
+
 export default class fetchsingledata extends Component {
     constructor() {
         super();
@@ -54,9 +55,6 @@ export default class fetchsingledata extends Component {
                         <div className="collapse navbar-collapse" id="navbarNav">
                             <ul className="navbar-nav ml-auto">
                                 <li className="nav-item">
-                                    <button className="btn btn-default" onClick={this.viewProfile} id="view">View profile</button>
-                                </li>
-                                <li className="nav-item">
                                     <Link to="/"><button className="btn btn-default red" onClick={this.logout} id="logout">Logout</button></Link>
                                 </li>
                                 
@@ -65,26 +63,27 @@ export default class fetchsingledata extends Component {
                         </div>
                     </div>
                 </nav>
-            <div className="col-sm-6 col-md-4">
+            <div  className="col-md-6 col-md-offset-2" id="row">
                 <div className="card">
                     <div className="card-image">
-                        <img src={photo}/>
+                        <img src={photo} className="card-img-top"/>
                         <span className="card-title"><strong>{recipe}</strong></span>
                     </div>
                         <div className="card-content">
-                            <h3><strong>Ingredients:</strong></h3>
-                            <p>{ingredients}</p>
-                            <h3><strong>Procedure:</strong></h3>
-                            <p>{procedure}</p>
+                            <span><strong>Ingredients:</strong></span>
+                            <p className="card-text">{ingredients}</p>
+                            <span><strong>Procedure:</strong></span>
+                            <p className="card-text">{procedure}</p>
                         </div>
-                        <div className="card-action">
-                            posted by {author}
-                        </div>
+                        <div class="card-footer">
+                                    <small class="text-muted">Created by {author}</small>
+                                    </div>
                 </div>
-            </div>
-            <div className="jumbotron">
+                <div className="jumbotron">
                 <Link to={`/comment/${id}`}><button>Add comment</button></Link>
             </div>
+            </div>
+            
   </div>
 
     )

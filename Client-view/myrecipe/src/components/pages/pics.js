@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-//import '../css/materialize.min.css'
-//import '../css/MaterialDesign-Webfont-master/css/materialdesignicons.min.css'
+import {Link} from 'react-router-dom'
 import axios from 'axios'
 
 export default class  extends Component {
@@ -48,16 +47,47 @@ export default class  extends Component {
     const {msg} = this.state
     return (
       <div>
+        <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+                    <div className="container">
+                        <div id="contain">
+                        <Link className="navbar-brand" to="/">
+                            Online Recipe
+                        </Link>
+                        </div>
+                        <button className="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarNav">
+                            <span className="navbar-toggler-icon"/>
+                        </button>
+                        <div className="collapse navbar-collapse" id="navbarNav">
+                            <ul className="navbar-nav ml-auto">
         
-        <img src={msg} alt="Preview"/>
-            <input type="text" value={this.state.name} onChange={this.handleName}/>
-            <label>
-                
-                    <input type="file" onChange={this.handleChange} />
-            </label>
-            <button onClick={this.handleView} >Upload</button>
-        
-        
+                                <li className="nav-item">
+                                </li>
+                                
+                            </ul>
+                        
+                        </div>
+                    </div>
+                </nav>
+        <div className="col-md-4 col-md-offset-4">
+        <div class="card">
+              <div className="panel-heading  bg-dark" style={{color:'white'}}>
+                <h3 class="panel-title">Upload image here</h3>
+              </div>
+              <div  className="card-image">
+                <img src={msg} alt="Preview"  className="card-img-top"/>
+                </div>
+                <div className="card-content">
+                {/* <input type="text" value={this.state.name} onChange={this.handleName}/> */}
+            
+                    <input type="file" onChange={this.handleChange} /><br/>
+            <button onClick={this.handleView} className="btn btn-primary">Upload</button>
+                </div>
+            
+        </div>  
+        </div>
       </div>
     )
   }

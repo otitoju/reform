@@ -73,7 +73,7 @@ export default class updateprofiles extends Component {
     
   render() {
     return (
-      <div id="bodie">
+      <div >
                 <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                     <div className="container">
                         <div id="contain">
@@ -98,27 +98,29 @@ export default class updateprofiles extends Component {
                         </div>
                     </div>
                 </nav>
-          <div className="card" id="Ucard">
-                  <div className="card-action teal lighten-1 white-text">
+                <div  className="col-md-4 col-md-offset-4">
+          <div className="card" >
+                  <div className="card-title">
                       <h3>Change profile</h3>
                   </div>
-                  <div className="card-content">
+                  <div className="container">
+                  <div className="form-group">
                         <div className="form-field">
-                                <label Htmlfor="name">New name*</label>
-                                <i className="mdi mdi-account"><input type="text" placeholder="Enter your name" value={this.state.name} onChange={this.handleName}/></i>
+                                <label>New name*</label>
+                                <i className="mdi mdi-account"><input type="text" placeholder="Enter your name" value={this.state.name} onChange={this.handleName} className="form-control"/></i>
                         </div>
                       <div className="form-field">
-                          <label Htmlfor="email">New email*</label>
-                          <i className="mdi mdi-email"><input type="email" placeholder="E.g jameela@gmail.com" value={this.state.email} onChange={this.handleEmail}/></i>
+                          <label>New email*</label>
+                          <i className="mdi mdi-email"><input type="email" placeholder="E.g jameela@gmail.com" value={this.state.email} onChange={this.handleEmail} className="form-control"/></i>
                       </div>
                       <div className="form-field">
-                          <label Htmlfor="secret">Secret*</label>
-                          <i className="mdi mdi-security"><input type="text" placeholder="Enter a secret value" value={this.state.secret} onChange={this.handleSecret}/></i>
-                      </div>
-                      <div className="form-field">
-                          <input type="submit" className="btn-large waves-effect" value="Update!!!" onClick={this.handleUpdate}/>
+                          <label>Secret*</label>
+                          <i className="mdi mdi-security"><input type="text" placeholder="Enter a secret value" value={this.state.secret} onChange={this.handleSecret} className="form-control"/></i>
+                      </div><br/>
+                          <input type="submit" className="btn btn-primary" value="Update" onClick={this.handleUpdate}/>
                       </div>
                   </div>
+            </div>
             </div>
       </div>
     )

@@ -11,7 +11,8 @@ class login extends Component{
         this.state= {
             email:"",
             password:"",
-            isLoading:false
+            isLoading:false,
+            info:''
             
         }
         this.handleSubmit= this.handleSubmit.bind(this)
@@ -48,24 +49,26 @@ class login extends Component{
         .then(res => {
             //alert(res.message)
             
-            console.log(res.msg)
+            //console.log(res.msg)
+            this.setState({info:res.message})
             localStorage.setItem('token', JSON.stringify(res.token));
             localStorage.setItem('userId', JSON.stringify(res.id))
+            //document.getElementById('in').style.display='block'
             if(res.message === 'Login successful'){
                 this.props.history.push('/recipe')
             } 
-            else if(res.message === 'fill all') {
-                alert('Please fill in all fields')
-            }
-            else if (res.message === 'Unable to login'){
-                alert('Unable to login, please try again')
-            }
-            else if(res.message === 'No user with such email') {
-                alert('No user with such email, check the email and try again')
-            }
-            else if(res.message === 'Invalid or wrong password'){
-                alert('Invalid or wrong password')
-            }
+            // else if(res.message === 'fill all') {
+            //     alert('Please fill in all fields')
+            // }
+            // else if (res.message === 'Unable to login'){
+            //     alert('Unable to login, please try again')
+            // }
+            // else if(res.message === 'No user with such email') {
+            //     alert('No user with such email, check the email and try again')
+            // }
+            // else if(res.message === 'Invalid or wrong password'){
+            //     alert('Invalid or wrong password')
+            // }
             let b = document.getElementById('pre').style.visibility = 'hidden'
         })
         .catch(error => console.log(error)) 
@@ -73,6 +76,7 @@ class login extends Component{
              
     }
     render(){
+        const {info} = this.state
     return(
          <div>
               
@@ -105,60 +109,29 @@ class login extends Component{
                         </div>
                     </div>
               </nav>
-             {/* <form>
-                    <div className="card" id="forgot">
-                        <div className="card-action teal lighten-1 white-text">
-                            <h3>Login form</h3>
-                        </div>
-                        <div className="card-content">
-                            <div className="form-field">
-                                <label htmlFor="email">Email</label>
-                                <i className="mdi mdi-email"><input type="email" placeholder="E.g jameela@gmail.com" value={this.state.email} onChange={this.handleEmail}/></i>
-                            </div>
-                            <div className="form-field">
-                                <label htmlFor="password">password</label>
-                                <i className="mdi mdi-lock"><input type="password" placeholder="Enter your password" value={this.state.password} onChange={this.handlePassword}/></i>
-                            </div>
-                            <div className="form-field">
-                                <input type="submit" className="btn-small waves-effect" value="Login" onClick={this.handleSubmit}/>
-                            </div>
-        
-                            <div className="form-field">
-                            <Link to="/forgot">
-                            <label>Forgot your password?</label>
-                            </Link>
-                            </div><br/>
-                            <div className="form-field">
-                            <Link to="/register">
-                            <label>Don't have an account yet?</label>
-                            </Link>
-                            </div>
-                        </div>
-                        
+              
+        <div class="container">
+                    <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="text-center"> User <small>Account Login</small></h1>
                     </div>
-           
-            </form> */}
-                  <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h1 class="text-center"> User <small>Account Login</small></h1>
-          </div>
-        </div>
+                    </div>
       </div>
             <section id="main">
       <div class="container">
         <div class="row">
           <div class="col-md-4 col-md-offset-4">
+                <div id="in" style={{display:'none'}} className='alert alert-danger' role="alert">*{info}</div>
             <form id="login"  className="well">
                   <div class="form-group">
                     <label>Email Address</label>
-                    <input type="email" class="form-control" placeholder="Enter Email"  value={this.state.email} onChange={this.handleEmail} required/>
+                    <input type="email" className="form-control" placeholder="Enter Email"  value={this.state.email} onChange={this.handleEmail} required id="mail"/>
                   </div>
                   <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control" placeholder="Password" value={this.state.password} onChange={this.handlePassword} required/>
+                    <input type="password" className="form-control" placeholder="Password" value={this.state.password} onChange={this.handlePassword} required id="pass"/>
                   </div>
-                  <button type="submit" class="btn btn-primary btn-block" onClick={this.handleSubmit}>Login</button>
+                  <button type="submit" className="btn btn-primary btn-block" onClick={this.handleSubmit} id="send">Login</button>
                   <div className="form-group">
                             <Link to="/forgot">
                             <label>Forgot your password?</label>

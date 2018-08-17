@@ -10,13 +10,17 @@ export default class register extends Component {
             email:"",
             password:"",
             secret:"",
-            info:''
+            info:'',
+            phone:'',
+            gender:''
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleName = this.handleName.bind(this)
         this.handleEmail = this.handleEmail.bind(this)
         this.handlePassword = this.handlePassword.bind(this)
         this.handleSecret = this.handleSecret.bind(this)
+        this.handleGender = this.handleGender.bind(this)
+        this.handlePhone = this.handlePhone.bind(this)
     }
     
     handleSubmit(e){
@@ -32,7 +36,9 @@ export default class register extends Component {
                 name:this.state.name,
                 email:this.state.email,
                 password:this.state.password,
-                secret:this.state.secret
+                secret:this.state.secret,
+                phone:this.state.phone,
+                gender:this.state.gender
             })
         })
         .then(res => res.json())
@@ -40,10 +46,10 @@ export default class register extends Component {
            // alert(res.message)
             this.setState({info:res.message})
             if(res.message === `Registration successful`){
-                alert('Registration successul, you can now log in')
+                
                 this.props.history.push('/login')
             }
-            //document.getElementById('info').style.visibility=true
+            document.getElementById('in').style.display='block'
         })
         .catch(err => console.log(err))
     }
@@ -59,8 +65,17 @@ export default class register extends Component {
     handleSecret(e){
         this.setState({secret:e.target.value})
     }
+    handleGender(e){
+        this.setState({gender:e.target.value})
+    }
+    handlePhone(e){
+        this.setState({phone:e.target.value})
+    }
   render() {
       const {info} = this.state
+      const aler = {
+          display:'none'
+      }
 
     return (
       <div>
@@ -93,7 +108,7 @@ export default class register extends Component {
                         </div>
                     </div>
                 </nav>
-            <div id="info" class="alert alert-success" role="alert">{info}</div>
+            
            
               <div class="container">
                     <div class="row">
@@ -106,24 +121,37 @@ export default class register extends Component {
       <div class="container">
         <div class="row">
           <div class="col-md-4 col-md-offset-4">
+          <div id="in" style={{display:'none'}} class="alert alert-danger" role="alert">{info}</div>
             <form id="login"  class="well">
             <div class="form-group">
                     <label>Fullname</label>
-                    <input type="text" class="form-control" placeholder="Enter Name" value={this.state.name} onChange={this.handleName} required/>
+                    <input type="text" className="form-control" placeholder="Enter Name" value={this.state.name} onChange={this.handleName} required/>
                   </div>
                   <div class="form-group">
                     <label>Email Address</label>
-                    <input type="email" class="form-control" placeholder="Enter Email" value={this.state.email} onChange={this.handleEmail} required/>
+                    <input type="email" className="form-control" placeholder="Enter Email" value={this.state.email} onChange={this.handleEmail} required/>
                   </div>
                   <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control" placeholder="Password"  value={this.state.password} onChange={this.handlePassword} required/>
+                    <input type="password" className="form-control" placeholder="Password"  value={this.state.password} onChange={this.handlePassword} required/>
                   </div>
                   <div class="form-group">
                     <label>Secret</label>
-                    <input type="text" class="form-control" placeholder="Enter any safe word" value={this.state.secret} onChange={this.handleSecret} required/>
+                    <input type="text" className="form-control" placeholder="Enter any safe word" value={this.state.secret} onChange={this.handleSecret} required/>
                   </div>
-                  <button type="submit" class="btn btn-primary btn-block" onClick={this.handleSubmit}>Login</button>
+                  <div class="form-group">
+                    <label>Gender</label>
+                    <select  className="form-control" value={this.state.gender} onChange={this.handleGender}>
+                        <option>--select gender--</option>
+                        <option>male</option>
+                        <option>female</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Phone number</label>
+                    <input type="phone" className="form-control" placeholder="Enter phone number" required value={this.state.phone} onChange={this.handlePhone}/>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block" onClick={this.handleSubmit} id="send">Signup</button>
               </form>
           </div>
         </div>

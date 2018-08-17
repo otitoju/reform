@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import '../css/fetchdata.css'
+//import '../css/fetchdata.css'
 import pic from './images.jpg'
 
 export default class fetchData extends Component {
@@ -20,6 +20,7 @@ export default class fetchData extends Component {
     }
     handleText(e){
         this.setState({search:e.target.value})
+        
     }
     handleSearch(e){
         e.preventDefault()
@@ -50,6 +51,7 @@ export default class fetchData extends Component {
     }
     
     componentDidMount(){
+        //"proxy":"https://rocky-atoll-10994.herokuapp.com/"
         //let a = document.getElementById('pres').style.visibility='visible'
         const token = JSON.parse(localStorage.getItem('token'));
             if(!token){
@@ -91,7 +93,7 @@ export default class fetchData extends Component {
       const {allRecipe, isLoading, username } = this.state
     return (
       <div>
-                <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+        <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                     <div className="container">
                         <Link className="navbar-brand" to="/">
                             Online Recipe
@@ -102,50 +104,59 @@ export default class fetchData extends Component {
                         data-target="#navbarNav">
                             <span className="navbar-toggler-icon"/>
                         </button>
+                        <form className="form-inline" onSubmit={this.handleSearch} method="GET">
+                            <div className="form-group">
+                                <input type="text" className="form-control" placeholder="Search recipe name" value={this.state.search} onChange={this.handleText}/>
+                                <input type="submit" className="btn btn-primary" value="Search" />
+                            </div>
+                        </form>
                         <div className="collapse navbar-collapse" id="navbarNav">
                             <ul className="navbar-nav ml-auto">
                                 <li className="nav-item">
-                                    <button className="btn btn-default" onClick={this.viewProfile} id="view">View profile</button>
+                                <p style={{color:'white'}}>Welcome, { username } </p>
                                 </li>
-                                <li className="nav-item">
-                                    <Link to="/"><button className="btn btn-default red" onClick={this.logout} id="logout">Logout</button></Link>
-                                </li>
-                                
+                            
+                    <div class="col-md-2">
+                            <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Profile
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li className="nav-item" onClick={this.viewProfile}>
+                                                    <button className="btn btn-default" onClick={this.viewProfile} id="view">profile</button>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <Link to="/"><button className="btn btn-default red" onClick={this.logout} id="logout">Logout {username}</button></Link>
+                                                </li>
+                            </ul>
+                            </div>
+                </div>
                             </ul>
                         
                         </div>
                     </div>
-                </nav>
-          <p id="username">Welcome { username } </p>
-          <form className="form-inline" onSubmit={this.handleSearch} method="GET">
-                            <div className="form-group">
-                                <input type="text" className="form-control" placeholder="Search recipe name" value={this.state.search} onChange={this.handleText}/>
-                                <input type="submit" className="form-control" value="Search" />
-                            </div>
-                        </form>
-            <h1>Recipes</h1>
+        </nav>
+        
+            <h1 className="card-title">Recipes</h1>
            
-            
-            <p>
-                <div id="buttons">
-                        <button className="btn btn-default" onClick={this.viewProfile} id="view">View profile</button>
-                        <Link to="/"><button className="btn btn-default red" onClick={this.logout} id="logout">Logout</button></Link>
-                </div>
-                </p>
-                <div>
-            <div className="col-sm-6 col-md-4" id="row">
+        <div className="card-deck">
+            <div  className="col-md-4 col-md-offset-4">
                     {allRecipe.map(rec => {
                         const {_id,name, ingredients, procedure, photo, author, time} = rec
-                        return <div className="card-panel" key={_id}>
-                                <img src={photo}/>
-                                <div className="caption">
-                                    <h3><strong>{name}</strong></h3>
+                        return <div className="card" key={_id}>
+                                <img src={photo} className="card-img-top"  alt="food image"/>
+                                <div className="card-body">
+                                    <h5 className="card-title"><strong>{name}</strong></h5>
                                         <ul>
-                                            <h4>posted by {author}</h4>
-                                            <p id="time">time: {time}</p>
+                                            <h4 className="card-text">posted by {author}</h4>
+                                            <p className="card-text">time: {time}</p>
                                         </ul>
-                                    <Link to={`post/${_id}`}><button className="btn-small" >View</button></Link>
+                                    <Link to={`post/${_id}`}><button className="btn btn-primary" >View</button></Link>
                                    </div> 
+                                   <div class="card-footer">
+                                    <small class="text-muted">Created by otitoju oluwapelumi</small>
+                                    </div>
                             </div>
                     })}
                 

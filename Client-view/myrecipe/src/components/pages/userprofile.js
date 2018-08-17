@@ -70,9 +70,9 @@ export default class userprofile extends Component {
                     </div>
                 </nav>
             
-             <div className="col-sm-6 col-md-4" id="row">
-                <div className="card-panel" key={id}>
-                                <img src={pic} />
+                <div  className="col-md-4 col-md-offset-2" id="row">
+                <div className="card" key={id}>
+                                <img src={pic} className="card-img-top"/>
                                 <div className="caption">
                             <h3 id="uses">Username: {username}</h3>
                             <h3 id="uses">Email: {email}</h3>

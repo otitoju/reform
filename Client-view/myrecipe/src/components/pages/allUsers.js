@@ -83,19 +83,27 @@ export default class allUsers extends Component {
                                     SECRET
                                 </th>
                                 <th>
+                                    GENDER
+                                </th>
+                                <th>
+                                    PHONE
+                                </th>
+                                <th>
                                     Action
                                 </th>
                             </thead>
                             
                             <tbody>
-                {allUsers.map(res => {
-                    const {_id,name,email, secret} = res
+                {allUsers.map((res, index) => {
+                    const {_id,name,email, secret, gender, phone} = res
                     return <tr key={_id}>
-                                    <td></td>
+                                    <td>{index+1}</td>
                                     <td><b>{_id}</b></td>
                                     <td><b>{name}</b></td>
                                     <td><b>{email}</b></td>
                                     <td><b>{secret}</b></td>
+                                    <td><b>{gender}</b></td>
+                                    <td><b>{phone}</b></td>
                                     <td><Link to={`/dashboard/${_id}`}>Del</Link></td>
                                 </tr>       
                 })}

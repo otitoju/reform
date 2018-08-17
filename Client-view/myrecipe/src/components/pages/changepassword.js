@@ -30,31 +30,33 @@ export default class changepassword extends Component {
                         </div>
                     </div>
                 </nav>
-        <div className="card" id="cCard">
-                <div className="card-action teal lighten-1 white-text">
+        
+        <div  className="col-md-4 col-md-offset-4">
+        <div className="card" >
+                <div className="card-title">
                     <h3>Change password</h3>
                 </div>
-            <div className="card-content">
+                <div class="container">
                 <form>
-                    <div className="form-field">
+                    <div className="form-group">
                         <label for="password">Old password*</label>
-                        <i className="mdi mdi-lock"><input type="password" placeholder="Enter your old password" required/></i>
+                        <i className="mdi mdi-lock"><input type="password" placeholder="Enter your old password" required className="form-control"/></i>
                     </div>
                     <div className="form-field">
                         <label for="password">New password*</label>
-                        <i className="mdi mdi-lock"><input type="password" placeholder="Enter your new password" required/></i>
+                        <i className="mdi mdi-lock"><input type="password" placeholder="Enter your new password" required className="form-control"/></i>
                     </div>
                     <div className="form-field">
                         <label for="password">Confirm password*</label>
-                        <i className="mdi mdi-lock"><input type="password" placeholder="Confirm your new password" required/></i>
+                        <i className="mdi mdi-lock"><input type="password" placeholder="Confirm your new password" required className="form-control"/></i>
                     </div>
-                    <div className="form-field">
-                        <button className="btn-small waves-effect">Change password</button>
-                    </div>
+                        <button className="btn btn-primary">Change password</button>
                 </form>
+            </div>
             </div>
             </div>
       </div>
     )
   }
 }
+

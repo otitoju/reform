@@ -91,36 +91,7 @@ export default class admindashboard extends Component {
         </div>
                     </div>
               </nav>
-        {/* <div id="side">
-            <div id="toggle" onClick={this.togglesidebar}>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-              <div id="circle"></div>
-              <hr/>
-              <div id="btns">
-                  <Link to="">
-                  <input type="button" className="btn-small waves-effect blue" value="Profile" id="btc"/>
-                  </Link>
-                  <Link to="">
-                  <input type="button" className="btn-small waves-effect" value="Change password" id="btd"/>
-                  </Link>
-                  
-              </div>
-        </div> */}
-          {/* <div className="card" id="Acard">
-              <div className="card-action red lighten-1 white-text">
-                  <h3>Site administration</h3>
-              </div>
-                <div className="">
-                    <h5 onClick={this.viewUser}>View registered users</h5>
-                    <h5 onClick={this.createRecipe}>Create new recipe</h5>
-                    <h5 onClick={this.deleteRecipe}>Delete recipe</h5>
-                    <h5>View site admins</h5>
-                </div>
-          </div> */}
-
+       
 <header id="header">
       <div class="container">
         <div class="row">
