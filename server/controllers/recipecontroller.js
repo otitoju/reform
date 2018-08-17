@@ -14,7 +14,7 @@ exports.createRecipe = async (req, res) => {
     }
     else{
         const admintoken = await req.headers['authorization'].split(" ")[1];
-        const decode = await jwt.verify(admintoken, adminConfig.adminsecret)
+        const decode = await jwt.verify(admintoken, process.env.adminsecret || adminConfig.adminsecret)
         let author = decode.username
         const Recipe = await recipe.create({
             name:req.body.name,
@@ -34,7 +34,7 @@ exports.getAllRecipe = async (req, res, next) => {
     const allRecipe = await recipe.find().sort({'_id':-1})
     let food_id = allRecipe.id
     const token = await req.headers['authorization'].split(" ")[1];
-    const decode = await jwt.verify(token, config.secret)
+    const decode = await jwt.verify(token, process.env.secret || config.secret)
     let name = await decode.name
     let id = await decode.id
     let email = await decode.email

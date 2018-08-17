@@ -36,7 +36,7 @@ exports.loginSuperUser = (req, res) => {
         admin.findOne({username:req.body.username}, (err, admin) => {
             if (err) {
                 res.status(500).json({
-                    message:`Problem loging in superuser`
+                    message:`Problem logging in superuser`
                 })
             }
             else if(!admin){
@@ -50,7 +50,7 @@ exports.loginSuperUser = (req, res) => {
                     })
                 }
                 else {
-                    const adminToken = jwt.sign({id:admin.id,username:admin.username}, config.adminsecret, {expiresIn:'5h'})
+                    const adminToken = jwt.sign({id:admin.id,username:admin.username}, process.env.adminsecret || config.adminsecret, {expiresIn:'5h'})
                     res.json({
                         message:`welcome`,
                         admintoken:adminToken
@@ -73,7 +73,7 @@ exports.getAllAdmin = (req, res) => {
 exports.getAdminUsername = async (req, res) => {
     
     const token = await req.headers['authorization'].split(" ")[1]
-    const decoded = await jwt.verify(token, config.adminsecret)
+    const decoded = await jwt.verify(token, process.env.adminsecret || config.adminsecret)
     let username = decoded.username
     res.status(200).json({
         username:username

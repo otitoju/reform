@@ -93,7 +93,7 @@ exports.loginUser = (req, res) => {
                 res.json(`incorrect password`)
             }
             else{
-               const token = jwt.sign({id:user.id,email:user.email,password:user.password},  confiq.secret, {expiresIn:'1h'}
+               const token = jwt.sign({id:user.id,email:user.email,password:user.password}, process.env.secret || confiq.secret, {expiresIn:'1h'}
             )
             res.json({
                 message:`login`,
@@ -109,7 +109,7 @@ exports.reportIssues = (req, res) => {
         service:'Gmail',
         auth:{
             user:'otitojuoluwapelumi@gmail.com',
-            pass:process.env.GMAILPASS
+            pass:process.env.GMAIL_PASS
         }
     })
     const mailOptions = {
@@ -156,7 +156,7 @@ exports.forgotPassword = (req, res) => {
                         service:'Gmail',
                         auth:{
                             user:'otitojuoluwapelumi@gmail.com',
-                            pass:process.env.GMAILPASS
+                            pass:process.env.GMAIL_PASS
                         }
                     })
                     var mailOptions = {

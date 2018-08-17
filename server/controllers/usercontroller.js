@@ -9,43 +9,11 @@ const adminConfig = require('../config/adminconfig')
 
 //const userExist = user.email
 
-const multer = require('multer')
-const path = require('path')
 
-const storage = multer.diskStorage({
-    filename:function(req, file, cb){
-        cb(null, Date.now()+file.originalname)
-    }
-})
-const imageFilter = function(req, file, cb){
-    if(!file.originalname.match(/\.(jpeg|jpg|png)$/i)){
-        return cb(new Error('Only image files are allowed'), false)
-    }
-    else{
-        cb(null,true)
-    }
-}
-var upload = multer({
-    storage:storage,
-    fileFilter:imageFilter
-})  
-var configpic = require('../routes/config')
-var cloudinary = require('cloudinary')
-cloudinary.config({
-    cloud_name: configpic.cloud_name,
-    api_key : configpic.api_key,
-    api_secret : configpic.api_secret
-})
 
 exports.admincreateUser = async (req, res) => {
     const body = req.body;
     const hashpassword = bcrypt.hashSync(req.body.password,10);
-
-    // var image = req.file.path
-    // const result = await cloudinary.uploader.upload(image)
-    // const img =  result.original_filename
-    // let imgUrl = result.secure_url
-    // let publicId = result.public_id
 
     if (!body.name || !body.email || !body.password) {
         res.status(403).json({
@@ -131,7 +99,8 @@ exports.getAllUser =  async (req, res) => {
 exports.userProfile =  async (req, res) => {
     const User = await user.find()
     const token = await req.headers['authorization'].split(" ")[1]
-    const decode = await jwt.verify(token, config.secret)
+    //const decode = await jwt.verify(token, config.secret)
+    const decode = await jwt.verify(token, process.env.secret || config.secret)
     let name = decode.name
     let id = decode.id
     let email = decode.email
@@ -158,7 +127,7 @@ exports.Login = (req, res) =>{
 exports.userLogin = (req, res) => {
     if(!req.body.email || !req.body.password){
         res.status(403).json({
-            message:'fill all'
+            message:'please fill all required fields'
         })
     }
     else{
