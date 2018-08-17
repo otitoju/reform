@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-//const passportLocalMongoose = require('passport-local-mongoose');
+const mongoDbErrorHandler = require('mongoose-mongodb-errors');
 
 const userSchema = new mongoose.Schema({
     //id:mongoose.Schema.Types.ObjectId,
@@ -11,7 +11,9 @@ const userSchema = new mongoose.Schema({
     resetexpires:Date,
     secret: String,
     pic:String,
-    test:String
+    gender:String,
+    phone:Number
+
 })
-//userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(mongoDbErrorHandler);
 module.exports = mongoose.model('user', userSchema);

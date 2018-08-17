@@ -15,7 +15,7 @@ exports.admincreateUser = async (req, res) => {
     const body = req.body;
     const hashpassword = bcrypt.hashSync(req.body.password,10);
 
-    if (!body.name || !body.email || !body.password) {
+    if (!body.name || !body.email || !body.password || !body.secret || !body.phone || !body.gender) {
         res.status(403).json({
             message:`Please fill all required input fields`
         })
@@ -36,7 +36,8 @@ exports.admincreateUser = async (req, res) => {
             email:body.email,
             password:hashpassword,
             secret:body.secret,
-            //pic:imgUrl
+            gender:req.body.gender,
+            phone:req.body.phone
         })
         res.json({
             message:`Registration successful`,
@@ -127,7 +128,7 @@ exports.Login = (req, res) =>{
 exports.userLogin = (req, res) => {
     if(!req.body.email || !req.body.password){
         res.status(403).json({
-            message:'please fill all required fields'
+            message:'please fill all required field'
         })
     }
     else{

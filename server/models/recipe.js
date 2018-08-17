@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-//const admin = require('./admin')
+const mongoDbErrorHandler = require('mongoose-mongodb-errors');
 
 const recipeSchema = new mongoose.Schema({
     //id:mongoose.Schema.Types.ObjectId,
@@ -11,4 +11,5 @@ const recipeSchema = new mongoose.Schema({
     time:{type:Date, default:Date.now()},
     comment:[{type:mongoose.Schema.Types.ObjectId, ref:'comment'}]
 })
+recipeSchema.plugin(mongoDbErrorHandler)
 module.exports = mongoose.model('recipe', recipeSchema)
