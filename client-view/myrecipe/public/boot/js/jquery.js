@@ -9,5 +9,7 @@ $(document).ready(function(){
                   // Animation complete.
               });
               error0 = true; // change the error state to true  
+              $("#divSCharge").show("slow");
         })
+        
       })
