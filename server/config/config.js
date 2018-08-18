@@ -1,1 +1,3 @@
-a
+module.exports = {
+    "secret":"supersecret"
+}

@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 
 // app.set('view engine', 'ejs');
 app.use('/', routes)
+//server view
 app.get('/', (req, res) => {
     res.send(`<h1>Welcome to our server</h1>`)
 })
