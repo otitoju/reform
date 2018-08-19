@@ -10,7 +10,7 @@ export default class home extends Component {
               <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                     <div className="container">
                         <Link className="navbar-brand" to="/">
-                           <img src={logo} style={{height:'40px'}}/>
+                          <h1 style={{fontStyle:'italic', fontFamily: 'Brush Script MT',fontWeight: 'bolder',fontSize: '30px'}}> Nice Recipe</h1>
                         </Link>
                         <button className="navbar-toggler"
                         type="button"

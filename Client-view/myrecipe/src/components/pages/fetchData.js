@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 //import '../css/fetchdata.css'
 import pic from './images.jpg'
+import '../css/Spinner.css'
 
 export default class fetchData extends Component {
     constructor(){
@@ -58,6 +59,7 @@ export default class fetchData extends Component {
                 this.props.history.push('/')
             }
             else{
+                
                 fetch('/recipe/get', {
                     headers:{
                         'Accept':'application/json',
@@ -95,9 +97,9 @@ export default class fetchData extends Component {
       <div>
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                     <div className="container">
-                        <Link className="navbar-brand" to="/">
-                            Online Recipe
-                        </Link>
+                    <Link className="navbar-brand" to="/">
+                        <h1 style={{fontStyle:'italic', fontFamily: 'Brush Script MT',fontWeight: 'bolder',fontSize: '30px'}}> Nice Recipe</h1>
+                    </Link>
                         <button className="navbar-toggler"
                         type="button"
                         data-toggle="collapse"
@@ -137,7 +139,7 @@ export default class fetchData extends Component {
                         </div>
                     </div>
         </nav>
-        
+       {isLoading && <div className='Loader' id="load">Loading...</div>}
             <h1 className="card-title">Recipes</h1>
            
         <div className="card-deck">

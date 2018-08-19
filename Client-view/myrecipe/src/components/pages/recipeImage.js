@@ -28,8 +28,8 @@ export default class recipeImage extends Component {
           })
           .then(res => {
             console.log(res)
-            alert(res.message)
-              //this.setState({msg:res.data.secure_url})
+            alert(res.data.message)
+              this.setState({msg:res.data.secure_url})
           })
           .catch(err => console.log(err))
           

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../css/updateprofile.css'
+//import '../css/updateprofile.css'
 import {Link} from 'react-router-dom'
 //import axios from 'axios'
 
@@ -76,11 +76,11 @@ export default class updateprofiles extends Component {
       <div >
                 <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                     <div className="container">
-                        <div id="contain">
-                        <Link className="navbar-brand" to="/">
-                            Online Recipe
-                        </Link>
-                        </div>
+                        
+                    <Link className="navbar-brand" to="/">
+                        <h1 style={{fontStyle:'italic', fontFamily: 'Brush Script MT',fontWeight: 'bolder',fontSize: '30px'}}> Nice Recipe</h1>
+                    </Link>
+                        
                         <button className="navbar-toggler"
                         type="button"
                         data-toggle="collapse"

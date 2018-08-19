@@ -10,7 +10,7 @@ export default class changepassword extends Component {
                     <div className="container">
                         <div id="contain">
                         <Link className="navbar-brand" to="/">
-                            Online Recipe
+                            <h1 style={{fontStyle:'italic', fontFamily: 'Brush Script MT',fontWeight: 'bolder',fontSize: '30px'}}> Nice Recipe</h1>
                         </Link>
                         </div>
                         <button className="navbar-toggler"

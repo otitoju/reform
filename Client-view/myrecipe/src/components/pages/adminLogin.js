@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
+import admin from './modal'
 
 export default class adminLogin extends Component {
     constructor(){
@@ -71,7 +72,7 @@ export default class adminLogin extends Component {
             <span class="icon-bar"></span>
           </button>
           <Link className="navbar-brand" to="/">
-                            Classic Recipe administrative site
+          <h1 style={{fontStyle:'italic', fontFamily: 'Brush Script MT',fontWeight: 'bolder',fontSize: '30px'}}> Nice Recipe Admin</h1>
                         </Link>
                         
         </div>
@@ -142,14 +143,14 @@ export default class adminLogin extends Component {
           <div class="col-md-4 col-md-offset-4">
             <form id="login" class="well">
                   <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" className="form-control" placeholder="Admin" value={this.state.username} onChange={this.handleUsername}/>
+                    <label>Username</label>
+                    <input type="text" className="form-control" placeholder="Admin username" value={this.state.username} onChange={this.handleUsername}/>
                   </div>
                   <div class="form-group">
                     <label>Password</label>
                     <input type="password"  className="form-control" value={this.state.password} onChange={this.handlePin} placeholder="Admin password"/>
                   </div>
-                  <button type="submit" className="btn btn-primary btn-block" onClick={this.handleSubmit}>Login</button>
+                  <button type="submit" className="btn btn-primary btn-block" onClick={this.handleSubmit}  >Login</button>
                   <div className="form-group">
                             <Link to="/forgot">
                             <label>Forgot your password?</label>
@@ -164,6 +165,7 @@ export default class adminLogin extends Component {
           </div>
         </div>
       </div>
+      
     </section>
             <div class="preloader-wrapper big active" id="pred">
                 <div class="spinner-layer spinner-red-only">

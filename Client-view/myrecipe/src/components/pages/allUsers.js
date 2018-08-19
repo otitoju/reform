@@ -41,7 +41,7 @@ export default class allUsers extends Component {
                   <nav className="navbar navbar-expand-sm navbar-dark bg mb-4">
                     <div className="container">
                         <Link className="navbar-brand" to="/">
-                            Classic Recipe administrative site
+                        <h1 style={{fontStyle:'italic', fontFamily: 'Brush Script MT',fontWeight: 'bolder',fontSize: '30px'}}> Nice Recipe Admin</h1>
                         </Link>
                         <button className="navbar-toggler"
                         type="button"

@@ -47,11 +47,11 @@ export default class userprofile extends Component {
       <div>
                 <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                     <div className="container">
-                        <div id="contain">
-                        <Link className="navbar-brand" to="/">
-                            Online Recipe
-                        </Link>
-                        </div>
+                        
+                    <Link className="navbar-brand" to="/">
+                        <h1 style={{fontStyle:'italic', fontFamily: 'Brush Script MT',fontWeight: 'bolder',fontSize: '30px'}}> Nice Recipe</h1>
+                    </Link>
+                    
                         <button className="navbar-toggler"
                         type="button"
                         data-toggle="collapse"
@@ -78,9 +78,9 @@ export default class userprofile extends Component {
                             <h3 id="uses">Email: {email}</h3>
                                 <ul>
                                    
-                                   <li> <Link to="/chgpassword"><input type="button" className="btn btn-default red" value="Change password"/></Link></li>
+                                   <li> <Link to="/chgpassword"><input type="button" className="btn btn-default red" value="Change password"  data-toggle="modal" data-target="#Photo"/></Link></li>
                                    <li> <Link to={`/update/${id}`}><input type="button" className="btn btn-default gray" value="Edit profile"/></Link></li><br/><br/>
-                                  <li> <Link to={`/img/${id}`}><input type="button" className="btn btn-primary gray" value="Upload image"/></Link></li>
+                                  <li> <Link to={`/profilepicture/${id}`}><input type="button" className="btn btn-primary gray" value="Upload image"/></Link></li>
                                    
                                 </ul>
                                     

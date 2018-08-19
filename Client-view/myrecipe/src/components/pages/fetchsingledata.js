@@ -10,7 +10,7 @@ export default class fetchsingledata extends Component {
         this.state = {
             recipe:null,
             photo:'',
-            ingredients:'',
+            ingredients:[],
             procedure:'',
             author:'',
             id:''
@@ -43,9 +43,9 @@ export default class fetchsingledata extends Component {
         <div>
                 <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                     <div className="container">
-                        <Link className="navbar-brand" to="/">
-                            Online Recipe
-                        </Link>
+                    <Link className="navbar-brand" to="/">
+                        <h1 style={{fontStyle:'italic', fontFamily: 'Brush Script MT',fontWeight: 'bolder',fontSize: '30px'}}> Nice Recipe</h1>
+                    </Link>
                         <button className="navbar-toggler"
                         type="button"
                         data-toggle="collapse"
@@ -63,15 +63,24 @@ export default class fetchsingledata extends Component {
                         </div>
                     </div>
                 </nav>
+                
             <div  className="col-md-6 col-md-offset-2" id="row">
+            <   div>
+                    <h4>{recipe}</h4>
+                    <hr />
+                </div>
+                
                 <div className="card">
                     <div className="card-image">
                         <img src={photo} className="card-img-top"/>
-                        <span className="card-title"><strong>{recipe}</strong></span>
+                        <span className="card-title"><strong><h3>{recipe}</h3></strong></span>
                     </div>
                         <div className="card-content">
-                            <span><strong>Ingredients:</strong></span>
-                            <p className="card-text">{ingredients}</p>
+                            <h4><strong>Ingredients:</strong></h4>
+                            <ul>
+                                <li>{ingredients}</li>
+                            </ul>
+                            
                             <span><strong>Procedure:</strong></span>
                             <p className="card-text">{procedure}</p>
                         </div>

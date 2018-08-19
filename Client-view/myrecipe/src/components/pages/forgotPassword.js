@@ -66,9 +66,7 @@ export default class forgotPassword extends Component {
       </div> */}
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                     <div className="container">
-                        <Link className="navbar-brand" to="/">
-                            Online Recipe
-                        </Link>
+                        <h1 style={{fontStyle:'italic', fontFamily: 'Brush Script MT',fontWeight: 'bolder',fontSize: '30px'}}> Nice Recipe</h1>
                         <button className="navbar-toggler"
                         type="button"
                         data-toggle="collapse"

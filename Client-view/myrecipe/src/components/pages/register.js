@@ -49,7 +49,7 @@ export default class register extends Component {
                 
                 this.props.history.push('/login')
             }
-            document.getElementById('in').style.display='block'
+           // document.getElementById('in').style.display='block'
         })
         .catch(err => console.log(err))
     }
@@ -82,7 +82,7 @@ export default class register extends Component {
                 <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                     <div className="container">
                         <Link className="navbar-brand" to="/">
-                            Online Recipe
+                        <h1 style={{fontStyle:'italic', fontFamily: 'Brush Script MT',fontWeight: 'bolder',fontSize: '30px'}}> Nice Recipe</h1>
                         </Link>
                         <button className="navbar-toggler"
                         type="button"
@@ -109,7 +109,6 @@ export default class register extends Component {
                     </div>
                 </nav>
             
-           
               <div class="container">
                     <div class="row">
                     <div class="col-md-12">

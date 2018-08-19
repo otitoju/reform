@@ -68,7 +68,7 @@ export default class admindashboard extends Component {
             <span class="icon-bar"></span>
           </button>
           <Link className="navbar-brand" to="/">
-                            Classic Recipe administrative site
+          <h1 style={{fontStyle:'italic', fontFamily: 'Brush Script MT',fontWeight: 'bolder',fontSize: '30px'}}> Nice Recipe Admin</h1>
                         </Link>
         </div>
         <div id="navbar" class="collapse navbar-collapse">

@@ -63,7 +63,8 @@ const storage = multer.diskStorage({
 })
 const imageFilter = function(req, file, cb){
     if(!file.originalname.match(/\.(jpeg|jpg|png)$/i)){
-        return cb(new Error('Only image files are allowed'), false)
+        //return cb(new Error('Only image files are allowed'), false)
+        return cb('Only image files are allowed', false)
     }
     else{
         cb(null,true)
@@ -75,31 +76,35 @@ var upload = multer({
 })
 var config = require('./config')
 var cloudinary = require('cloudinary')
-// cloudinary.config({
-//     cloud_name: config.cloud_name,
-//     api_key : config.api_key,
-//     api_secret : config.api_secret
-// })
 cloudinary.config({
-    cloud_name: process.env.cloud_name,
-    api_key : process.env.api_key,
-    api_secret : process.env.api_secret
+    cloud_name: config.cloud_name,
+    api_key : config.api_key,
+    api_secret : config.api_secret
 })
+// cloudinary.config({
+//     cloud_name: process.env.cloud_name,
+//     api_key : process.env.api_key,
+//     api_secret : process.env.api_secret
+// })
 router.put('/img/:id', upload.single('pic'), async(req, res) => {
-    var image = req.file.path
-    const result = await cloudinary.uploader.upload(image)
-    const img =  result.original_filename
-    let imgUrl = result.secure_url
-    let publicId = result.public_id
-    const User = await user.findByIdAndUpdate(req.params.id,{
-        //test:req.body.test,
-        pic:imgUrl
-    }, {new:true})
-    //console.log(img)
-    res.json({
+    if(req.file == undefined || req.file == ''){
+        res.status(403).json({message:`Error: No file selected`})
+    }
+    else{
+        var image = req.file.path
+        const result = await cloudinary.uploader.upload(image)
+        const img =  result.original_filename
+        let imgUrl = result.secure_url
+        let publicId = result.public_id
+        const User = await user.findByIdAndUpdate(req.params.id,{
+            pic:imgUrl
+        }, {new:true})
+        res.json({
         user:User,
+        message:'Success: Picture uploaded successfully'
         //imgUrl:imgUrl
-    })
+        })
+    }
 })
 const env = require('dotenv').config()
 //get all pic
@@ -113,11 +118,12 @@ router.get('/imga', async(req, res)=> {
 // Recipe image
 const recipee = require('../models/recipe')
 router.put('/recipeimage/:id', upload.single('photo'), async(req, res) => {
-    var image = req.file.path
-    if(!image){
+    
+    if(req.file == undefined || req.file == ''){
         res.json({message:`Error: No file selected`})
     }
     else{
+        var image = req.file.path
         const result = await cloudinary.uploader.upload(image)
         const img =  result.original_filename
         let imgUrl = result.secure_url

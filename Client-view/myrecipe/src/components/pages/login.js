@@ -51,11 +51,13 @@ class login extends Component{
             
             //console.log(res.msg)
             this.setState({info:res.message})
-            localStorage.setItem('token', JSON.stringify(res.token));
-            localStorage.setItem('userId', JSON.stringify(res.id))
-            //document.getElementById('in').style.display='block'
+            
+
             if(res.message === 'Login successful'){
+                localStorage.setItem('token', JSON.stringify(res.token));
+                localStorage.setItem('userId', JSON.stringify(res.id))
                 this.props.history.push('/recipe')
+
             } 
             // else if(res.message === 'fill all') {
             //     alert('Please fill in all fields')
@@ -83,7 +85,7 @@ class login extends Component{
               <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                     <div className="container">
                         <Link className="navbar-brand" to="/">
-                            Online Recipe
+                        <h1 style={{fontStyle:'italic', fontFamily: 'Brush Script MT',fontSize: '30px'}}> Nice Recipe</h1>
                         </Link>
                         <button className="navbar-toggler"
                         type="button"
@@ -110,17 +112,19 @@ class login extends Component{
                     </div>
               </nav>
               
-        <div class="container">
+              
+       
+            <section id="main">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-4 col-md-offset-4">
+          <div className="container">
                     <div class="row">
                     <div class="col-md-12">
                         <h1 class="text-center"> User <small>Account Login</small></h1>
                     </div>
                     </div>
-      </div>
-            <section id="main">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4 col-md-offset-4">
+        </div>
                 <div id="in" style={{display:'none'}} className='alert alert-danger' role="alert">*{info}</div>
             <form id="login"  className="well">
                   <div class="form-group">
@@ -147,6 +151,8 @@ class login extends Component{
         </div>
       </div>
     </section>
+    
+
             <div class="preloader-wrapper big active" id="pre">
                 <div class="spinner-layer spinner-blue-only">
                 <div class="circle-clipper left">

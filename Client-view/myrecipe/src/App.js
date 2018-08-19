@@ -27,6 +27,8 @@ import AdminRecipe from './components/pages/adminControlRecipe'
 import adminControlRecipe from './components/pages/adminControlRecipe';
 import deleteRecipe from './components/pages/deleteRecipe';
 import comment from './components/pages/newComment'
+import Particles from 'react-particles-js'
+
 
 
 class App extends Component {
@@ -37,7 +39,7 @@ class App extends Component {
       <div className="App">
           {/* <Navbar /> */}
           <Switch>
-          <Route path="/img/:id" strict exact={true} component={pic}/>
+          <Route path="/profilepicture/:id" strict exact={true} component={pic}/>
           <Route path="/del/:id" strict exact={true} component={deleteRecipe}/>
           <Route path="/createsuperuser" strict exact={true} component={AdminRegister}/>
           <Route path="/comment/:id" strict exact={true} component={comment}/>
@@ -61,6 +63,7 @@ class App extends Component {
           <Route path="/recipe" strict exact={true} component={Recipes}/>
           <Route path="*" exact={true} component={notFound}/>
           </Switch>
+          
       </div>
 
     );

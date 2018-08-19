@@ -79,7 +79,7 @@ export default class createRecipe extends Component {
                     <span class="icon-bar"></span>
                 </button>
                 <Link className="navbar-brand" to="/">
-                            Classic Recipe administrative site
+                <h1 style={{fontStyle:'italic', fontFamily: 'Brush Script MT',fontWeight: 'bolder',fontSize: '30px'}}> Nice Recipe Admin</h1>
                         </Link>
                 </div>
                     <div id="navbar" class="collapse navbar-collapse">
@@ -101,29 +101,7 @@ export default class createRecipe extends Component {
                     </div>
                                 </div>
               </nav>
-          {/* <div className="card" id="head">
-                        <div className="card-action red lighten-1 white-text">
-                            <h3>Create Recipe here</h3>
-                        </div>
-                        <div className="card-content">
-                            <div className="form-field">
-                                <label for="name">Food name</label>
-                                <i className="mdi mdi-email"><input type="text" placeholder="Enter food name" value={this.state.name} onChange={this.handleName}  required/></i>
-                            </div>
-                            <div className="form-field">
-                                <label for="ingredients">Ingredients</label>
-                                <i className="mdi mdi-lock"><textarea id="textarea1" className="materialize-textarea" value={this.state.ingredients} onChange={this.handleIngredients} placeholder="Enter food ingredients"  required/></i>
-                            </div>
-                            <div className="form-field">
-                                <label for="procedure">Procedure</label>
-                                <i className="mdi mdi-lock"><textarea id="textarea1" className="materialize-textarea" value={this.state.procedure} onChange={this.handleProcedure} placeholder="Enter food procedure"  required/></i>
-                            </div>
-                            <input type="date"/>
-                            <div className="form-field">
-                                <input type="submit" className="btn-small red" value="Create" onClick={this.handleCreate}/>
-                            </div>
-                        </div>
-                    </div> */}
+          
                               <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
               <div class="panel-heading main-color-bg">

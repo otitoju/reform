@@ -49,7 +49,7 @@ export default class report extends Component {
   render() {
     return (
       <div>
-        <div className="card hoverable" id="head">
+        <div className="card" id="head">
                         <div className="card-action teal lighten-1 white-text">
                             <h3>Report problem here</h3>
                         </div>

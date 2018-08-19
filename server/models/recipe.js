@@ -4,7 +4,7 @@ const mongoDbErrorHandler = require('mongoose-mongodb-errors');
 const recipeSchema = new mongoose.Schema({
     //id:mongoose.Schema.Types.ObjectId,
     name:String,
-    ingredients:String,
+    ingredients:[{type:String}],
     procedure:String,
     photo:String,
     author:{type:String, ref:'admin'},
