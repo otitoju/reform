@@ -255,7 +255,7 @@ export default class admindashboard extends Component {
         </div>
         <div class="form-group">
           <label>Page Body</label>
-          <textarea name="editor1" class="form-control" placeholder="Page Body"></textarea>
+          <textarea id="editor1" class="ckeditor" placeholder="Page Body"></textarea>
         </div>
         <div class="checkbox">
           <label>
