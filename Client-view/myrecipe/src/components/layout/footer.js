@@ -11,8 +11,8 @@ export default class footer extends Component {
           <p class="copyright footer-logo">
             <i class="fa fa-copyright"></i> Developed with
             <i class="fa fa-heart text-info"></i>&nbsp; by
-            <a href="https://github.com/leksyib">
-              <strong>leksyib</strong>
+            <a href="https://github.com/otitoju">
+              <strong>otitoju</strong>
             </a>
           </p>
           <div class="col-lg-3 col-md-3">

@@ -82,7 +82,8 @@ exports.updateUserProfile = async (req, res) => {
 }
 //get all users
 exports.getAllUser =  async (req, res) => {
-    const allUser = await user.find()
+    const allUser = await user.find().sort({'_id':-1})
+    const total = await allUser.length
     const token = await req.headers['authorization'].split(" ")[1]
     const decode = await jwt.verify(token, adminConfig.adminsecret)
     let name = decode.name
@@ -92,7 +93,8 @@ exports.getAllUser =  async (req, res) => {
         allUser:allUser,
         id:id,
         name:name,
-        email:email
+        email:email,
+        total:total
     })
 }
 

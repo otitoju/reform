@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
 export default class newComment extends Component {
     constructor(){
         super();
         this.state = {
             name:'',
-            comment:''
+            comment:'',
+            text:''
         }
         this.handleClick = this.handleClick.bind(this)
         this.handleComment = this.handleComment.bind(this)
@@ -21,7 +23,8 @@ export default class newComment extends Component {
             },
             body:JSON.stringify({
                 name:this.state.name,
-                comment:this.state.comment
+                comment:this.state.comment,
+                text:this.state.text
             })
         })
         .then(res => res.json())
@@ -38,6 +41,11 @@ export default class newComment extends Component {
             name:e.target.value
         })
     }
+    handleText(e){
+        this.setState({
+            text:e.target.value
+        })
+    }
   render() {
     return (
       <div>
@@ -45,6 +53,7 @@ export default class newComment extends Component {
             <h1>Add new comment here</h1>
             <input type="text" placeholder="Enter your name here" value={this.state.name} onChange={this.handleName}/>
             <input type="text" placeholder="Enter your comment..." value={this.state.comment} onChange={this.handleComment}/>
+            <input type="text" placeholder="Enter your text..." value={this.state.text} onChange={this.handleText.bind(this)}/>
             <button onClick={this.handleClick}>Add</button>
         </div>
       </div>

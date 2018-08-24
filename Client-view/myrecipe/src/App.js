@@ -63,7 +63,7 @@ class App extends Component {
           <Route path="/recipe" strict exact={true} component={Recipes}/>
           <Route path="*" exact={true} component={notFound}/>
           </Switch>
-          
+          <Footer />
       </div>
 
     );

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 import Rcard from './recipe.jpg'
+import './pic.css'
 
 
 export default class fetchsingledata extends Component {
@@ -38,7 +39,7 @@ export default class fetchsingledata extends Component {
     
     
   render() {
-      const {recipe, photo, ingredients, procedure, author, id} = this.state
+      const {recipe, photo, ingredients, procedure, author, id, description} = this.state
     return (
         <div>
                 <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
@@ -64,26 +65,27 @@ export default class fetchsingledata extends Component {
                     </div>
                 </nav>
                 
-            <div  className="col-md-6 col-md-offset-2" id="row">
-            <   div>
+            <div  className="col-md-12 " id="row">
+            <div>
                     <h4>{recipe}</h4>
-                    <hr />
-                </div>
-                
+            </div>  
                 <div className="card">
+                <div  className="col-md-4 col-md-offset-4" >
                     <div className="card-image">
-                        <img src={photo} className="card-img-top"/>
-                        <span className="card-title"><strong><h3>{recipe}</h3></strong></span>
+                        <img src={photo} className="card-img-top" id="imgtag"/>
+                        <span className="card-title"><strong><h3>Description:{description}</h3></strong></span>
                     </div>
+                </div>    
                         <div className="card-content">
-                            <h4><strong>Ingredients:</strong></h4>
                             <ul>
+                                <h4><strong>Ingredients:</strong></h4>
                                 <li>{ingredients}</li>
                             </ul>
                             
-                            <span><strong>Procedure:</strong></span>
+                            <h4><strong>Procedure:</strong></h4>
                             <p className="card-text">{procedure}</p>
                         </div>
+                        
                         <div class="card-footer">
                                     <small class="text-muted">Created by {author}</small>
                                     </div>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
+//import './pic.css'
+
 
 export default class  extends Component {
   constructor(){
@@ -77,7 +79,7 @@ export default class  extends Component {
                 <h3 class="panel-title">Upload image here</h3>
               </div>
               <div  className="card-image">
-                <img src={msg} alt="Preview"  className="card-img-top"/>
+                <img src={msg} alt="Preview"  className="card-img-top" />
                 </div>
                 <div className="card-content">
                 {/* <input type="text" value={this.state.name} onChange={this.handleName}/> */}

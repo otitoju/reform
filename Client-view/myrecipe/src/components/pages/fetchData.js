@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 //import '../css/fetchdata.css'
 import pic from './images.jpg'
 import '../css/Spinner.css'
+import './pic.css'
 
 export default class fetchData extends Component {
     constructor(){

@@ -20,11 +20,13 @@ exports.createRecipe = async (req, res) => {
             name:req.body.name,
             ingredients:req.body.ingredients,
             procedure:req.body.procedure,
-            author:author
+            author:author,
+            description:req.body.description
         })
         res.status(200).json({
             message:'Recipe created',
-            id:Recipe.id
+            id:Recipe.id,
+            recipe:Recipe
         })
     }
 
@@ -32,6 +34,7 @@ exports.createRecipe = async (req, res) => {
 // get all recipe
 exports.getAllRecipe = async (req, res, next) => {
     const allRecipe = await recipe.find().sort({'_id':-1})
+    const total_recipe = await allRecipe.length
     let food_id = allRecipe.id
     const token = await req.headers['authorization'].split(" ")[1];
     const decode = await jwt.verify(token, process.env.secret || config.secret)
@@ -43,7 +46,8 @@ exports.getAllRecipe = async (req, res, next) => {
          name:name,
          id:id,
          email:email,
-         food_id:food_id
+         food_id:food_id,
+         total:total_recipe
         })
 }
 //get single recipe

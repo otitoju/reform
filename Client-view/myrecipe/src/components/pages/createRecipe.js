@@ -10,7 +10,8 @@ export default class createRecipe extends Component {
         this.state = {
             name:"",
             ingredients:'',
-            procedure:''
+            procedure:'',
+            description:''
         }
         this.handleCreate = this.handleCreate.bind(this)
         this.handleName = this.handleName.bind(this)
@@ -31,13 +32,14 @@ export default class createRecipe extends Component {
             body:JSON.stringify({
                 name:this.state.name,
                 ingredients:this.state.ingredients,
-                procedure:this.state.procedure
+                procedure:this.state.procedure,
+                description:this.state.description
             })
         })
         .then(res => res.json())
         .then(res => {
             //alert(res.message)
-
+            console.log(res)
             if(res.message === 'Recipe created'){
                 const id = res.id
                 localStorage.setItem('recipeId', JSON.stringify(res.id))
@@ -68,6 +70,9 @@ export default class createRecipe extends Component {
     handleCheck(e){
         const pro = document.getElementById('editor1')
         alert(pro)
+    }
+    handleDescription(e){
+        this.setState({description:e.target.value})
     }
 
   render() {
@@ -120,15 +125,15 @@ export default class createRecipe extends Component {
                   </div>
                   <div class="form-group">
                     <label>Food Ingredients</label>
-                    <textarea id="editor1" class="ckeditor" value={this.state.ingredients} onChange={this.handleIngredients} placeholder="Enter food ingredients" />    
+                    <textarea id="editor1"  value={this.state.ingredients} onChange={this.handleIngredients} placeholder="Enter food ingredients" />    
                   </div>
                   <div class="form-group">
                     <label>Food Procedure</label>
-                    <textarea id="editor1" class="ckeditor" value={this.state.procedure} onChange={this.handleProcedure} placeholder="Enter food procedure" />    
+                    <textarea id="editor1"  value={this.state.procedure} onChange={this.handleProcedure} placeholder="Enter food procedure" />    
                   </div>
                   <div class="form-group">
                     <label>Food Description</label>
-                    <input type="text" class="form-control" placeholder="Add some Description..."/>
+                    <input type="text" class="form-control" placeholder="Add some Description..." value={this.state.description} onChange={this.handleDescription.bind(this)}/>
                   </div>
                   <input type="submit" class="btn btn-danger" value="Create" onClick={this.handleCreate}/>
                   <input type="submit" class="btn btn-danger" value="Check" onClick={this.handleCheck.bind(this)}/>

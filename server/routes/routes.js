@@ -7,6 +7,8 @@ const admin = require('../controllers/admincontroller')
 const adminVerify = require('../controllers/adminverify')
 const recipecontroller = require('../controllers/recipecontroller')
 const { catchErrors } = require('../handlers/errorhandler')
+const commentRouter = express.Router({mergeParams: true})
+const commentcontroller = require('../controllers/commentcontroller')
 
 const user = require('../models/user')
 const bodyParser = require('body-parser');
@@ -16,8 +18,7 @@ const path = require('path')
 const pic = require('../models/pics')
 
 router.get('/log', usercontroller.Login)
-//router.get('/reg/:token',verifyToken, usercontroller.registerUser)
-//router.get('/postrecipe', recipecontroller.create)
+
 
 //USER ROUTES
 router.post('/reg', usercontroller.admincreateUser)
@@ -42,7 +43,7 @@ router.get('/recipe/get/:id', recipecontroller.getSingleRecipe)
 router.put('/recipe/update/:id', recipecontroller.updateRecipe)
 router.delete('/recipe/delete/:id', recipecontroller.deleteRecipe)
 router.get('/search', recipecontroller.fuzzySearch )
-router.post('/comment', recipecontroller.createNewComment)
+//router.post('/comment', recipecontroller.createNewComment)
 
 //Auth routes
 router.put('/reset/:email', authcontroller.resetPassword)
@@ -50,6 +51,9 @@ router.post('/forgot', authcontroller.forgotPassword)
 router.post('/report', authcontroller.reportIssues)
 router.post('/register', authcontroller.register)
 router.get('/decode', authcontroller.getToken)
+
+//comment routes
+router.post('/comment/:id', catchErrors(commentcontroller.createNewComment))
 
 
 

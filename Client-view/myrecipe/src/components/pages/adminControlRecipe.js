@@ -77,15 +77,17 @@ export default class adminControlRecipe extends Component {
           <div className="card-deck">
         <div  class="col-md-4 col-md-offset-4">
         {allRecipe.map(res => {
-            const {_id,name, ingredients, procedure, photo, author} = res
+            const {_id,name, ingredients, procedure, photo, author, description} = res
             return <div className="card" key={_id}>
                     <img src={photo} className="card-img-top"  alt="food image"/>
                 <div className="card-body">
                     <h5 className="card-title"><strong>{name}</strong></h5>
                         <ul >
                         <h4>posted by {author}</h4>
+                        <p className="card-text"> <strong>Description:</strong> {description}</p>
                         <p className="card-text"><strong>Ingredients:</strong> {ingredients}</p>
                         <p className="card-text"> <strong>Procedure:</strong> {procedure}</p>
+                        
                         </ul>
                 <Link to={`del/${_id}`}><button className="btn btn-danger"  >Delete</button></Link>
                 </div>

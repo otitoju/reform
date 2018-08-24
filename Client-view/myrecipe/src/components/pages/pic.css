@@ -1,0 +1,10 @@
+img{
+    background-image: url("recipe.jpg");
+    background-size: 400px;
+    background-repeat: no-repeat
+}
+#imgtag{
+    background-image: url("recipe.jpg");
+    background-size: 700px;
+    background-repeat: no-repeat
+}
