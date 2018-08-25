@@ -41,20 +41,23 @@ exports.getAllRecipe = async (req, res, next) => {
     let name = await decode.name
     let id = await decode.id
     let email = await decode.email
+    
 
     res.json({recipe:allRecipe,
          name:name,
          id:id,
          email:email,
          food_id:food_id,
-         total:total_recipe
+         total:total_recipe,
         })
 }
 //get single recipe
 exports.getSingleRecipe = async (req, res) => {
     const singleRecipe = await recipe.findById(req.params.id)
+    //let comment = await singleRecipe.comments[0].text
     res.json({
-        recipe:singleRecipe
+        recipe:singleRecipe,
+        //text:comment
     })
     
 }
