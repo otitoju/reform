@@ -17,9 +17,10 @@ export default class resetpassword extends Component {
     handlePassword(e){this.setState({password:e.target.value})}
     handleSecret(e){this.setState({secret:e.target.value})}
     handleConfirm(e){this.setState({confirm:e.target.value})}
-    handleReset(e){
+
+    handleReset(e, email){
         e.preventDefault()
-        fetch('/reset/:email', {
+        fetch(`/reset/${email}`, {
             method:'post',
             headers:{
                 'Accept':'application/json',
@@ -38,27 +39,25 @@ export default class resetpassword extends Component {
   render() {
     return (
       <div>
-        <div className="card hoverable" id="reset">
-                <div className="card-action teal lighten-1 white-text">
-                    <h3>Reset password</h3>
+        <div className="container">
+                <div className="title">
+                    <h1 className="text-center"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Reset password</h1>
                 </div>
-                <div className="card-content">
-                    <div className="form-field">
+                    <div className="form-group">
                         <label for="password">New password</label>
-                        <i className="mdi mdi-lock"><input type="password" placeholder="Enter your new password" value={this.state.password} onChange={this.handlePassword}/></i>
+                        <i className="mdi mdi-lock"><input type="password" placeholder="Enter your new password" value={this.state.password} onChange={this.handlePassword}  className="form-control"/></i>
                     </div>
-                    <div className="form-field">
+                    <div className="form-group">
                         <label for="password">Confirm password</label>
-                        <i className="mdi mdi-lock"><input type="password" placeholder="Confirm your new password" value={this.state.confirm} onChange={this.handleConfirm}/></i>
+                        <i className="mdi mdi-lock"><input type="password" placeholder="Confirm your new password" value={this.state.confirm} onChange={this.handleConfirm}  className="form-control"/></i>
                     </div>
-                    <div className="form-field">
+                    <div className="form-group">
                         <label for="secret">Secret</label>
-                        <i className="mdi mdi-security"><input type="text" placeholder="Enter the secret value you choose during registration" value={this.state.secret} onChange={this.handleSecret}/></i>
+                        <i className="mdi mdi-security"><input type="text" placeholder="Enter the secret value you choose during registration" value={this.state.secret} onChange={this.handleSecret}  className="form-control"/></i>
                     </div>
                     <div className="form-field">
-                        <button className="btn-large waves-effect" onClick={this.handleReset}>Reset</button>
+                        <button className="btn btn-primary" onClick={this.handleReset} btn-block>Reset</button>
                     </div>
-                </div>
             </div>
       </div>
     )

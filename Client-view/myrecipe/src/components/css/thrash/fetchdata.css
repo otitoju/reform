@@ -1,0 +1,57 @@
+#row{
+    margin: 0 auto;
+    padding-top: 100px;
+}
+#username{
+    float: right;
+    font-size: 20px;
+    margin-right: 30px;  
+}
+
+#buttons #logout{
+    float: right;
+    margin-right: 15px;
+    visibility: hidden;
+}
+#buttons #view{
+    float: right;
+    margin-right: 15px;
+    visibility: hidden;
+}
+#pres{
+    visibility: hidden;
+}
+h3{
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+h4{
+    font-family: Courier New, Courier, monospace;
+}
+#time{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif
+}
+@media (max-width: 650px) {
+    #buttons #logout{
+        float: right;
+        margin-right: 15px;
+        visibility: visible;
+        width: 20px;
+    }
+    #buttons #view{
+        float: right;
+        margin-right: 15px;
+        visibility: visible;
+    } 
+}
+@media (max-width: 350px) {
+    h3{
+        font-size: 14px;
+        text-align: center
+    }
+    #LCard{
+        margin: auto;
+        width: 250px;
+        margin-top: 5%
+    }
+}

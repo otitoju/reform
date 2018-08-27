@@ -5,25 +5,28 @@ export default class newComment extends Component {
     constructor(){
         super();
         this.state = {
-            name:'',
-            comment:'',
-            text:''
+            text:null
         }
         this.handleClick = this.handleClick.bind(this)
-        this.handleComment = this.handleComment.bind(this)
-        this.handleName = this.handleName.bind(this)
+        // this.handleComment = this.handleComment.bind(this)
+        // this.handleName = this.handleName.bind(this)
+        this.handleText = this.handleText.bind(this)
+    }
+    componentDidMount(){
+        const token = JSON.parse(localStorage.getItem('token'))
     }
     handleClick(e){
+        const token = JSON.parse(localStorage.getItem('token'))
+        const id = JSON.parse(localStorage.getItem('userId'))
         e.preventDefault()
-        fetch('/comment', {
+        fetch(`/comment/${id}`, {
             method:'POST',
             headers:{
                 'Accept':'application/json',
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body:JSON.stringify({
-                name:this.state.name,
-                comment:this.state.comment,
                 text:this.state.text
             })
         })
@@ -31,16 +34,16 @@ export default class newComment extends Component {
         .then(res => console.log(res))
         .catch(err => console.log(err))
     }
-    handleComment(e){
-        this.setState({
-            comment:e.target.value
-        })
-    }
-    handleName(e){
-        this.setState({
-            name:e.target.value
-        })
-    }
+    // handleComment(e){
+    //     this.setState({
+    //         comment:e.target.value
+    //     })
+    // }
+    // handleName(e){
+    //     this.setState({
+    //         name:e.target.value
+    //     })
+    // }
     handleText(e){
         this.setState({
             text:e.target.value
@@ -51,10 +54,8 @@ export default class newComment extends Component {
       <div>
         <div>
             <h1>Add new comment here</h1>
-            <input type="text" placeholder="Enter your name here" value={this.state.name} onChange={this.handleName}/>
-            <input type="text" placeholder="Enter your comment..." value={this.state.comment} onChange={this.handleComment}/>
-            <input type="text" placeholder="Enter your text..." value={this.state.text} onChange={this.handleText.bind(this)}/>
-            <button onClick={this.handleClick}>Add</button>
+            <input type="text" placeholder="Enter your text..." value={this.state.text} onChange={this.handleText}/>
+            <button onClick={this.handleClick} data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Add</button>
         </div>
       </div>
     )

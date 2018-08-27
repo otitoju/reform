@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 import { Link } from 'react-router-dom'
-import '../css/login.css'
+//import '../css/login.css'
 //import '../css/MaterialDesign-Webfont-master/css/materialdesignicons.min.css'
 //import '../css/materialize.min.css'
 // import Navbar from '../layout/Navbar'
@@ -121,7 +121,7 @@ class login extends Component{
           <div className="container">
                     <div class="row">
                     <div class="col-md-12">
-                        <h1 class="text-center"> User <small>Account Login</small></h1>
+                        <h1 class="text-center"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> User <small>Account Login</small></h1>
                     </div>
                     </div>
         </div>

@@ -1,0 +1,49 @@
+#profile{
+    margin: auto;
+    width: 50%;
+    height: 500px;
+    margin-top: 5%;
+    padding: 10px;
+}
+#pic{
+    margin: auto;
+    width: 30%;
+    height: 200px;
+    
+}
+#Pbtn{
+    margin-bottom: 5px
+}
+img{
+    height: 200px;
+    width:200px;
+}
+#contain{
+    left: 40%;
+    position: relative;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+@media (max-width: 850px) {
+    #profile{
+        width:350px;
+        margin: auto;
+        margin-top:5%;
+    }
+    #pic{
+        margin: auto;
+        width: 50%;
+        height: 200px;
+    }
+}
+@media (max-width: 350px) {
+    #profile{
+        width:300px;
+        margin: auto;
+        margin-top:5%;
+    }
+    #pic{
+        margin: auto;
+        width: 50%;
+        height: 200px;
+    }
+}

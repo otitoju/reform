@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 //import '../css/fetchdata.css'
 import pic from './images.jpg'
-import '../css/Spinner.css'
 import './pic.css'
 
 export default class fetchData extends Component {
@@ -14,7 +13,7 @@ export default class fetchData extends Component {
             isLoading:true,
             search:''
         }
-        this.handleView = this.handleView.bind(this)
+        //this.handleView = this.handleView.bind(this)
         this.logout = this.logout.bind(this)
         this.viewProfile = this.viewProfile.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
@@ -36,21 +35,21 @@ export default class fetchData extends Component {
         .then(res => console.log(res))
         .catch(err => console.log(err))
     }
-    handleView(e){
-        e.preventDefault()
-        const token = JSON.parse(localStorage.getItem('token'))
-        fetch('/recipe/get/:id', {
-            headers:{
-                'Accept':'application/json',
-                'Content-Type':'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+    // handleView(e){
+    //     e.preventDefault()
+    //     const token = JSON.parse(localStorage.getItem('token'))
+    //     fetch('/recipe/get/:id', {
+    //         headers:{
+    //             'Accept':'application/json',
+    //             'Content-Type':'application/json',
+    //             'Authorization': `Bearer ${token}`
+    //         }
 
-        })
-        .then(res => res.json())
-        .then(result => (result))
-        .catch(err => console.log(err))
-    }
+    //     })
+    //     .then(res => res.json())
+    //     .then(result => (result))
+    //     .catch(err => console.log(err))
+    // }
     
     componentDidMount(){
         //"proxy":"https://rocky-atoll-10994.herokuapp.com/"

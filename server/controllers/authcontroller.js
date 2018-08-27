@@ -193,39 +193,44 @@ exports.forgotPassword = (req, res) => {
 //RESET PASSWORD
 exports.resetPassword = (req, res) => {
     const hashpassword = bcrypt.hashSync(req.body.password,10)
-    user.findOne({email:req.params.email, resetexpires:{$gt:Date.now()}}, req.body, {new: true}, (err, user) => {
-        if (!user){
-            res.status(401).json({
-                message:'Invalid email address or email session has expired, please check and try again'
-            })
-        }
-        else {
-            if(req.body.password === req.body.confirm && user.secret === req.body.secret){
-                user.password = hashpassword;
-                user.save()
-            var transport = nodemailer.createTransport({
-                service:'Gmail',
-                auth:{
-                    user:'otitojuoluwapelumi@gmail.com',
-                    pass:process.env.GMAILPASS
-                }
-            })
-            var mailOptions = {
-                from:'otitojuoluwapelumi@gmail.com',
-                to:user.email,
-                subject:'Password reset',
-                html:'<p>Your password has been change to '+req.body.password
-            }
-            
-            }
-            else{
-                res.json({
-                    message:'passwords do not match'
+    if(!req.body.password || !req.body.confirm || !req.body.secret){
+        res.status(403).json({message:`Error: Empty field`})
+    }
+    else{
+        user.findOne({email:req.params.email, resetexpires:{$gt:Date.now()}}, req.body, {new: true}, (err, user) => {
+            if (!user){
+                res.status(401).json({
+                    message:'Invalid email address or email session has expired, please check and try again'
                 })
             }
-            
-        }
-    } )
+            else {
+                if(req.body.password === req.body.confirm && user.secret === req.body.secret){
+                    user.password = hashpassword;
+                    user.save()
+                var transport = nodemailer.createTransport({
+                    service:'Gmail',
+                    auth:{
+                        user:'otitojuoluwapelumi@gmail.com',
+                        pass:process.env.GMAILPASS
+                    }
+                })
+                var mailOptions = {
+                    from:'otitojuoluwapelumi@gmail.com',
+                    to:user.email,
+                    subject:'Password reset',
+                    html:'<p>Your password has been change to '+req.body.password
+                }
+                
+                }
+                else{
+                    res.json({
+                        message:'passwords do not match'
+                    })
+                }
+                
+            }
+        } )
+    }
 }
 exports.pagenotfound = (req, res)=>{
     res.json({message:`page not found`})

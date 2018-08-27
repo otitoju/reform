@@ -1,0 +1,20 @@
+#forgot{
+    margin: auto;
+    width: 50%;
+    margin-top: 5%
+}
+
+@media (max-width: 650px) {
+    #forgot{
+        margin: auto;
+        width: 350px;
+        margin-top: 5%
+    } 
+}
+@media (max-width: 350px) {
+    #forgot{
+        margin: auto;
+        width: 320px;
+        margin-top: 5%
+    } 
+}

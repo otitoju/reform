@@ -1,0 +1,39 @@
+
+#Lcard{
+    margin: auto;
+    width: 50%;
+    margin-top: 5%
+}
+#pre{
+    visibility: hidden;
+}
+#pred{
+    visibility: hidden;
+}
+
+
+
+
+@media (max-width: 650px) {
+    h3{
+        font-size: 20px;
+        text-align: center;
+    }
+    #LCard{
+        margin: auto;
+        width: 450px;
+        margin-top: 5%
+    }
+}
+@media (max-width: 350px) {
+    h3{
+        font-size: 14px;
+        text-align: center
+    }
+    #LCard{
+        margin: auto;
+        width: 300px;
+        margin-top: 5%;
+        
+    }
+}

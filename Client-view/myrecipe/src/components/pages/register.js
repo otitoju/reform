@@ -112,7 +112,7 @@ export default class register extends Component {
               <div class="container">
                     <div class="row">
                     <div class="col-md-12">
-                        <h1 class="text-center"> Create Account Here</h1>
+                        <h1 class="text-center"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Create Account Here</h1>
                     </div>
                     </div>
                 </div>
@@ -123,15 +123,15 @@ export default class register extends Component {
           <div id="in" style={{display:'none'}} class="alert alert-danger" role="alert">{info}</div>
             <form id="login"  class="well">
             <div class="form-group">
-                    <label>Fullname</label>
+                    <label>Name</label>
                     <input type="text" className="form-control" placeholder="Enter Name" value={this.state.name} onChange={this.handleName} required/>
                   </div>
                   <div class="form-group">
-                    <label>Email Address</label>
+                    <label>Email Address(*Mongodb@gmail.com)</label>
                     <input type="email" className="form-control" placeholder="Enter Email" value={this.state.email} onChange={this.handleEmail} required/>
                   </div>
                   <div class="form-group">
-                    <label>Password</label>
+                    <label>Password(*Atleast 8 characters)</label>
                     <input type="password" className="form-control" placeholder="Password"  value={this.state.password} onChange={this.handlePassword} required/>
                   </div>
                   <div class="form-group">

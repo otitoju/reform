@@ -7,7 +7,10 @@ export default class admindashboard extends Component {
   constructor(){
     super()
     this.state = {
-      username:''
+      username:'',
+      totalRecipe:'',
+      totalUsers:'',
+      latestUsers:[]
     }
     this.viewUser = this.viewUser.bind(this)
     this.createRecipe = this.createRecipe.bind(this)
@@ -35,7 +38,28 @@ export default class admindashboard extends Component {
         })
         .catch(err => console.log(err))
       }
+
+      fetch('/ctrlrecipe', {
+                    
+        headers:{
+            'Accept':'application/json',
+            'Content-Type':'application/json',
+           
+        }
+    })
+    .then(res => res.json())
+    .then(res =>{
+     // console.log(res)
+        this.setState({totalRecipe:res.total})
+        this.setState({totalUsers:res.users})
+        this.setState({latestUsers:res.limit})
+    })
+    .catch(err => console.log(err))
+
+
     }
+
+
     logout(){
       localStorage.removeItem('AdminToken')
       localStorage.removeItem('recipeId')
@@ -54,10 +78,10 @@ export default class admindashboard extends Component {
     }
     
   render() {
-    const { username } = this.state
+    const { username, totalRecipe, totalUsers, latestUsers } = this.state
     return (
       <div>
-        <nav className="navbar navbar-expand-sm navbar-default bg mb-4">
+                <nav className="navbar navbar-expand-sm navbar-default bg mb-4">
                     <div className="container">
                         
                         <div class="navbar-header">
@@ -70,33 +94,37 @@ export default class admindashboard extends Component {
           <Link className="navbar-brand" to="/">
           <h1 style={{fontStyle:'italic', fontFamily: 'Brush Script MT',fontWeight: 'bolder',fontSize: '30px'}}> Nice Recipe Admin</h1>
                         </Link>
+                        
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Dashboard</a></li>
-            <li><Link className="nav-link" to="/">
-                                    Visit site
-                                    </Link></li>
-            <li><Link className="nav-link" to="/profile">
-                                        Profile
-                                    </Link></li>
-            <li><a href="users.html">Welcome, {username}</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-  
-            <li onClick={this.logout}><Link  to="/admin">
+        
+        <div className="collapse navbar-collapse" id="navbar">
+                            <ul className="navbar-nav ml-auto">
+                                <li className="nav-item" >
+                                    <Link className="nav-link" to="/profile">
+                                    Welcome, {username}
+                                    </Link>
+                                </li>
+                                <li className="nav-item"  onClick={this.logout}>
+                                    <Link className="nav-link" to="/admin">
                                     Logout
-                                    </Link></li>
-          </ul>
-        </div>
+                                    </Link>
+                                </li>
+                                {/* <li onClick={this.logout} className="nav-item"><Link  to="/admin">
+                                        Logout
+                                </Link></li> */}
+                            </ul>
+                        
+                        </div>
+
                     </div>
-              </nav>
+        </nav>
+
        
-<header id="header">
+    <header id="header">
       <div class="container">
         <div class="row">
           <div class="col-md-10">
-            <h1><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard <small>Manage Your Site</small></h1>
+            <h1><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard <small>Explore Site</small></h1>
           </div>
           <div class="col-md-2">
             <div class="dropdown create">
@@ -132,27 +160,11 @@ export default class admindashboard extends Component {
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard
               </a>
               
-              <a href="pages.html" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Pages <span class="badge">12</span></a>
               <h5 className="list-group-item" onClick={this.viewUser}><span class="glyphicon glyphicon-user" aria-hidden="true"></span> users</h5>
               <h5 className="list-group-item" onClick={this.createRecipe}><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>new recipe</h5>
               <h5 className="list-group-item" onClick={this.deleteRecipe}>}><span class="glyphicon glyphicon-delete" aria-hidden="true"></span>Delete recipe</h5>
-              <a href="/admin" class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Users <span class="badge">203</span></a>
             </div>
 
-            <div class="well">
-              <h4>Disk Space Used</h4>
-              {/* <div class="progress">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                      60%
-              </div>
-            </div> */}
-            <h4>Bandwidth Used </h4>
-            {/* <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-                    40%
-            </div>
-          </div> */}
-            </div>
           </div>
           <div class="col-md-9">
             
@@ -160,29 +172,18 @@ export default class admindashboard extends Component {
               <div class="panel-heading main-color-bg">
                 <h3 class="panel-title">Website Overview</h3>
               </div>
-              <div class="panel-body">
-                <div class="col-md-3">
-                  <div class="well dash-box">
-                    <h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 203</h2>
+              <div className="panel-body">
+                <div className="col-md-6">
+                  <div className="well dash-box">
+                    <h2><span className="glyphicon glyphicon-user" aria-hidden="true"></span> {totalUsers}</h2>
                     <h4>Users</h4>
                   </div>
                 </div>
-                <div class="col-md-3">
+                
+                <div class="col-md-6">
                   <div class="well dash-box">
-                    <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 12</h2>
-                    <h4>Pages</h4>
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="well dash-box">
-                    <h2><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 33</h2>
-                    <h4>Posts</h4>
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="well dash-box">
-                    <h2><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> 12,334</h2>
-                    <h4>Visitors</h4>
+                    <h2><span className="glyphicon glyphicon-pencil" aria-hidden="true"></span> {totalRecipe}</h2>
+                    <h4>Recipes</h4>
                   </div>
                 </div>
               </div>
@@ -195,36 +196,26 @@ export default class admindashboard extends Component {
                 </div>
                 <div class="panel-body">
                   <table class="table table-striped table-hover">
-                      <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Joined</th>
-                      </tr>
-                      <tr>
-                        <td>Jill Smith</td>
-                        <td>jillsmith@gmail.com</td>
-                        <td>Dec 12, 2016</td>
-                      </tr>
-                      <tr>
-                        <td>Eve Jackson</td>
-                        <td>ejackson@yahoo.com</td>
-                        <td>Dec 13, 2016</td>
-                      </tr>
-                      <tr>
-                        <td>John Doe</td>
-                        <td>jdoe@gmail.com</td>
-                        <td>Dec 13, 2016</td>
-                      </tr>
-                      <tr>
-                        <td>Stephanie Landon</td>
-                        <td>landon@yahoo.com</td>
-                        <td>Dec 14, 2016</td>
-                      </tr>
-                      <tr>
-                        <td>Mike Johnson</td>
-                        <td>mjohnson@gmail.com</td>
-                        <td>Dec 15, 2016</td>
-                      </tr>
+                  <thead>
+                                <th>
+                                    NAME
+                                </th>
+                                <th>
+                                    EMAIL
+                                </th>
+                                
+                                
+                            </thead>
+                            
+                            <tbody>
+                              {latestUsers.map(res => {
+                                const {_id, name,email, gender, phone} = res
+                                return <tr key={_id}>
+                                  <td><b>{name}</b></td>
+                                    <td><b>{email}</b></td>
+                                </tr>
+                              })}
+                            </tbody>
                     </table>
                 </div>
               </div>
@@ -234,7 +225,7 @@ export default class admindashboard extends Component {
     </section>
 
     <footer id="footer">
-      <p>Copyright AdminStrap, &copy; 2017</p>
+      <p>Copyright Nice Recipe, &copy; 2018 and forever</p>
     </footer>
 
    

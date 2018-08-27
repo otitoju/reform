@@ -5,15 +5,16 @@ const user = require('../models/user');
 const config = require('../config/config')
 const admin = require('../models/admin')
 const adminConfig = require('../config/adminconfig')
-//const gib = require('../gib')
-
-//const userExist = user.email
-
 
 
 exports.admincreateUser = async (req, res) => {
     const body = req.body;
     const hashpassword = bcrypt.hashSync(req.body.password,10);
+    const validEmail = await user.findOne({email:req.body.email})
+    const name = body.name.toUpperCase().trim()
+    const secret = body.secret.toUpperCase().trim()
+    const email = body.email.toUpperCase().trim()
+    const phone = body.phone.trim()
 
     if (!body.name || !body.email || !body.password || !body.secret || !body.phone || !body.gender) {
         res.status(403).json({
@@ -29,6 +30,12 @@ exports.admincreateUser = async (req, res) => {
         res.status(403).json({
             message:`Password must be more than 7`
         })
+    }
+    else if(validEmail){
+        res.status(403).json({message:`Email already exist`})
+    }
+    else if(phone.length > 11){
+         res.status(403).json({message:`phone number is too long`})
     }
     else {
         const User = await user.create({
@@ -55,18 +62,6 @@ exports.getSingleUser = async (req, res) => {
 }
 //update user profile
 exports.updateUserProfile = async (req, res) => {
-    //const token = await req.headers['authorization'].split(" ")[1]
-    //const decode = await jwt.verify(token, config.secret)
-    //const update = await user.findByIdAndUpdate(req.params.id, req.body, {new:true})
-    // let id = decode.id
-    // let name = decode.name
-    // let email = decode.email
-    // res.status(200).json({
-    //     message:'updated',
-    //     id:id
-    // })
-    //console.log('hello')
-
     user.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, user) => {
         if (err) {
             res.status(500).send("There was a problem updating the user.");
@@ -128,6 +123,7 @@ exports.Login = (req, res) =>{
 }
 //user login
 exports.userLogin = (req, res) => {
+    const email = req.body.email.toUpperCase().trim()
     if(!req.body.email || !req.body.password){
         res.status(403).json({
             message:'please fill all required field'

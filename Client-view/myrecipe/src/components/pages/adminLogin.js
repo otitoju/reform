@@ -61,7 +61,7 @@ export default class adminLogin extends Component {
   render() {
     return (
       <div>
-                  <nav className="navbar navbar-expand-sm navbar-default bg mb-4">
+        <nav className="navbar navbar-expand-sm navbar-default bg mb-4">
                     <div className="container">
                         
                         <div class="navbar-header">
@@ -95,7 +95,7 @@ export default class adminLogin extends Component {
                         </div>
 
                     </div>
-              </nav>
+        </nav>
 
           {/* <form>
                     <div className="card" id="Lcard">
@@ -133,14 +133,15 @@ export default class adminLogin extends Component {
             <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h1 class="text-center"> Admin <small>Account Login</small></h1>
+            
           </div>
         </div>
       </div>
-                <section id="main">
+    <section id="main">
       <div class="container">
         <div class="row">
           <div class="col-md-4 col-md-offset-4">
+          <h1 class="text-center"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Admin <small>Account Login</small></h1>
             <form id="login" class="well">
                   <div class="form-group">
                     <label>Username</label>

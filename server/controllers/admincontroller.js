@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const config = require('../config/adminconfig')
 const admin = require('../models/admin')
 const recipe = require('../models/recipe')
+const user = require('../models/user')
 
 
 //CREATE ADMIN SUPERUSER
@@ -79,10 +80,18 @@ exports.getAdminUsername = async (req, res) => {
         username:username
     })
 }
-//upload image
 
 //admin control recipe
 exports.ctrlRecipe = async(req, res) => {
     const Recipe = await recipe.find().sort({'_id':-1})
-    res.json({message:Recipe})
+    const totalRecipe = await Recipe.length
+    const Limit = await user.find().sort({'_id':-1}).limit(4)
+    const Users = await user.find().sort({'_id':-1})
+    const totalUser = await Users.length
+    res.json({message:Recipe,
+         total:totalRecipe,
+        users:totalUser,
+        info:Users,
+        limit:Limit
+        })
 }

@@ -4,7 +4,10 @@ export default class footer extends Component {
   render() {
     return (
       <div>
-        <div class="footer">
+        <footer id="footer">
+      <p>Copyright NiceRecipe, &copy; 2018 and forever</p>
+    </footer>
+        {/* <div class="footer">
         <br/>
         <div class="row">
           <div class="col-lg-4 col-md-4"></div>
@@ -21,7 +24,7 @@ export default class footer extends Component {
           <div class="col-lg-3 col-md-3">
           </div>
         </div>
-      </div>
+      </div> */}
       </div>
     )
   }

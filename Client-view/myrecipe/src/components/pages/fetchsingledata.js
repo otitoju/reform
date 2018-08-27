@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 import Rcard from './recipe.jpg'
+//import '../css/Spinner.css'
 import './pic.css'
 
 
@@ -14,7 +15,8 @@ export default class fetchsingledata extends Component {
             ingredients:[],
             procedure:'',
             author:'',
-            id:''
+            id:'',
+            isLoading:false
         }
         this.getSingleRecipe = this.getSingleRecipe.bind(this)
     }
@@ -39,7 +41,7 @@ export default class fetchsingledata extends Component {
     
     
   render() {
-      const {recipe, photo, ingredients, procedure, author, id, description} = this.state
+      const {recipe, photo, ingredients, procedure, author, id, description, isLoading} = this.state
     return (
         <div>
                 <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
@@ -64,7 +66,7 @@ export default class fetchsingledata extends Component {
                         </div>
                     </div>
                 </nav>
-                
+                {isLoading && <div className='Loader' id="load">Loading...</div>}
             <div  className="col-md-12 " id="row">
             <div>
                     <h4>{recipe}</h4>

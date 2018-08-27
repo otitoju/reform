@@ -21,13 +21,11 @@ export default class forgotPassword extends Component {
     }
     handleForgot(e){
         e.preventDefault()
-        const token = JSON.parse(localStorage.getItem('token'))
         fetch('/forgot', {
             method:'post',
             headers:{
                 'Accept':'application/json',
                 'Content-Type':'application/json',
-                'Authorization':`Bearer ${token}`
             },
             body:JSON.stringify({
                 email:this.state.email,
@@ -75,27 +73,27 @@ export default class forgotPassword extends Component {
                         </button>
                     </div>
                 </nav>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h1 class="text-center"> Forgot password</h1>
+      <div  className="container">
+        <div  className="row">
+          <div  className="col-md-12">
+            <h1 className="text-center"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Forgot password</h1>
           </div>
         </div>
       </div>
       <section id="main">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4 col-md-offset-4">
-            <form id="login" action="index.html" class="well">
-                  <div class="form-group">
+      <div className="container">
+        <div  className="row">
+          <div className="col-md-4 col-md-offset-4">
+            <form id="login" class="well">
+                  <div  className="form-group">
                     <label>Email Address</label>
-                    <input type="text" class="form-control" placeholder="Enter Email" required value={this.state.email} onChange={this.handleEmail}/>
+                    <input type="text" className="form-control" placeholder="Enter Email" required value={this.state.email} onChange={this.handleEmail}/>
                   </div>
                   <div class="form-group">
                     <label>Secret</label>
-                    <input type="text" class="form-control" placeholder="secret" required value={this.state.secret} onChange={this.handleSecret}/>
+                    <input type="text"  className="form-control" placeholder="secret" required value={this.state.secret} onChange={this.handleSecret}/>
                   </div>
-                  <button type="submit" class="btn btn-primary btn-block" onClick={this.handleForgot}>Send</button>
+                  <button type="submit" className="btn btn-primary btn-block" onClick={this.handleForgot}>Send</button>
               </form>
           </div>
         </div>

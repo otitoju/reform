@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import '../css/bootstrap.min.css'
-import '../css/recipe.css'
+//import '../css/recipe.css'
 
 
 export default class createRecipe extends Component {
@@ -115,7 +115,7 @@ export default class createRecipe extends Component {
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
               <div class="panel-heading main-color-bg">
-                <h3 class="panel-title">Create Recipe Here</h3>
+                <h3 class="panel-title"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Create Recipe Here</h3>
               </div>
               <div class="panel-body">
                 <form>
@@ -135,8 +135,8 @@ export default class createRecipe extends Component {
                     <label>Food Description</label>
                     <input type="text" class="form-control" placeholder="Add some Description..." value={this.state.description} onChange={this.handleDescription.bind(this)}/>
                   </div>
-                  <input type="submit" class="btn btn-danger" value="Create" onClick={this.handleCreate}/>
-                  <input type="submit" class="btn btn-danger" value="Check" onClick={this.handleCheck.bind(this)}/>
+                  <input type="submit" class="btn btn-danger btn-block" value="Create" onClick={this.handleCreate}/>
+                  <input type="submit" class="btn btn-danger btn-block" value="Check" onClick={this.handleCheck.bind(this)} />
                 </form>
               </div>
               </div>

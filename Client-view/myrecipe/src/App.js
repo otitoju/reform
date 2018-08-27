@@ -45,7 +45,7 @@ class App extends Component {
           <Route path="/comment/:id" strict exact={true} component={comment}/>
           <Route path="/ctrlrecipe" strict exact={true} component={AdminRecipe}/>
           <Route path="/post/:id" strict exact={true} component={Single}/>
-          <Route path="/reset" strict exact={true} component={Reset}/>
+          <Route path="/reset/:email" strict exact={true} component={Reset}/>
           <Route path="/userprofile" strict exact={true} component={userprofile}/>
           <Route path="/users" strict exact={true} component={Alluser}/>
           <Route path="/adminhome" strict exact={true} component={Admindashboard}/>
@@ -63,7 +63,7 @@ class App extends Component {
           <Route path="/recipe" strict exact={true} component={Recipes}/>
           <Route path="*" exact={true} component={notFound}/>
           </Switch>
-          <Footer />
+          {/* <Footer /> */}
       </div>
 
     );

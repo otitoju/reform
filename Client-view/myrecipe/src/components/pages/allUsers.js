@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
-import '../css/allusers.css'
+//import '../css/allusers.css'
 
 export default class allUsers extends Component {
     constructor(){
@@ -65,6 +65,7 @@ export default class allUsers extends Component {
                   </nav>
         <h1>All users</h1>
         <fragment>
+        <div class="container">
             <table className="table table-condensed table-bordered">
                             <thead>
                                 <th>
@@ -110,6 +111,7 @@ export default class allUsers extends Component {
                 </tbody>
                 
             </table>
+            </div>
             </fragment>
       </div>
     )

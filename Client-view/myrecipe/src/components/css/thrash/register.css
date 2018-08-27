@@ -1,0 +1,57 @@
+
+.jumbotron .form-group #name, #password, #email {
+border:none;
+border-bottom: 1px solid rgb(92, 40, 40);
+/* background:transparent; */
+/* outline: none; */
+height: 40px;
+color:black;
+font-size: 16px;
+}
+.jumbotron .form-group #secret {
+border:none;
+border-bottom: 1px solid rgb(92, 40, 40);
+/* background:transparent;
+outline: none; */
+height: 40px;
+color:black;
+font-size: 16px;
+}
+label{
+    margin:0;
+    padding: 0;
+    font-weight: bold;
+    float: left;
+}
+#cards{
+    width:50%;
+    margin: auto;
+    margin-top:5%;
+}
+h3{
+    text-align: center
+}
+#butt{
+    float: center;
+}
+#info{
+ font-size: 20px;
+ transition: height 5s ease-in-out;
+}
+@media (max-width: 650px) {
+    #bodi{
+       margin:auto;
+       width:300px;
+    }
+    h3{
+        font-size: 20px;
+        text-align: center
+    }
+    #cards{
+        width:50%;
+        margin:0 auto;
+    }
+    
+  }
+
+  

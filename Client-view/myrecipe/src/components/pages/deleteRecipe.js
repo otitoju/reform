@@ -23,8 +23,7 @@ handleDelete(id){
     return (
       <div>
           <h2>You have delete the selected recipe successfully</h2>
-          {/* <h2>Proceed to delete recipe here...</h2>
-          <button className="btn btn-large" onClick={this.handleDelete}>delete</button> */}
+         
       </div>
     )
   }

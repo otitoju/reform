@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
-import '../css/changepassword.css'
+//import '../css/changepassword.css'
 
 export default class changepassword extends Component {
   render() {
@@ -34,7 +34,7 @@ export default class changepassword extends Component {
         <div  className="col-md-4 col-md-offset-4">
         <div className="card" >
                 <div className="card-title">
-                    <h3>Change password</h3>
+                    <h3><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Change password</h3>
                 </div>
                 <div class="container">
                 <form>
