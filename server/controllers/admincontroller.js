@@ -89,9 +89,9 @@ exports.ctrlRecipe = async(req, res) => {
     const Users = await user.find().sort({'_id':-1})
     const totalUser = await Users.length
     res.json({message:Recipe,
-         total:totalRecipe,
-        users:totalUser,
-        info:Users,
-        limit:Limit
+            total:totalRecipe,
+            users:totalUser,
+            info:Users,
+            limit:Limit
         })
 }
