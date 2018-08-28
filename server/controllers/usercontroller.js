@@ -5,7 +5,7 @@ const user = require('../models/user');
 const config = require('../config/config')
 const admin = require('../models/admin')
 const adminConfig = require('../config/adminconfig')
-
+const nodemailer = require('nodemailer')
 
 exports.admincreateUser = async (req, res) => {
     const body = req.body;
@@ -38,17 +38,41 @@ exports.admincreateUser = async (req, res) => {
          res.status(403).json({message:`phone number is too long`})
     }
     else {
-        const User = await user.create({
-            name:body.name,
-            email:body.email,
-            password:hashpassword,
-            secret:body.secret,
-            gender:req.body.gender,
-            phone:req.body.phone
+
+        var transport = nodemailer.createTransport({
+            service:'Gmail',
+            auth:{
+                user:'otitojuoluwapelumi@gmail.com',
+                pass:''
+            }
         })
-        res.json({
-            message:`Registration successful`,
-            user:User
+        var mailOptions = {
+            from:'otitojuoluwapelumi@gmail.com',
+            to:req.body.email,
+            subject:'Nice Recipe Welcome Team',
+            html:'<p>Dear, '+req.body.name +'you are welcome to Nice Recipe where you can find all exciting food in the world'+'</p>'
+        }
+        transport.sendMail(mailOptions, (err) => {
+            if (err) {
+                res.status(403).json({
+                    message:'Request failed, please check your network settings and try again'
+                })
+            }
+            else{
+                const User =  user.create({
+                    name:body.name,
+                    email:body.email,
+                    password:hashpassword,
+                    secret:body.secret,
+                    gender:req.body.gender,
+                    phone:req.body.phone
+                })
+                res.json({
+                    message:`Registration successful`,
+                    user:User
+                }) 
+            }
+            
         })
     }
 }

@@ -163,7 +163,7 @@ exports.forgotPassword = (req, res) => {
                         from:'otitojuoluwapelumi@gmail.com',
                         to:req.body.email,
                         subject:'Password Recovery',
-                        html:'<p>You requested for reset password and it will expire in 1hour time, please follow this link to reset your password http://'+req.headers.host+'/reset/'+req.body.email+'</p>'
+                        html:'<p>You requested for reset password and it will expire in 1hour time, please follow this link to reset your password http://'+'localhost:3000'+'/reset/'+req.body.email+'</p>'
                     }
                     transport.sendMail(mailOptions, (err) => {
                         if (err) {
@@ -211,7 +211,7 @@ exports.resetPassword = (req, res) => {
                     service:'Gmail',
                     auth:{
                         user:'otitojuoluwapelumi@gmail.com',
-                        pass:process.env.GMAILPASS
+                        pass:process.env.GMAIL_PASS
                     }
                 })
                 var mailOptions = {
