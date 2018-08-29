@@ -18,8 +18,8 @@ export default class resetpassword extends Component {
     handleSecret(e){this.setState({secret:e.target.value})}
     handleConfirm(e){this.setState({confirm:e.target.value})}
 
-    handleReset(e, email){
-        e.preventDefault()
+    handleReset( email){
+        //e.preventDefault()
         fetch(`/reset/${email}`, {
             method:'post',
             headers:{

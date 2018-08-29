@@ -23,6 +23,10 @@ img{
     position: relative;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+ul li{
+    list-style: none;
+    display: inline
+}
 @media (max-width: 850px) {
     #profile{
         width:350px;

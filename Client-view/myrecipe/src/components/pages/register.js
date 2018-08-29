@@ -49,7 +49,7 @@ export default class register extends Component {
                 
                 this.props.history.push('/login')
             }
-           // document.getElementById('in').style.display='block'
+            document.getElementById('in').style.display='block'
         })
         .catch(err => console.log(err))
     }

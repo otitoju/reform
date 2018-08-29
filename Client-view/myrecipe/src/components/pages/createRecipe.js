@@ -121,15 +121,15 @@ export default class createRecipe extends Component {
                 <form>
                   <div class="form-group">
                     <label>Food Name</label>
-                    <input type="text" class="form-control" placeholder="Food name"  value={this.state.name} onChange={this.handleName}  required/>
+                    <input type="text" className="form-control" placeholder="Food name"  value={this.state.name} onChange={this.handleName}  required/>
                   </div>
                   <div class="form-group">
                     <label>Food Ingredients</label>
-                    <textarea id="editor1"  value={this.state.ingredients} onChange={this.handleIngredients} placeholder="Enter food ingredients" />    
+                    <textarea id="editor1"  value={this.state.ingredients} onChange={this.handleIngredients} placeholder="Enter food ingredients"  className="form-control"/>    
                   </div>
                   <div class="form-group">
                     <label>Food Procedure</label>
-                    <textarea id="editor1"  value={this.state.procedure} onChange={this.handleProcedure} placeholder="Enter food procedure" />    
+                    <textarea id="editor1"  value={this.state.procedure} onChange={this.handleProcedure} placeholder="Enter food procedure"  className="form-control"/>    
                   </div>
                   <div class="form-group">
                     <label>Food Description</label>

@@ -13,7 +13,7 @@ export default class fetchData extends Component {
             isLoading:true,
             search:''
         }
-        //this.handleView = this.handleView.bind(this)
+
         this.logout = this.logout.bind(this)
         this.viewProfile = this.viewProfile.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
@@ -35,21 +35,6 @@ export default class fetchData extends Component {
         .then(res => console.log(res))
         .catch(err => console.log(err))
     }
-    // handleView(e){
-    //     e.preventDefault()
-    //     const token = JSON.parse(localStorage.getItem('token'))
-    //     fetch('/recipe/get/:id', {
-    //         headers:{
-    //             'Accept':'application/json',
-    //             'Content-Type':'application/json',
-    //             'Authorization': `Bearer ${token}`
-    //         }
-
-    //     })
-    //     .then(res => res.json())
-    //     .then(result => (result))
-    //     .catch(err => console.log(err))
-    // }
     
     componentDidMount(){
         //"proxy":"https://rocky-atoll-10994.herokuapp.com/"
@@ -106,12 +91,12 @@ export default class fetchData extends Component {
                         data-target="#navbarNav">
                             <span className="navbar-toggler-icon"/>
                         </button>
-                        <form className="form-inline" onSubmit={this.handleSearch} method="GET">
+                        {/* <form className="form-inline" onSubmit={this.handleSearch} method="GET">
                             <div className="form-group">
                                 <input type="text" className="form-control" placeholder="Search recipe name" value={this.state.search} onChange={this.handleText}/>
                                 <input type="submit" className="btn btn-primary" value="Search" />
                             </div>
-                        </form>
+                        </form> */}
                         <div className="collapse navbar-collapse" id="navbarNav">
                             <ul className="navbar-nav ml-auto">
                                 <li className="nav-item">
@@ -141,11 +126,10 @@ export default class fetchData extends Component {
         </nav>
        {isLoading && <div className='Loader' id="load">Loading...</div>}
             <h1 className="card-title">Recipes</h1>
-           
         <div className="card-deck">
             <div  className="col-md-4 col-md-offset-4">
                     {allRecipe.map(rec => {
-                        const {_id,name, ingredients, procedure, photo, author, time} = rec
+                        const {_id, name, ingredients, procedure, photo, author, time} = rec
                         return <div className="card" key={_id}>
                                 <img src={photo} className="card-img-top"  alt="food image"/>
                                 <div className="card-body">
@@ -164,7 +148,7 @@ export default class fetchData extends Component {
                 
                 
             </div>
-            </div>
+        </div>
       </div>
     )
   }

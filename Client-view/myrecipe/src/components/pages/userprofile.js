@@ -78,9 +78,9 @@ export default class userprofile extends Component {
                             <h3 id="uses">Email: {email}</h3>
                                 <ul>
                                    
-                                   <li> <Link to="/chgpassword"><input type="button" className="btn btn-default red" value="Change password"  data-toggle="modal" data-target="#Photo"/></Link></li>
-                                   <li> <Link to={`/update/${id}`}><input type="button" className="btn btn-default gray" value="Edit profile"/></Link></li><br/><br/>
-                                  <li> <Link to={`/profilepicture/${id}`}><input type="button" className="btn btn-primary gray" value="Upload image"/></Link></li>
+                                   <li> <Link to="/chgpassword"><input type="button" className="btn btn-danger" value="Change password"  data-toggle="modal" data-target="#Photo"/></Link></li>
+                                   <li> <Link to={`/update/${id}`}><input type="button" className="btn btn-default" value="Edit profile"/></Link></li><br/><br/>
+                                  <li> <Link to={`/profilepicture/${id}`}><input type="button" className="btn btn-primary" value="Upload image"/></Link></li>
                                    
                                 </ul>
                                     
