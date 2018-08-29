@@ -6,6 +6,7 @@ const config = require('../config/config')
 const admin = require('../models/admin')
 const adminConfig = require('../config/adminconfig')
 const nodemailer = require('nodemailer')
+const emailExistence = require('email-existence')
 
 exports.admincreateUser = async (req, res) => {
     const body = req.body;
@@ -38,27 +39,12 @@ exports.admincreateUser = async (req, res) => {
          res.status(403).json({message:`phone number is too long`})
     }
     else {
-
-        var transport = nodemailer.createTransport({
-            service:'Gmail',
-            auth:{
-                user:'otitojuoluwapelumi@gmail.com',
-                pass:''
-            }
-        })
-        var mailOptions = {
-            from:'otitojuoluwapelumi@gmail.com',
-            to:req.body.email,
-            subject:'Nice Recipe Welcome Team',
-            html:'<p>Dear, '+req.body.name +'you are welcome to Nice Recipe where you can find all exciting food in the world'+'</p>'
-        }
-        transport.sendMail(mailOptions, (err) => {
-            if (err) {
-                res.status(403).json({
-                    message:'Request failed, please check your network settings or email and try again'
-                })
-            }
-            else{
+        emailExistence.check(req.body.email, function(error, response){
+            console.log('res: '+response);
+            if(response == false){
+                res.json({message:'You have entered an invalid email address'})
+            }else{
+                //res.json({message:'valid'})
                 const User =  user.create({
                     name:body.name,
                     email:body.email,
@@ -72,8 +58,9 @@ exports.admincreateUser = async (req, res) => {
                     user:User
                 }) 
             }
-            
-        })
+        });
+
+        
     }
 }
 //get single user from the database
