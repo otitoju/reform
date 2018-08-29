@@ -55,7 +55,7 @@ exports.admincreateUser = async (req, res) => {
         transport.sendMail(mailOptions, (err) => {
             if (err) {
                 res.status(403).json({
-                    message:'Request failed, please check your network settings and try again'
+                    message:'Request failed, please check your network settings or email and try again'
                 })
             }
             else{
