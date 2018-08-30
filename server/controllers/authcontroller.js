@@ -134,7 +134,7 @@ exports.reportIssues = (req, res) => {
     })
 }
 
-//FORGOT PASSWORD
+//FORGOT PASSWORD link
 exports.forgotPassword = (req, res) => {
     if(!req.body.email || !req.body.secret){
         res.status(401).json({
