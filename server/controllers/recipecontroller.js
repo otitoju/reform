@@ -66,7 +66,7 @@ exports.updateRecipe = async (req, res) => {
     const update = await recipe.findByIdAndUpdate(req.params.id, req.body, {new:true})
     res.json(update)
 }
-//delete recipe
+//delete recipes
 exports.deleteRecipe = async (req, res) => {
     const removeRecipe = await recipe.findByIdAndRemove(req.params.id)
     res.json(removeRecipe)
