@@ -123,23 +123,23 @@ export default class register extends Component {
           <div id="in" style={{display:'none'}} class="alert alert-danger" role="alert">{info}</div>
             <form id="login"  class="well">
             <div class="form-group">
-                    <label>Name</label>
+                    <label><i class="glyphicon glyphicon-user"></i> Name</label>
                     <input type="text" className="form-control" placeholder="Enter Name" value={this.state.name} onChange={this.handleName} required/>
                   </div>
                   <div class="form-group">
-                    <label>Email Address(*Mongodb@gmail.com)</label>
+                    <label><i class="glyphicon glyphicon-envelope"></i> Email Address(*Mongodb@gmail.com)</label>
                     <input type="email" className="form-control" placeholder="Enter Email" value={this.state.email} onChange={this.handleEmail} required/>
                   </div>
                   <div class="form-group">
-                    <label>Password(*Atleast 8 characters)</label>
+                    <label><i class="glyphicon glyphicon-lock"></i> Password(*Atleast 8 characters)</label>
                     <input type="password" className="form-control" placeholder="Password"  value={this.state.password} onChange={this.handlePassword} required/>
                   </div>
                   <div class="form-group">
-                    <label>Secret</label>
+                    <label><i class="glyphicon glyphicon-qrcode"></i> Secret</label>
                     <input type="text" className="form-control" placeholder="Enter any safe word" value={this.state.secret} onChange={this.handleSecret} required/>
                   </div>
                   <div class="form-group">
-                    <label>Gender</label>
+                    <label><i class="glyphicon glyphicon-children"></i> Gender</label>
                     <select  className="form-control" value={this.state.gender} onChange={this.handleGender}>
                         <option>--select gender--</option>
                         <option>male</option>
@@ -147,10 +147,10 @@ export default class register extends Component {
                     </select>
                   </div>
                   <div class="form-group">
-                    <label>Phone number</label>
+                    <label><i class="glyphicon glyphicon-phone"></i> Phone number</label>
                     <input type="phone" className="form-control" placeholder="Enter phone number" required value={this.state.phone} onChange={this.handlePhone}/>
                   </div>
-                  <button type="submit" class="btn btn-primary btn-block" onClick={this.handleSubmit} id="send">Signup</button>
+                  <button type="submit" class="btn btn-primary btn-block" onClick={this.handleSubmit} id="send"><i class="glyphicon glyphicon-send"></i> Signup</button>
               </form>
           </div>
         </div>

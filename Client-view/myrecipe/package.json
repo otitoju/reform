@@ -20,5 +20,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy":"https://rocky-atoll-10994.herokuapp.com/"
+  "proxy": "http://localhost:2000/"
 }

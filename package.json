@@ -24,6 +24,7 @@
     "cloudinary": "^1.11.0",
     "dotenv": "^6.0.0",
     "ejs": "^2.6.1",
+    "email-existence": "^0.1.6",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.2.2",
     "localStorage": "^1.0.3",

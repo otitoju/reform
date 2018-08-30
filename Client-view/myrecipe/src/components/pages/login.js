@@ -128,14 +128,14 @@ class login extends Component{
                 <div id="in" style={{display:'none'}} className='alert alert-danger' role="alert">*{info}</div>
             <form id="login"  className="well">
                   <div class="form-group">
-                    <label>Email Address</label>
+                    <label><i class="glyphicon glyphicon-envelope"></i> Email Address</label>
                     <input type="email" className="form-control" placeholder="Enter Email"  value={this.state.email} onChange={this.handleEmail} required id="mail"/>
                   </div>
                   <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Password" value={this.state.password} onChange={this.handlePassword} required id="pass"/>
+                    <label><i class="glyphicon glyphicon-lock"></i> Password</label>
+                    <input type="password" className="form-control glyphicon glyphicon-lock" placeholder="Password" value={this.state.password} onChange={this.handlePassword} required id="pass"/>
                   </div>
-                  <button type="submit" className="btn btn-primary btn-block" onClick={this.handleSubmit} id="send">Login</button>
+                  <button type="submit" className="btn btn-primary btn-block" onClick={this.handleSubmit} id="send"><i class="glyphicon glyphicon-send"></i> Login</button>
                   <div className="form-group">
                             <Link to="/forgot">
                             <label>Forgot your password?</label>
@@ -147,6 +147,7 @@ class login extends Component{
                             </Link>
                             </div>
               </form>
+              
           </div>
         </div>
       </div>
