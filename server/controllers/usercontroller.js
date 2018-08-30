@@ -40,7 +40,7 @@ exports.admincreateUser = async (req, res) => {
     }
     else {
         emailExistence.check(req.body.email, function(error, response){
-            console.log('res: '+response);
+            //console.log('res: '+response);
             if(response == false){
                 res.json({message:'You have entered an invalid email address'})
             }else{

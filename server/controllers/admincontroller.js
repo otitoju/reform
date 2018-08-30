@@ -5,25 +5,37 @@ const config = require('../config/adminconfig')
 const admin = require('../models/admin')
 const recipe = require('../models/recipe')
 const user = require('../models/user')
+const emailExistence = require('email-existence')
 
 
 //CREATE ADMIN SUPERUSER
 exports.createSuperUser =async (req, res) => {
     const hashpassword = bcrypt.hashSync(req.body.password,10)
+    const validEmail = await admin.findOne({email:req.body.email})
     if(req.body.username == '' || req.body.email == '' || req.body.password == ''){
         res.status(403).json({
             message:'Please fill in all inputs'
         })
     }
+    else if(validEmail){
+        res.status(403).json({message:`Email already exist`})
+    }
     else{
-        const Admin = await admin.create({
-            username:req.body.username,
-            password:hashpassword,
-            email:req.body.email
-        })
-        res.status(200).json({
-            message:`registered`,
-            Admin:Admin
+        emailExistence.check(req.body.email, function(error, response){
+            if(response == false){
+                res.json({message:'You have entered an invalid email address'})
+            }
+            else{
+                const Admin = await admin.create({
+                    username:req.body.username,
+                    password:hashpassword,
+                    email:req.body.email
+                })
+                res.status(200).json({
+                    message:`registered`,
+                    Admin:Admin
+                })
+            }
         })
     }
     
