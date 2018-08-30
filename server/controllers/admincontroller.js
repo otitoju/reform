@@ -26,7 +26,7 @@ exports.createSuperUser =async (req, res) => {
                 res.json({message:'You have entered an invalid email address'})
             }
             else{
-                const Admin = await admin.create({
+                const Admin =  admin.create({
                     username:req.body.username,
                     password:hashpassword,
                     email:req.body.email
