@@ -75,19 +75,23 @@ exports.deleteRecipe = async (req, res) => {
 function escapeRegex(text){
     return text.replace(/[-[\]{}()*+?.,\\^$|#\$]/g, "\\$&")
 }
-exports.fuzzySearch =  (req, res) => {
-    if(req.query.search){
-        var regex = new RegExp(escapeRegex(req.query.search, 'gi'))
-        recipe.find({name: regex}, (err, result) => {
-            if(err){
-                res.json({message:'Unable to complete seach'})
-            }
-            else{
-                res.json(result)
-            }
-        })
+exports.fuzzySearch = async (req, res) => {
+    const text = req.body.text
+    const search = await new RegExp(text, 'i')
+    if(!text){
+        res.status(400).json({message:`You have search for an empty field`})
     }
-    
+    else{
+        const result = await recipe.find( {name:search} )
+        if(result == ''){
+            res.json({message:`No record found, ${result.length} matches `})
+        }
+        else{
+            res.json({info:result,
+                match:`${result.length} matches`
+            })
+        }
+    }
 }
 //Add comments
 exports.createNewComment = (req, res) => {

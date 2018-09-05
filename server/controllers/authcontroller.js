@@ -109,7 +109,7 @@ exports.reportIssues = (req, res) => {
         service:'Gmail',
         auth:{
             user:'otitojuoluwapelumi@gmail.com',
-            pass:'sci15csc067@'
+            pass:''
         }
     })
     const mailOptions = {
@@ -156,7 +156,7 @@ exports.forgotPassword = (req, res) => {
                         service:'Gmail',
                         auth:{
                             user:'otitojuoluwapelumi@gmail.com',
-                            pass:'sci15csc067@'
+                            pass:''
                         }
                     })
                     var mailOptions = {
@@ -211,7 +211,7 @@ exports.resetPassword = (req, res) => {
                     service:'Gmail',
                     auth:{
                         user:'otitojuoluwapelumi@gmail.com',
-                        pass:'sci15csc067@'
+                        pass:''
                     }
                 })
                 var mailOptions = {
