@@ -53,6 +53,7 @@ exports.getAllRecipe = async (req, res, next) => {
 }
 //get single recipe
 exports.getSingleRecipe = async (req, res) => {
+    //const token = await req.headers['authorization'].split(" ")[1];
     const singleRecipe = await recipe.findById(req.params.id)
     //let comment = await singleRecipe.comments[0].text
     res.json({

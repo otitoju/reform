@@ -39,7 +39,7 @@ router.get('/ctrlrecipe', adminVerify, admin.ctrlRecipe)
 //Recipe routes
 router.post('/recipe', adminVerify, recipecontroller.createRecipe)
 router.get('/recipe/get', verifyToken, recipecontroller.getAllRecipe)
-router.get('/recipe/get/:id', verifyToken, recipecontroller.getSingleRecipe)
+router.get('/recipe/get/:id', recipecontroller.getSingleRecipe)
 router.put('/recipe/update/:id', adminVerify, recipecontroller.updateRecipe)
 router.delete('/recipe/delete/:id', adminVerify, recipecontroller.deleteRecipe)
 router.post('/search', recipecontroller.fuzzySearch )
