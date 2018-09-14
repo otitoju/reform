@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 //import '../css/fetchdata.css'
 import pic from './images.jpg'
 import './pic.css'
+import moment from 'moment'
 
 export default class fetchData extends Component {
     constructor(){
@@ -136,7 +137,7 @@ export default class fetchData extends Component {
                                     <h5 className="card-title"><strong>{name}</strong></h5>
                                         <ul>
                                             <h4 className="card-text">posted by {author}</h4>
-                                            <p className="card-text">time: {time}</p>
+                                            <p className="card-text">time: {moment(time).format("Do MMMM YYYY, h:mm:ss a")}</p>
                                         </ul>
                                     <Link to={`post/${_id}`}><button className="btn btn-primary" >View</button></Link>
                                    </div> 

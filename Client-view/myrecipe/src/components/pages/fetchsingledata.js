@@ -21,7 +21,8 @@ export default class fetchsingledata extends Component {
         this.getSingleRecipe = this.getSingleRecipe.bind(this)
     }
     getSingleRecipe(id){
-         axios.get(`/recipe/get/${id}`)
+        const token = JSON.parse(localStorage.getItem('token'))
+          axios.get(`/recipe/get/${id}`, token)
         .then(res =>{
             console.log(res)
             this.setState({recipe:res.data.recipe.name,
@@ -34,9 +35,16 @@ export default class fetchsingledata extends Component {
         } )
         .catch(err => console.log(err))
     }
-    componentDidMount = () => {
+    componentDidMount = (id) => {
+
+
       const recipe = this.getSingleRecipe(this.props.match.params.id)
       this.setState({recipe})
+      const token = JSON.parse(localStorage.getItem('token'));
+            if(!token){
+                this.props.history.push('/')
+            }
+            
     }
     
     

@@ -54,10 +54,10 @@ export default class updateprofiles extends Component {
             .then(res => console.log(res))
             // .then(res =>{
             //     alert(res.message)
-            //     this.setState({
-            //         id:res.id
-            //     })
-            //})
+            //     // this.setState({
+            //     //     id:res.id
+            //     // })
+            // })
             .catch(err => console.log(err))
              
 

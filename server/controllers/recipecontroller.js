@@ -64,8 +64,16 @@ exports.getSingleRecipe = async (req, res) => {
 }
 //update recipes
 exports.updateRecipe = async (req, res) => {
-    const update = await recipe.findByIdAndUpdate(req.params.id, req.body, {new:true})
-    res.json(update)
+    const update = await recipe.findOne({_id:req.params.id})
+    if(!update){
+        res.status(404).json({message:'no recipe found'})
+    }
+    update.name = req.body.name || update.name
+    update.ingredients = req.body.ingredients || update.ingredients
+    update.procedure = req.body.procedure || update.procedure
+    update.description = req.body.description || update.description
+    await update.save()
+    res.json({message:'updated'})
 }
 //delete recipes
 exports.deleteRecipe = async (req, res) => {

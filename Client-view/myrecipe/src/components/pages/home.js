@@ -15,7 +15,7 @@ export default class home extends Component {
                         <button className="navbar-toggler"
                         type="button"
                         data-toggle="collapse"
-                        data-target="#navbarNav">
+                        data-target="#navbarNav">{}
                             <span className="navbar-toggler-icon"/>
                         </button>
                         <div className="collapse navbar-collapse" id="navbarNav">

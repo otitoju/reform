@@ -73,18 +73,21 @@ exports.getSingleUser = async (req, res) => {
 }
 //update user profile
 exports.updateUserProfile = async (req, res) => {
-    user.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, user) => {
-        if (err) {
-            res.status(500).send("There was a problem updating the user.");
-        }
-        else {
-            res.status(200).send({
-                message:'Updated',
-               // user:user
-            });
-        }
-        
-    })  
+    const info = await user.findOne({_id: req.params.id})
+    if(!info){
+        res.status(404).json({
+            message:`user not found`
+        })
+    }
+    else{
+        info.name = req.body.name || info.name
+        info.email = req.body.email || info.email
+        info.secret = req.body.secret || info.secret
+        await info.save()
+        res.status(200).json({
+            message:'user profile updated'
+        })
+    }
 }
 //get all users
 exports.getAllUser =  async (req, res) => {
