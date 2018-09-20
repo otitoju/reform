@@ -43,7 +43,8 @@ export default class register extends Component {
         })
         .then(res => res.json())
         .then(res => {
-           // alert(res.message)
+            console.log(res)
+           //alert(res.message)
             this.setState({info:res.message})
             if(res.message === `Registration successful`){
                 
@@ -150,7 +151,7 @@ export default class register extends Component {
                     <label><i class="glyphicon glyphicon-phone"></i> Phone number</label>
                     <input type="phone" className="form-control" placeholder="Enter phone number" required value={this.state.phone} onChange={this.handlePhone}/>
                   </div>
-                  <button type="submit" class="btn btn-primary btn-block" onClick={this.handleSubmit} id="send"><i class="glyphicon glyphicon-send"></i> Signup</button>
+                  <button type="submit" class="btn btn-primary btn-block" onClick={this.handleSubmit} id="sender"><i class="glyphicon glyphicon-send"></i> Signup</button>
               </form>
           </div>
         </div>

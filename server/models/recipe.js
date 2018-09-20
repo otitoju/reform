@@ -11,10 +11,23 @@ const recipeSchema = new mongoose.Schema({
     time:{type:Date, default:Date.now()},
     comments: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "comment"
+            text:{type:String},
+            date:{type:Date, default:Date.now()},
+            created_by:{type:String}
+            // type: mongoose.Schema.Types.ObjectId,
+            // ref: "comment"
         }
     ]
 })
 recipeSchema.plugin(mongoDbErrorHandler)
 module.exports = mongoose.model('recipe', recipeSchema)
+const recipe = module.exports = mongoose.model('recipe', recipeSchema)
+
+module.exports.addComment = function(query, comment, callback){
+    recipe.update(query, {
+        $push:{
+            comments: comment
+        }
+    }, callback)
+
+}

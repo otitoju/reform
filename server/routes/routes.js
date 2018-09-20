@@ -43,6 +43,8 @@ router.get('/recipe/get/:id', recipecontroller.getSingleRecipe)
 router.put('/recipe/update/:id',  recipecontroller.updateRecipe)
 router.delete('/recipe/delete/:id',  recipecontroller.deleteRecipe)
 router.post('/search', recipecontroller.fuzzySearch )
+router.post('/comment/:id', recipecontroller.addNewComment)
+router.get('/del/:id', recipecontroller.removeComment)
 //router.post('/comment', recipecontroller.createNewComment)
 
 //Auth routes

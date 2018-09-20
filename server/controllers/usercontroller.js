@@ -39,6 +39,18 @@ exports.admincreateUser = async (req, res) => {
          res.status(403).json({message:`phone number is too long`})
     }
     else {
+        // const User =  user.create({
+        //     name:body.name,
+        //     email:body.email,
+        //     password:hashpassword,
+        //     secret:body.secret,
+        //     gender:req.body.gender,
+        //     phone:req.body.phone
+        // })
+        // res.json({
+        //     message:`Registration successful`,
+        //     user:User
+        // }) 
         emailExistence.check(req.body.email, function(error, response){
             //console.log('res: '+response);
             if(response == false){
@@ -137,7 +149,7 @@ exports.Login = (req, res) =>{
 }
 //user login
 exports.userLogin = (req, res) => {
-    const email = req.body.email.toUpperCase().trim()
+    //const email = req.body.email.toUpperCase().trim()
     if(!req.body.email || !req.body.password){
         res.status(403).json({
             message:'please fill all required field'

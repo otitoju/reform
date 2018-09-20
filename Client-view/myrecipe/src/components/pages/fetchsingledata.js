@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import Rcard from './recipe.jpg'
 //import '../css/Spinner.css'
 import './pic.css'
+import moment from 'moment'
 
 
 export default class fetchsingledata extends Component {
@@ -16,7 +17,9 @@ export default class fetchsingledata extends Component {
             procedure:'',
             author:'',
             id:'',
-            isLoading:false
+            isLoading:false,
+            comment:[],
+            totalComment:''
         }
         this.getSingleRecipe = this.getSingleRecipe.bind(this)
     }
@@ -30,14 +33,14 @@ export default class fetchsingledata extends Component {
             ingredients:res.data.recipe.ingredients,
             procedure:res.data.recipe.procedure,
             author:res.data.recipe.author,
-            id:res.data.recipe._id
+            id:res.data.recipe._id,
+            comment:res.data.recipe.comments,
+            totalComment:res.data.comment
             })
         } )
         .catch(err => console.log(err))
     }
     componentDidMount = (id) => {
-
-
       const recipe = this.getSingleRecipe(this.props.match.params.id)
       this.setState({recipe})
       const token = JSON.parse(localStorage.getItem('token'));
@@ -48,8 +51,9 @@ export default class fetchsingledata extends Component {
     }
     
     
+    
   render() {
-      const {recipe, photo, ingredients, procedure, author, id, description, isLoading} = this.state
+      const {recipe, photo, ingredients, procedure, author, id, description, isLoading, comment, totalComment} = this.state
     return (
         <div>
                 <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
@@ -77,7 +81,7 @@ export default class fetchsingledata extends Component {
                 {isLoading && <div className='Loader' id="load">Loading...</div>}
             <div  className="col-md-12 " id="row">
             <div>
-                    <h4>{recipe}</h4>
+                    <h4>{recipe} has {totalComment} comment</h4>
             </div>  
                 <div className="card">
                 <div  className="col-md-4 col-md-offset-4" >
@@ -102,6 +106,19 @@ export default class fetchsingledata extends Component {
                 </div>
                 <div className="jumbotron">
                 <Link to={`/comment/${id}`}><button>Add comment</button></Link>
+                {comment.map(res => {
+                    const {text, _id, created_by, date}= res
+                    return <div className="row">
+                        <div class="col-md-12">
+                        <strong>{created_by}</strong>
+                        <span class="pull-right">{moment(date).format("Do MMMM YYYY, h:mm:ss a")}</span>
+                        <p>
+                            {text}
+                        </p>
+                        </div>
+                    
+                    </div>
+                })}
             </div>
             </div>
             

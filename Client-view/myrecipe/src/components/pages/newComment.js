@@ -5,7 +5,7 @@ export default class newComment extends Component {
     constructor(){
         super();
         this.state = {
-            text:null
+            text:''
         }
         this.handleClick = this.handleClick.bind(this)
         // this.handleComment = this.handleComment.bind(this)
@@ -17,7 +17,7 @@ export default class newComment extends Component {
     }
     handleClick(e){
         const token = JSON.parse(localStorage.getItem('token'))
-        const id = JSON.parse(localStorage.getItem('userId'))
+        const id = JSON.parse(localStorage.getItem('recipeId'))
         e.preventDefault()
         fetch(`/comment/${id}`, {
             method:'POST',
@@ -31,7 +31,10 @@ export default class newComment extends Component {
             })
         })
         .then(res => res.json())
-        .then(res => console.log(res))
+        .then(res =>{
+            console.log(res)
+            alert(res.message)
+        })
         .catch(err => console.log(err))
     }
     // handleComment(e){
@@ -52,11 +55,22 @@ export default class newComment extends Component {
   render() {
     return (
       <div>
-        <div>
-            <h1>Add new comment here</h1>
-            <input type="text" placeholder="Enter your text..." value={this.state.text} onChange={this.handleText}/>
-            <button onClick={this.handleClick} data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Add</button>
-        </div>
+         <div class="container">
+         <div class="row">
+             <div style={{width:'30%', margin:'25px auto'}}>
+             <h1 style={{textAlign:'center'}}>Add a new comment to post</h1>
+                     <div class="form-group">
+                         <input  type="text" class="form-control"  value={this.state.text} onChange={this.handleText} placeholder="Type your here"/>
+                     </div>
+                     <div class="form-group">
+                         <button class="btn btn-lg btn-primary btn-block" onClick={this.handleClick}>Submit</button>
+                     </div>
+                 <a href="/recipe">Go back to recipes</a>   
+             </div>
+                      
+         </div>
+         
+     </div>
       </div>
     )
   }

@@ -55,10 +55,12 @@ exports.getAllRecipe = async (req, res, next) => {
 exports.getSingleRecipe = async (req, res) => {
     //const token = await req.headers['authorization'].split(" ")[1];
     const singleRecipe = await recipe.findById(req.params.id)
+    let comment_length = singleRecipe.comments.length
+    //console.log(comment_length)
     //let comment = await singleRecipe.comments[0].text
     res.json({
         recipe:singleRecipe,
-        //text:comment
+        comment:comment_length
     })
     
 }
@@ -112,5 +114,28 @@ exports.createNewComment = (req, res) => {
     if(recipeId){
         Comment === recipe.comment
         console.log(Comment)
+    }
+}
+//add comment
+exports.addNewComment = async (req, res) => {
+    if(!req.body.text){
+        res.status(403).json({
+            message:'No empty field allowed'
+        })
+    }
+    else{
+        const token = await req.headers['authorization'].split(" ")[1];
+        const decode = await jwt.verify(token, process.env.secret || config.secret)
+        var name = decode.name
+
+        let article = new recipe()
+        let query = {_id:req.params.id}
+        let comment = {
+            text:req.body.text,
+            created_by:name
+        }
+        recipe.addComment(query, comment, (err, article) => {
+            res.json({message:'successfully added comment'})
+        })
     }
 }

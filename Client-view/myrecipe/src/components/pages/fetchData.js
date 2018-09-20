@@ -56,6 +56,8 @@ export default class fetchData extends Component {
                 })
                 .then(res => res.json())
                 .then(result => {
+                    const comment = result.recipe
+                    //console.log(comment)
                     //let b = document.getElementById('pres').style.visibility='hidden'
                     this.setState({
                     allRecipe:result.recipe,
@@ -66,6 +68,35 @@ export default class fetchData extends Component {
             }
             
     
+    }
+
+    componentDidUpdate(){
+        const token = JSON.parse(localStorage.getItem('token'));
+            if(!token){
+                this.props.history.push('/')
+            }
+            else{
+                
+                fetch('/recipe/get', {
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+        
+                })
+                .then(res => res.json())
+                .then(result => {
+                    const comment = result.recipe
+                    //console.log(comment)
+                    //let b = document.getElementById('pres').style.visibility='hidden'
+                    this.setState({
+                    allRecipe:result.recipe,
+                    isLoading:false,
+                    username:result.name
+                    }) })
+                .catch(err => console.log(err))
+            }
     }
     logout(){
         const logout = localStorage.removeItem('token')
