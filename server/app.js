@@ -6,9 +6,9 @@ const routes = require('./routes/routes')
 const path = require('path')
 const db = require('./config/dbconfig')
 const env = require('dotenv').config()
-const cors = require('cors')
+//const cors = require('cors')
 
-app.use(cors())
+//app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 
