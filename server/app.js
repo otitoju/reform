@@ -6,13 +6,12 @@ const routes = require('./routes/routes')
 const path = require('path')
 const db = require('./config/dbconfig')
 const env = require('dotenv').config()
+const cors = require('cors')
 
-
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
-// app.use(express.static(path.join(__dirname,'../views')))
 
-// app.set('view engine', 'ejs');
 app.use('/', routes)
 //server view
 app.get('/', (req, res) => {
