@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 const app = express()
 const routes = require('./routes/routes')
-const errorHandler = require('./handlers/errorHandler');
+const errorHandler = require('./handlers/errorhandler');
 const path = require('path')
 const db = require('./config/dbconfig')
 const env = require('dotenv').config()
@@ -25,7 +25,7 @@ if (app.get('env') === 'development') {
 app.use(errorHandler.productionErrors);
 //server view
 app.get('/', (req, res) => {
-    res.send(`<h1>Welcome to our server</h1>`)
+    res.send(`<h1>This is where the best food recipe is running</h1>`)
 })
 
 
