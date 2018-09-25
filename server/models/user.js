@@ -3,8 +3,8 @@ const mongoDbErrorHandler = require('mongoose-mongodb-errors');
 
 const userSchema = new mongoose.Schema({
     //id:mongoose.Schema.Types.ObjectId,
-    name:{type:String, required:true, unique:true},
-    email:{type:String, required:true, unique:true},
+    name:{type:String, trim:true},
+    email:{type:String,  unique:true},
     password:String,
     date:Date,
     resettoken: String,

@@ -18,7 +18,7 @@ exports.createSuperUser =async (req, res) => {
         })
     }
     else if(validEmail){
-        res.status(403).json({message:`Email already exist`})
+        res.status(403).json({message:`The email already exist`})
     }
     else{
         emailExistence.check(req.body.email, function(error, response){
@@ -26,7 +26,7 @@ exports.createSuperUser =async (req, res) => {
                 res.json({message:'You have entered an invalid email address'})
             }
             else{
-                const Admin =  admin.create({
+                const Admin = await admin.create({
                     username:req.body.username,
                     password:hashpassword,
                     email:req.body.email
@@ -37,6 +37,7 @@ exports.createSuperUser =async (req, res) => {
                 })
             }
         })
+        
     }
     
 }
