@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 const app = express()
 const routes = require('./routes/routes')
+const errorHandler = require('./handlers/errorHandler');
 const path = require('path')
 const db = require('./config/dbconfig')
 const env = require('dotenv').config()
@@ -13,6 +14,15 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 
 app.use('/', routes)
+app.use(errorHandler.notFound);
+
+if (app.get('env') === 'development') {
+    /* Development Error Handler - Prints stack trace */
+    app.use(errorHandler.developmentErrors);
+}
+
+// production error handler
+app.use(errorHandler.productionErrors);
 //server view
 app.get('/', (req, res) => {
     res.send(`<h1>Welcome to our server</h1>`)
