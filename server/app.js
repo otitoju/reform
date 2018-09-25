@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 
 app.use('/', routes)
-app.use(errorHandler.notFound);
+//app.use(errorHandler.notFound);
 
 if (app.get('env') === 'development') {
     /* Development Error Handler - Prints stack trace */
