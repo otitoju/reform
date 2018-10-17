@@ -139,3 +139,30 @@ exports.addNewComment = async (req, res) => {
         })
     }
 }
+
+//search for recipes 
+exports.searchRecipe = async (req, res) => {
+    const name = req.body.name
+    const search = await new RegExp(name, 'i')
+    if(!name){
+        res.status(403).json({
+            message:'I cant search for an empty field',
+            success: false
+        })
+    }
+    else{
+        const result = await recipe.find({name: search})
+        if(result == ''){
+            res.status(403).json({
+                message:`No record found, ${result.length} matches `,
+                success: false
+            })
+        }
+        else{
+            res.status(200).json({info:result,
+                match:`${result.length} matches`,
+                success: true
+            })
+        }
+    }
+}
