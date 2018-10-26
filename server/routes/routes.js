@@ -49,7 +49,7 @@ router.post('/comment/:id', catchErrors(recipecontroller.addNewComment))
 
 //Auth routes
 router.put('/reset/:email', catchErrors(authcontroller.resetPassword))
-router.post('/forgot', catchErrors(authcontroller.forgotPassword))
+router.post('/forgot', authcontroller.forgotPassword)
 router.post('/report', catchErrors(authcontroller.reportIssues))
 router.post('/register', catchErrors(authcontroller.register))
 router.get('/decode', authcontroller.getToken)
