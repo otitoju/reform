@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 import pic from './images.jpg'
 import './pic.css'
 import moment from 'moment'
-
+import Header from '../layout/Navbar'
 export default class fetchData extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
             allRecipe:[],
             username:'',
@@ -112,6 +112,7 @@ export default class fetchData extends Component {
       const {allRecipe, isLoading, username } = this.state
     return (
       <div>
+          {/* <Header onClick={this.state.logout}/> */}
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                     <div className="container">
                     <Link className="navbar-brand" to="/">

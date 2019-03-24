@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import '../css/home.css'
 import logo from '../logo/logo1.PNG'
+import Header from '../layout/Navbar'
 
 export default class home extends Component {
   render() {
     return (
       <div id="body">
-              <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+            {/* <Header name="john"/> */}
+              {/* <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                     <div className="container">
                         <Link className="navbar-brand" to="/">
                           <h1 style={{fontStyle:'italic', fontFamily: 'Brush Script MT',fontWeight: 'bolder',fontSize: '30px'}}> Nice Recipe</h1>
@@ -35,7 +37,7 @@ export default class home extends Component {
                         
                         </div>
                     </div>
-              </nav>
+              </nav> */}
         <div>
           <div className="containers">
               <h2 id="inside">Find And Share Your Cooking Experience.</h2>
